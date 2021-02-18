@@ -1,0 +1,2 @@
+symbol,indicator,start_date,end_date,ob_level,os_level,k,mean,std,skewness,kurtosis,entropy,n_total_partitions,n_partitions,clean_gains
+ADA/USDT,wave_trend,2020-09-12 00:01:00,2020-09-19 23:59:00,53,-53,0.015,0.09396075006510983,0.0023613943894144037,0.2709522602562684,-1.0168365141051923,9.351438002391605,24,6,1.6313173956520473

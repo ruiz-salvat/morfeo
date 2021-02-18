@@ -1,0 +1,2 @@
+symbol_list = ['BTCEUR', 'ETHEUR', 'XRPEUR', 'ADAEUR', 'DOTEUR', 'LTCEUR', 'XLMEUR', 'LINKEUR', 'GRTEUR', 'BNBEUR',
+               'SXPEUR', 'BCHEUR', 'DOGEEUR', 'YFIEUR', 'EOSEUR']
