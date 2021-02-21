@@ -28,9 +28,11 @@ def run_script(data, simulator, time_range_in_days, time_scale):
                 day_df = pd.DataFrame(columns=data_symbol.columns)
                 day_count = 0
                 count += 1
+                print('active threads: ' + str(thread_pool.pool_size()))
 
             aux_df = pd.DataFrame([row], columns=day_df.columns)
             day_df = day_df.append(aux_df, ignore_index=True)
             day_count += 1
 
-        simulator.results_df.to_csv('../Data/ResultData/wave_trend_results.csv', index=False)
+        simulator.results_df.to_csv('../Data/ResultData/' + symbol.replace('/', '') + '_' + str(time_range_in_days)
+                                    + '_' + str(time_scale) + '_' + 'wave_trend_results.csv', index=False)

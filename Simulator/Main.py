@@ -5,7 +5,7 @@ from Simulators.WaveTrendSimulator import WaveTrendSimulator
 
 
 time_range_in_days = 7  # 1 week
-time_scale = 30  # 30 min
+time_scale = 5  # 30 min
 
 #data = pd.read_csv('../Data/data.csv')
 data = pd.read_csv('../Data/test_data.csv')
