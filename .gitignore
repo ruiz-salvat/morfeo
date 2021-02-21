@@ -59,3 +59,5 @@ Analysis/.ipynb_checkpoints/generate_dataset-checkpoint.ipynb
 Analysis/.ipynb_checkpoints/ModelPreprocessing-checkpoint.ipynb
 Analysis/.ipynb_checkpoints/WaveTrendOptimization-checkpoint.ipynb
 Data/data.csv
+Simulator/__pycache__/ScriptRunner.cpython-38.pyc
+Simulator/.idea/vcs.xml
