@@ -1,11 +1,11 @@
 import pandas as pd
-from ScriptRunner import run_script
+from Runners.RunnerScript import run_script
 from Simulators.BoltSimulator import BoltSimulator
 from Simulators.WaveTrendSimulator import WaveTrendSimulator
 
 
 time_range_in_days = 7  # 1 week
-time_scale = 240  # 4 hours
+time_scale = 30  # 30 min
 
 #data = pd.read_csv('../Data/data.csv')
 data = pd.read_csv('../Data/test_data.csv')

@@ -16,8 +16,8 @@ class WaveTrendSimulator(Simulator):
         super().__init__(results_df_columns)
 
     def simulate(self, df, symbol, time_scale, budget, partition_size, n_partition_limit):
-        ob_level = 63
-        os_level = -63
+        ob_level = 53
+        os_level = -53
         for k in np.arange(0.001, 0.1, 0.001):
 
             waves = Waves(k)

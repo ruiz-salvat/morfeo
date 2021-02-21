@@ -61,3 +61,7 @@ Analysis/.ipynb_checkpoints/WaveTrendOptimization-checkpoint.ipynb
 Data/data.csv
 Simulator/__pycache__/ScriptRunner.cpython-38.pyc
 Simulator/.idea/vcs.xml
+Simulator/Runners/__pycache__/__init__.cpython-38.pyc
+Simulator/Runners/__pycache__/RunnerScript.cpython-38.pyc
+Simulator/Runners/__pycache__/RunnerThread.cpython-38.pyc
+Simulator/Runners/__pycache__/ThreadPool.cpython-38.pyc

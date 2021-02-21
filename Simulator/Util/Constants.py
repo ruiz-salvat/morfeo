@@ -4,3 +4,4 @@ symbols = ['ADA/USDT']
 budget = 1000
 partition_size = 10
 n_partition_limit = 50
+minutes_per_day = 1440
