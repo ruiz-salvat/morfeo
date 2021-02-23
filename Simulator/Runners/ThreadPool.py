@@ -15,7 +15,7 @@ class ThreadPool:
         return count
 
     def add_thread(self, thread):
-        if self.pool_size() > self.pool_limit:
+        while self.pool_size() > self.pool_limit:
             time.sleep(1)
         thread.start()
         self.thread_pool_array.append(thread)

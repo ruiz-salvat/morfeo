@@ -27,8 +27,8 @@ class WaveTrendSimulator(Simulator):
                     indicator.ingest(df['value'].array)
                     result = indicator.result
 
-                    start_date = df.loc[0]['timestamp']
-                    end_date = df.loc[df.shape[0] - 1]['timestamp']
+                    start_date = df.iloc[0]['timestamp']
+                    end_date = df.iloc[df.shape[0] - 1]['timestamp']
                     summary = summarize(df['value'].array)
                     aux_df = pd.DataFrame([[symbol, 'wave_trend', start_date, end_date, ob_level, os_level, k,
                                             summary.mean, summary.std, summary.skewness, summary.kurtosis,
