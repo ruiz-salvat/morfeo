@@ -18,11 +18,12 @@ class WaveTrendSimulator(Simulator):
     def simulate(self, df, symbol, time_scale, budget, partition_size, n_partition_limit):
         for ob_level in range(43, 63, 5):
             for os_level in range(-63, -43, 5):
-                for k in np.arange(0.001, 0.025, 0.001):
+                for k in np.arange(0.001, 0.030, 0.001):
 
                     waves = Waves(k)
                     pattern = WaveTrendPattern(waves, ob_level, os_level)
-                    indicator = WaveTrendIndicator(pattern, symbol, time_scale, budget, partition_size, n_partition_limit)
+                    indicator = WaveTrendIndicator(pattern, symbol, time_scale, budget, partition_size,
+                                                   n_partition_limit)
 
                     indicator.ingest(df['value'].array)
                     result = indicator.result
@@ -36,3 +37,5 @@ class WaveTrendSimulator(Simulator):
                                             result.clean_gains]], columns=self.results_df.columns)
 
                     self.results_df = self.results_df.append(aux_df, ignore_index=True)
+                    print('Simulation: ' + start_date + ' (' + str(ob_level) + ', ' + str(os_level) + ', ' +
+                          str(k) + ') DONE.')

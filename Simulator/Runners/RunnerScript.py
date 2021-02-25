@@ -32,6 +32,7 @@ def run_script(data, simulator, time_range_in_days, time_scale):
             start_date = end_date
             end_date = start_date + timedelta(days=time_range_in_days)
             day_df = symbol_df[(symbol_df['timestamp'] >= str(start_date)) & (symbol_df['timestamp'] < str(end_date))]
+            count += 1
 
         while thread_pool.pool_size() > 0:
             time.sleep(0.1)
