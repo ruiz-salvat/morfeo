@@ -125,7 +125,7 @@ while df.shape[0] > 0:
     r2_scores.append(arr)
 
     # Gradient Boosting Regressor
-    param_grid = {'learning_rate': np.arange(0.1, 0.5, 0.1),
+    param_grid = {#'learning_rate': np.arange(0.1, 0.5, 0.1),
                   'loss': ['ls', 'lad', 'huber', 'quantile'],
                   'criterion': ['friedman_mse', 'mse']}
     model = GradientBoostingRegressor()
