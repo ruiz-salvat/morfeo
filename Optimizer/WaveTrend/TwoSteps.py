@@ -1,305 +1,174 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 from datetime import timedelta
 from datetime import datetime
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet, SGDRegressor
+from sklearn.linear_model import LinearRegression, Ridge, SGDRegressor, ARDRegression, BayesianRidge
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.svm import LinearSVR
+from sklearn.svm import SVR, NuSVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.experimental import enable_halving_search_cv
-from sklearn.model_selection import HalvingGridSearchCV
-from sklearn.metrics import classification_report
+from sklearn.model_selection import GridSearchCV
 from sklearn import metrics
 
-results = pd.read_csv('../../Data/ResultData/wave_trend_results.csv')
+results = pd.read_csv('../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv')
+results = results[results['clean_gains'] != 0]
+final_df = pd.DataFrame(columns=['mean', 'std', 'skewness',	'kurtosis',	'entropy', 'ob_level', 'os_level', 'k',
+                                 'clean_gains', 'r2'])
 
-df = results[results['clean_gains'] != 0]
-
-start_date = df.iloc[0]['start_date']
+start_date = results.iloc[0]['start_date']
 start_date = datetime.strptime(start_date, '%Y-%m-%d %H:%M:%S')
 end_date = start_date + timedelta(days=7)
-df = df[(df['start_date'] >= str(start_date)) & (df['end_date'] < str(end_date))]
+df = results[(results['start_date'] >= str(start_date)) & (results['end_date'] < str(end_date))]
 
 while df.shape[0] > 0:
 
-    start_date = df.iloc[0]['start_date']
-    start_date = datetime.strptime(start_date, '%Y-%m-%d %H:%M:%S')
+    df = df.sample(frac=1)
+    df = df.reset_index(drop=True)
+
+    X = df[['ob_level', 'os_level', 'k']].to_numpy()
+    y = df['clean_gains'].to_numpy()
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+
+    r2_scores = []  # stores the performance results of all the models
+
+    # Linear Regression
+    linear = LinearRegression()
+    linear.fit(X_train, y_train)
+    linear_y_pred = linear.predict(X_test)
+    linear_R2 = metrics.r2_score(y_test, linear_y_pred)
+    arr = [linear, linear_R2]
+    r2_scores.append(arr)
+
+    # Ridge Regression
+    param_grid = {'alpha': np.arange(0.00001, 0.001, 0.00001)}
+    model = Ridge()
+    clf = GridSearchCV(model, param_grid)
+    clf.fit(X_train, y_train)
+    ridge = clf.best_estimator_
+    ridge_y_pred = ridge.predict(X_test)
+    ridge_R2 = metrics.r2_score(y_test, ridge_y_pred)
+    arr = [ridge, ridge_R2]
+    r2_scores.append(arr)
+
+    # Stochastic Gradient Descent
+    sgd = SGDRegressor()
+    sgd.fit(X_train, y_train)
+    sgd_y_pred = linear.predict(X_test)
+    sgd_R2 = metrics.r2_score(y_test, sgd_y_pred)
+    arr = [sgd, sgd_R2]
+    r2_scores.append(arr)
+
+    # Bayesian ARD Regression
+    ard = ARDRegression()
+    ard.fit(X_train, y_train)
+    ard_y_pred = linear.predict(X_test)
+    ard_R2 = metrics.r2_score(y_test, ard_y_pred)
+    arr = [ard, ard_R2]
+    r2_scores.append(arr)
+
+    # Bayesian Ridge
+    bayesian_ridge = BayesianRidge()
+    bayesian_ridge.fit(X_train, y_train)
+    bayesian_ridge_y_pred = bayesian_ridge.predict(X_test)
+    bayesian_ridge_R2 = metrics.r2_score(y_test, bayesian_ridge_y_pred)
+    arr = [bayesian_ridge, bayesian_ridge_R2]
+    r2_scores.append(arr)
+
+    # Decision Tree Regressor
+    param_grid = {'random_state': range(0, 10),
+                  'criterion': ['mse', 'friedman_mse', 'mae'],
+                  'splitter': ['best', 'random']}
+    model = DecisionTreeRegressor()
+    clf = GridSearchCV(model, param_grid)
+    clf.fit(X_train, y_train)
+    dt = clf.best_estimator_
+    dt_y_pred = dt.predict(X_test)
+    dt_R2 = metrics.r2_score(y_test, dt_y_pred)
+    arr = [dt, dt_R2]
+    r2_scores.append(arr)
+
+    # Support Vector Regressor
+    param_grid = {'C': [1, 10, 100, 1000],
+                  'epsilon': np.arange(0.01, 1, 0.01)}
+    model = SVR()
+    clf = GridSearchCV(model, param_grid)
+    clf.fit(X_train, y_train)
+    svr = clf.best_estimator_
+    svr_y_pred = svr.predict(X_test)
+    svr_R2 = metrics.r2_score(y_test, svr_y_pred)
+    arr = [svr, svr_R2]
+    r2_scores.append(arr)
+
+    # NuSVR
+    param_grid = {'C': [1, 10, 100, 1000],
+                  'nu': np.arange(0.01, 1, 0.01)}
+    model = NuSVR()
+    clf = GridSearchCV(model, param_grid)
+    clf.fit(X_train, y_train)
+    nu_svr = clf.best_estimator_
+    nu_svr_y_pred = nu_svr.predict(X_test)
+    nu_svr_R2 = metrics.r2_score(y_test, nu_svr_y_pred)
+    arr = [nu_svr, nu_svr_R2]
+    r2_scores.append(arr)
+
+    # KNN Regressor
+    param_grid = {'n_neighbors': range(2, 30)}
+    model = KNeighborsRegressor()
+    clf = GridSearchCV(model, param_grid)
+    clf.fit(X_train, y_train)
+    knn = clf.best_estimator_
+    knn_y_pred = knn.predict(X_test)
+    knn_R2 = metrics.r2_score(y_test, knn_y_pred)
+    arr = [knn, knn_R2]
+    r2_scores.append(arr)
+
+    # Gradient Boosting Regressor
+    param_grid = {'learning_rate': np.arange(0.1, 0.5, 0.1),
+                  'loss': ['ls', 'lad', 'huber', 'quantile'],
+                  'criterion': ['friedman_mse', 'mse']}
+    model = GradientBoostingRegressor()
+    clf = GridSearchCV(model, param_grid)
+    clf.fit(X_train, y_train)
+    gbr = clf.best_estimator_
+    gbr_y_pred = gbr.predict(X_test)
+    gbr_R2 = metrics.r2_score(y_test, gbr_y_pred)
+    arr = [gbr, gbr_R2]
+    r2_scores.append(arr)
+
+    # Model selection
+    best_model = r2_scores[0]
+    for arr in r2_scores:
+        if arr[1] > best_model[1]:
+            best_model = arr
+    model = best_model[0]
+
+    # Optimize
+    best_result = 0
+    best_parameters = {'ob_level': -1,
+                       'os_level': -1,
+                       'k': -1}
+    for k in np.arange(0.001, 0.030, 0.001):
+        for ob_level in range(43, 63):
+            for os_level in range(-63, -43):
+                prediction = model.predict([[ob_level, os_level, k]])
+                if prediction > best_result:
+                    best_result = prediction
+                    best_parameters = {'ob_level': ob_level,
+                                       'os_level': os_level,
+                                       'k': k}
+
+    first_df_row = df.iloc[0]
+    aux_df = pd.DataFrame([[first_df_row['mean'], first_df_row['std'], first_df_row['skewness'], first_df_row['kurtosis'],
+                            first_df_row['entropy'], best_parameters['ob_level'], best_parameters['os_level'],
+                            best_parameters['k'], best_result[0], best_model[1]]], columns=['mean', 'std', 'skewness',
+                            'kurtosis', 'entropy', 'ob_level', 'os_level', 'k', 'clean_gains', 'r2'])
+    final_df = final_df.append(aux_df, ignore_index=True)
+
+    print(str(start_date) + ' - ' + str(end_date) + '    DONE.')
+    start_date = end_date
     end_date = start_date + timedelta(days=7)
-    df = df[(df['start_date'] >= str(start_date)) & (df['end_date'] < str(end_date))]
+    df = results[(results['start_date'] >= str(start_date)) & (results['end_date'] < str(end_date))]
 
-df = df.sample(frac=1)
-df = df.reset_index(drop=True)
-
-X = df['k'].to_numpy()
-y = df['clean_gains'].to_numpy()
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-
-X_train = X_train.reshape(-1, 1)
-X_test = X_test.reshape(-1, 1)
-y_train = y_train.reshape(-1, 1)
-y_test = y_test.reshape(-1, 1)
-
-
-# # Linear regression
-
-# In[7]:
-
-
-linear = LinearRegression()
-
-linear.fit(X_train, y_train)
-
-linear_y_pred = linear.predict(X_test)
-
-
-# In[8]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, linear_y_pred, color='r') 
-
-
-# In[9]:
-
-
-linear_R2 = metrics.r2_score(y_test, linear_y_pred)
-print(linear_R2)
-
-
-# # Ridge regression
-
-# In[10]:
-
-
-ridge = Ridge(alpha = 0.00001) # TODO: tunning
-
-ridge.fit(X_train, y_train)
-
-ridge_y_pred = ridge.predict(X_test)
-
-
-# In[11]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, ridge_y_pred, color='r')
-
-
-# In[12]:
-
-
-ridge_R2 = metrics.r2_score(y_test, ridge_y_pred)
-print(ridge_R2)
-
-
-# # Lasso regression
-
-# In[13]:
-
-
-lasso = Lasso(alpha = 0.00001) # TODO: tunning
-
-lasso.fit(X_train, y_train)
-
-lasso_y_pred = lasso.predict(X_test)
-
-
-# In[14]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, lasso_y_pred, color='r')
-
-
-# In[15]:
-
-
-lasso_R2 = metrics.r2_score(y_test, lasso_y_pred)
-print(lasso_R2)
-
-
-# # ElasticNet
-
-# In[16]:
-
-
-elastic_net = ElasticNet(alpha=0.00001, l1_ratio=0.1)
-
-elastic_net.fit(X_train, y_train)
-
-elastic_net_y_pred = elastic_net.predict(X_test)
-
-
-# In[17]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, elastic_net_y_pred, color='r')
-
-
-# In[18]:
-
-
-elastic_net_R2 = metrics.r2_score(y_test, elastic_net_y_pred)
-print(elastic_net_R2)
-
-
-# # Stochastic Gradient Descent
-
-# In[19]:
-
-
-sgd = SGDRegressor(max_iter=1000, tol=1e-3)
-
-sgd.fit(X_train, y_train)
-
-sgd_y_pred = sgd.predict(X_test)
-
-
-# In[20]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, sgd_y_pred, color='r')
-
-
-# In[21]:
-
-
-sgd_R2 = metrics.r2_score(y_test, sgd_y_pred)
-print(sgd_R2)
-
-
-# # DecisionTreeRegressor
-
-# In[22]:
-
-
-dt = DecisionTreeRegressor(random_state=0)
-
-dt.fit(X_train, y_train)
-
-dt_y_pred = dt.predict(X_test)
-
-
-# In[23]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, dt_y_pred, color='r')
-
-
-# In[24]:
-
-
-dt_R2 = metrics.r2_score(y_test, dt_y_pred)
-print(dt_R2)
-
-
-# # Linear Support Vector Regressor
-
-# In[25]:
-
-
-svr = LinearSVR(random_state=0, tol=1e-5)
-
-svr.fit(X_train, y_train)
-
-svr_y_pred = svr.predict(X_test)
-
-
-# In[26]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, svr_y_pred, color='r')
-
-
-# In[27]:
-
-
-svr_R2 = metrics.r2_score(y_test, svr_y_pred)
-print(svr_R2)
-
-
-# # KNN Regressor
-
-# In[28]:
-
-
-knn = KNeighborsRegressor(n_neighbors=2)
-
-knn.fit(X_train, y_train)
-
-knn_y_pred = knn.predict(X_test)
-
-
-# In[29]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, knn_y_pred, color = 'r')
-
-
-# In[30]:
-
-
-knn_R2 = metrics.r2_score(y_test, knn_y_pred)
-print(knn_R2)
-
-
-# # Gradient Boosting Regressor
-
-# In[31]:
-
-
-gbr = GradientBoostingRegressor(random_state=0)
-
-gbr.fit(X_train, y_train)
-
-gbr_y_pred = gbr.predict(X_test)
-
-
-# In[32]:
-
-
-plt.scatter(X, y)
-plt.scatter(X_test, gbr_y_pred, color = 'r')
-
-
-# In[33]:
-
-
-gbr_R2 = metrics.r2_score(y_test, gbr_y_pred)
-print(gbr_R2)
-
-
-# # KNN hyperparameter tunning
-
-# In[34]:
-
-
-param_grid = {'n_neighbors': [2, 3, 4, 5, 6, 7, 8, 9]}
-
-model = KNeighborsRegressor()
-
-clf = HalvingGridSearchCV(model, param_grid, scoring='r2')
-clf.fit(X_train, y_train)
-
-
-# In[35]:
-
-
-print("Best parameters set found on development set:")
-print(clf.best_params_)
-
-
-# In[ ]:
-
-
-
-
+final_df.to_csv('../Data/OptimizationData/ADAUSDT_7_5_wave_trend_optimizations.csv', index=False)
