@@ -16,4 +16,4 @@ class RunnerThread(Thread):
     def run(self):
         self.simulator.simulate(self.df, self.symbol, self.time_scale, self.budget, self.partition_size,
                                 self.n_partition_limit)
-        print('thread ' + str(self.thread_id) + ' done')
+        print('Thread ' + str(self.thread_id) + ' DONE.')

@@ -27,8 +27,8 @@ class BoltSimulator(Simulator):
                         bolt_indicator.ingest(df['value'].array)
                         result = bolt_indicator.result
 
-                        start_date = df.loc[0]['timestamp']
-                        end_date = df.loc[df.shape[0] - 1]['timestamp']
+                        start_date = df.iloc[0]['timestamp']
+                        end_date = df.iloc[df.shape[0] - 1]['timestamp']
                         summary = summarize(df['value'].array)
                         aux_df = pd.DataFrame([[symbol, 'bolt', start_date, end_date, bolt_pattern.buy_array_repr,
                                                 bolt_pattern.sell_array_repr, bolt_pattern.buy_array_size,

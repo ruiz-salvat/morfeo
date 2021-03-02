@@ -27,7 +27,7 @@ def run_script(data, simulator, time_range_in_days, time_scale):
             thread = RunnerThread(count, simulator, day_df, symbol, time_scale, Constants.budget,
                                   Constants.partition_size, Constants.n_partition_limit)
             thread_pool.add_thread(thread)
-            print('active threads: ' + str(thread_pool.pool_size()))
+            print('Active threads: ' + str(thread_pool.pool_size()))
 
             start_date = end_date
             end_date = start_date + timedelta(days=time_range_in_days)
