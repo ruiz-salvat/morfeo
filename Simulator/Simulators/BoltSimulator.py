@@ -38,8 +38,8 @@ class BoltSimulator(Simulator):
                                               columns=self.results_df.columns)
 
                         self.results_df = self.results_df.append(aux_df, ignore_index=True)
-                        print('Simulation: ' + start_date + ' (' + str(buy_exp) + ', ' + str(i) + ', ' + str(sell_exp)
-                              + ', ' + str(j) + ') DONE.')
+                        print('Simulation: ' + str(start_date) + ' (' + str(buy_exp) + ', ' + str(i) + ', '
+                              + str(sell_exp) + ', ' + str(j) + ') DONE.')
 
     def get_indicator_name(self):
         return 'bolt'
