@@ -37,4 +37,5 @@ def run_script(data, simulator, time_range_in_days, time_scale):
         while thread_pool.pool_size() > 0:
             time.sleep(0.1)
         simulator.results_df.to_csv('../Data/ResultData/' + symbol.replace('/', '') + '_' + str(time_range_in_days)
-                                    + '_' + str(time_scale) + '_' + 'wave_trend_results.csv', index=False)
+                                    + '_' + str(time_scale) + '_' + simulator.get_indicator_name() + '_results.csv',
+                                    index=False)

@@ -10,3 +10,7 @@ class Simulator(ABC):
     @abstractmethod
     def simulate(self, df, symbol, time_scale, budget, partition_size, n_partition_limit):
         pass
+
+    @abstractmethod
+    def get_indicator_name(self):
+        pass
