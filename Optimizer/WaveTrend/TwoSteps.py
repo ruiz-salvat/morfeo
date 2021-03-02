@@ -162,8 +162,7 @@ while df.shape[0] > 0:
     first_df_row = df.iloc[0]
     aux_df = pd.DataFrame([[first_df_row['mean'], first_df_row['std'], first_df_row['skewness'], first_df_row['kurtosis'],
                             first_df_row['entropy'], best_parameters['ob_level'], best_parameters['os_level'],
-                            best_parameters['k'], best_result[0], best_model[1]]], columns=['mean', 'std', 'skewness',
-                            'kurtosis', 'entropy', 'ob_level', 'os_level', 'k', 'clean_gains', 'r2'])
+                            best_parameters['k'], best_result[0], best_model[1]]], columns=final_df.columns)
     final_df = final_df.append(aux_df, ignore_index=True)
 
     print(str(start_date) + ' - ' + str(end_date) + '    DONE.')
@@ -171,4 +170,4 @@ while df.shape[0] > 0:
     end_date = start_date + timedelta(days=7)
     df = results[(results['start_date'] >= str(start_date)) & (results['end_date'] < str(end_date))]
 
-final_df.to_csv('../Data/OptimizationData/ADAUSDT_7_5_wave_trend_optimizations.csv', index=False)
+final_df.to_csv('../Data/OptimizationData/ADAUSDT_7_5_wave_trend_optimizations_2steps.csv', index=False)
