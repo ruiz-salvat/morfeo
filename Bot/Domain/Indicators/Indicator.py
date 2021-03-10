@@ -3,9 +3,8 @@ from abc import ABC, abstractmethod
 
 class Indicator(ABC):
 
-    def __init__(self, pattern, symbol, time_scale, budget, partition_size, n_partition_limit):
+    def __init__(self, pattern, time_scale, budget, partition_size, n_partition_limit):
         self.pattern = pattern
-        self.symbol = symbol
         self.time_scale = time_scale
         self.initial_budget = budget
         self.budget = budget
@@ -15,8 +14,6 @@ class Indicator(ABC):
         self.n_total_partitions = 0
         self.clean_gains = 0
         self.n_partition_limit = n_partition_limit
-        self.ingested = False
-        self.result = None
 
     def reduce(self, array):
         new_array = []
@@ -58,3 +55,11 @@ class Indicator(ABC):
             self.budget = self.budget + sold_coins * price
             self.clean_gains = self.clean_gains + (sold_coins * price - self.partition_size)
             self.n_partitions -= 1
+
+    @abstractmethod
+    def update_pattern(self, pattern):
+        pass
+
+    @abstractmethod
+    def get_max_arr_len(self):
+        pass

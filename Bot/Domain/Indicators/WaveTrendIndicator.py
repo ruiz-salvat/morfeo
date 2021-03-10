@@ -1,31 +1,21 @@
-from DataObjects.SimulationResult import SimulationResult
-from Indicators.Indicator import Indicator
-from collections import deque
+from Domain.Indicators.Indicator import Indicator
+from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 
 
 class WaveTrendIndicator(Indicator):
-    queue_size = 31
 
-    def __init__(self, pattern, symbol, time_scale, budget, partition_size, n_partition_limit):
-        super().__init__(pattern, symbol, time_scale, budget, partition_size, n_partition_limit)
+    def __init__(self, pattern, time_scale, budget, partition_size, n_partition_limit):
+        super().__init__(pattern, time_scale, budget, partition_size, n_partition_limit)
 
     def ingest(self, array):
-        if self.ingested is False:
-            array = self.reduce(array)
-            queue = deque()
+        for value in array:
+            if self.pattern.buy_condition(array):
+                self.buy(value)
+            elif self.pattern.sell_condition(array):
+                self.sell(value)
 
-            for value in array:
-                if len(queue) >= WaveTrendIndicator.queue_size:
-                    queue.popleft()
-                    queue.append(value)
-                else:
-                    queue.append(value)
+    def update_pattern(self, pattern):
+        self.pattern = pattern
 
-                if self.pattern.buy_condition(list(queue)):
-                    self.buy(value)
-                elif self.pattern.sell_condition(list(queue)):
-                    self.sell(value)
-
-            self.ingested = True
-            self.result = SimulationResult(self.symbol, self.partition_size, self.initial_budget, self.budget,
-                                           self.coins, self.n_partitions, self.n_total_partitions, self.clean_gains)
+    def get_max_arr_len(self):
+        return WaveTrendPattern.max_arr_len

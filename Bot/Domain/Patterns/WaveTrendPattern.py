@@ -1,9 +1,9 @@
-from Patterns.Pattern import Pattern
-from Util.Functions import exponential_moving_average, absolute_value_array, simple_moving_average, cross
-from Util.Waves import Waves
+from Domain.Patterns.Pattern import Pattern
+from Util.Functions import cross
 
 
 class WaveTrendPattern(Pattern):
+    max_arr_len = 31
 
     def __init__(self, waves, ob_level, os_level):
         super().__init__()
@@ -12,7 +12,7 @@ class WaveTrendPattern(Pattern):
         self.waves = waves
 
     def buy_condition(self, array):
-        if len(array) != 31:
+        if len(array) != WaveTrendPattern.max_arr_len:
             return False
 
         wt1, wt2 = self.waves.calculate(array)
@@ -35,7 +35,7 @@ class WaveTrendPattern(Pattern):
             return False
 
     def sell_condition(self, array):
-        if len(array) != 31:
+        if len(array) != WaveTrendPattern.max_arr_len:
             return False
 
         wt1, wt2 = self.waves.calculate(array)
