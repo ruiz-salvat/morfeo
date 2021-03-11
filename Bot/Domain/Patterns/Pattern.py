@@ -13,3 +13,6 @@ class Pattern(ABC):
     @abstractmethod
     def sell_condition(self, array):
         pass
+
+    def __repr__(self):
+        return str(self.__dict__)

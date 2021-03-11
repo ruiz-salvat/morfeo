@@ -10,7 +10,7 @@ from sklearn import metrics
 from sklearn.model_selection import GridSearchCV
 from ML.Model import Model
 
-
+# TODO: make a unique model builder for any indicator
 class WaveTrendModel(Model):
 
     def __init__(self, file_path):
@@ -27,6 +27,8 @@ class WaveTrendModel(Model):
 
         model_scores = []  # List of tuples
 
+        # TODO: improve MLP
+        '''
         # Multilayer Perceptron Regressor
         param_grid = {'activation': ['identity', 'logistic', 'tanh', 'relu'],
                       'solver': ['lbfgs', 'sgd', 'adam'],
@@ -39,10 +41,11 @@ class WaveTrendModel(Model):
         mlp_r2 = metrics.r2_score(y_test, mlp_y_pred)
         model_scores.append((mlp, mlp_r2))
         print('MLP: ' + str(mlp_r2))
+        '''
 
         # Gradient Boosting Regressor
         param_grid = {'loss': ['ls', 'lad', 'huber', 'quantile'],
-                      'criterion': ['friedman_mse', 'mse', 'mae'],
+                      'criterion': ['friedman_mse', 'mse'],
                       'max_features': ['auto', 'sqrt', 'log2']}
         model = GradientBoostingRegressor()
         clf = GridSearchCV(model, param_grid)
@@ -51,7 +54,6 @@ class WaveTrendModel(Model):
         gbr_y_pred = gbr.predict(X_test)
         gbr_r2 = metrics.r2_score(y_test, gbr_y_pred)
         model_scores.append((gbr, gbr_r2))
-        print('GBR: ' + str(gbr_r2))
 
         # Gaussian Process Regressor
         param_grid = {'normalize_y': [True, False]}
@@ -62,7 +64,6 @@ class WaveTrendModel(Model):
         gpr_y_pred = gpr.predict(X_test)
         gpr_r2 = metrics.r2_score(y_test, gpr_y_pred)
         model_scores.append((gpr, gpr_r2))
-        print('GPR: ' + str(gpr_r2))
 
         # Decision Tree Regressor
         param_grid = {'criterion': ['mse', 'friedman_mse', 'mae'],
@@ -75,7 +76,6 @@ class WaveTrendModel(Model):
         dt_y_pred = dt.predict(X_test)
         dt_r2 = metrics.r2_score(y_test, dt_y_pred)
         model_scores.append((dt, dt_r2))
-        print('DT: ' + str(dt_r2))
 
         # Random Forests Regressor
         param_grid = {'n_estimators': [75, 100, 125, 150],
@@ -87,7 +87,6 @@ class WaveTrendModel(Model):
         rf_y_pred = rf.predict(X_test)
         rf_r2 = metrics.r2_score(y_test, rf_y_pred)
         model_scores.append((rf, rf_r2))
-        print('RF: ' + str(rf_r2))
 
         # K Neighbors Regressor
         param_grid = {'n_neighbors': range(2, 30)}
@@ -98,7 +97,6 @@ class WaveTrendModel(Model):
         knr_y_pred = knr.predict(X_test)
         knr_r2 = metrics.r2_score(y_test, knr_y_pred)
         model_scores.append((knr, knr_r2))
-        print('KNR: ' + str(knr_r2))
 
         # Model Selection
         self.max_r2 = 0

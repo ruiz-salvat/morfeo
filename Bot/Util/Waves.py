@@ -25,3 +25,6 @@ class Waves:
         wt2 = simple_moving_average(wt1, Waves.ma_len)
 
         return wt1, wt2
+
+    def __repr__(self):
+        return str(self.__dict__)

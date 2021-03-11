@@ -104,3 +104,13 @@ Bot/Util/__pycache__/__init__.cpython-38.pyc
 Bot/Util/__pycache__/Constants.cpython-38.pyc
 Bot/Util/__pycache__/Functions.cpython-38.pyc
 Bot/Util/__pycache__/Waves.cpython-38.pyc
+Bot/DataObjects/__pycache__/__init__.cpython-38.pyc
+Bot/DataObjects/__pycache__/Summary.cpython-38.pyc
+Analysis/.ipynb_checkpoints/SummarizeData-checkpoint.ipynb
+Bot/Tests/__pycache__/__init__.cpython-38.pyc
+Bot/Tests/Mock/__pycache__/__init__.cpython-38.pyc
+Bot/Tests/Mock/__pycache__/MockMarketData.cpython-38.pyc
+Bot/Util/__pycache__/Summarizer.cpython-38.pyc
+Bot/Util/Observable/__pycache__/__init__.cpython-38.pyc
+Bot/Util/Observable/__pycache__/Observer.cpython-38.pyc
+Bot/Util/Observable/__pycache__/Target.cpython-38.pyc

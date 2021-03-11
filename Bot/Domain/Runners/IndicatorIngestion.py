@@ -2,11 +2,14 @@ import time
 from collections import deque
 from datetime import datetime, timedelta
 from threading import Thread
-
+from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Net.DataRetriever import DataRetriever
+from Util.Constants import parameters_refresh_event
+from Util.Observable.Observer import Observer
+from Util.Waves import Waves
 
 
-class IndicatorIngestion(Thread):
+class IndicatorIngestion(Thread, Observer):
 
     def __init__(self, symbol, indicator):
         Thread.__init__(self)
@@ -30,4 +33,11 @@ class IndicatorIngestion(Thread):
                     self.indicator.ingest(list(self.queue))
                 else:
                     self.queue.append(last_price)
-                print(self.indicator.clean_gains)
+                print('clean gains: ' + str(self.indicator.clean_gains) + '  |  ' + str(self.indicator.pattern))
+
+    def notify(self, *args, **kwargs):
+        if args[0] == parameters_refresh_event:
+            # TODO: make it generic
+            waves = Waves(args[1]['k'])
+            pattern = WaveTrendPattern(waves, args[1]['ob_level'], args[1]['os_level'])
+            self.indicator.pattern = pattern

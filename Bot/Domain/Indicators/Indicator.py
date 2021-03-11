@@ -57,9 +57,5 @@ class Indicator(ABC):
             self.n_partitions -= 1
 
     @abstractmethod
-    def update_pattern(self, pattern):
-        pass
-
-    @abstractmethod
     def get_max_arr_len(self):
         pass

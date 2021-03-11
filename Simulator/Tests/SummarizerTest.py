@@ -6,5 +6,5 @@ def Summarizer_Summarize_Equal():
 
     summary = summarize(array)
 
-    assert summary.mean == 3, 'the calculated mean should be 3'
+    assert summary.mean == 0.75, 'the calculated normalized mean should be 0.75'
     # TODO: add more asserts
