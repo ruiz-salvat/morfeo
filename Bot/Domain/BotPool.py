@@ -40,5 +40,8 @@ class BotPool:
         else:
             return 'Error: instance id not found'
 
-    def get_bot_pool(self):
+    def size(self):
+        return len(self.bot_inst_dict)
+
+    def __repr__(self):
         return str(self.bot_inst_dict)

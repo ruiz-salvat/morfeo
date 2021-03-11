@@ -114,3 +114,8 @@ Bot/Util/__pycache__/Summarizer.cpython-38.pyc
 Bot/Util/Observable/__pycache__/__init__.cpython-38.pyc
 Bot/Util/Observable/__pycache__/Observer.cpython-38.pyc
 Bot/Util/Observable/__pycache__/Target.cpython-38.pyc
+Bot/Tests/Mock/__pycache__/MockBotInstance.cpython-38.pyc
+Bot/Tests/Mock/__pycache__/MockIndicator.cpython-38.pyc
+Bot/Tests/Mock/__pycache__/MockPattern.cpython-38.pyc
+Bot/Tests/Mock/__pycache__/TestConstants.cpython-38.pyc
+Bot/Tests/__pycache__/BotPoolTest.cpython-38.pyc

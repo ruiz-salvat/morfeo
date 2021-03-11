@@ -40,7 +40,7 @@ def add_bot_instance():
 
     indicator = WaveTrendIndicator(None, time_scale, budget, partition_size, n_partition_limit)
     bot_instance = BotInstance(symbol, indicator, model_name)
-    bot_pool.add_instance(instance_id, bot_instance)
+    bot_pool.add_instance(instance_id, bot_instance)  # TODO: add validation (bot pool is full)
 
 
 @app.route('/start_bot_instance', methods=['GET'])
@@ -63,4 +63,4 @@ def stop_bot_instance():
 
 @app.route('/get_bot_pool', methods=['GET'])
 def get_bot_pool():
-    return bot_pool.get_bot_pool()
+    return bot_pool.__repr__()
