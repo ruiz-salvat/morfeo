@@ -12,4 +12,3 @@ test_n_partition_limit = 50
 test_model_name = 'test_model_name'
 test_pattern = MockPattern()
 test_indicator = MockIndicator(test_pattern, test_time_scale, test_budget, test_partition_size, test_n_partition_limit)
-test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)

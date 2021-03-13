@@ -1,46 +1,110 @@
 from Domain.BotPool import BotPool
 from Tests.Mock.MockBotInstance import MockBotInstance
-from Tests.Mock.MockIndicator import MockIndicator
-from Tests.Mock.TestConstants import test_symbol, test_model_name, test_bot_instance, valid_id
+from Tests.Mock.TestConstants import test_symbol, test_model_name, valid_id, test_indicator, invalid_id
+from Util.Constants import bot_instance_added_msg, bot_instance_exists_msg, bot_instance_started_msg, \
+    bot_instance_already_started_msg, instance_id_not_found_msg, bot_instance_removed_msg, bot_instance_not_stopped_msg, \
+    bot_instance_stopped_msg, bot_instance_already_stopped_msg
+
+
+def BotPool_Size_Equal():
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    bot_pool = BotPool()
+
+    bot_pool.add_instance(valid_id, test_bot_instance)
+
+    assert bot_pool.size() == 1, 'the size of the bot pool should be 1'
+    assert bot_pool.size() == len(bot_pool.bot_inst_dict), 'the size should be equal than the dict len'
 
 
 def BotPool_AddInstance_Equal():
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
     bot_pool = BotPool()
 
-    bot_pool.add_instance(valid_id, test_bot_instance)
-    bot_pool.add_instance(valid_id + 1, test_bot_instance)
+    msg_1 = bot_pool.add_instance(valid_id, test_bot_instance)
+    msg_2 = bot_pool.add_instance(valid_id + 1, test_bot_instance)
 
-    assert len(bot_pool.bot_inst_dict) == 2, 'the size of the bot pool should be 2'
+    assert bot_pool.size() == 2, 'the size of the bot pool should be 2'
+    assert msg_1 == msg_2 == bot_instance_added_msg, 'the return message should be correct'
 
 
 def BotPool_AddInstance_Error():
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
     bot_pool = BotPool()
 
     bot_pool.add_instance(valid_id, test_bot_instance)
-    bot_pool.add_instance(valid_id, test_bot_instance)
+    msg = bot_pool.add_instance(valid_id, test_bot_instance)
 
-    assert len(bot_pool.bot_inst_dict) == 1, 'the size of the bot pool should be 1'
+    assert bot_pool.size() == 1, 'the size of the bot pool should be 1'
+    assert msg == bot_instance_exists_msg, 'the return message should be correct'
 
 
 def BotPool_StartInstance_Equal():
-    pass
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    bot_pool = BotPool()
+
+    bot_pool.add_instance(valid_id, test_bot_instance)
+    msg = bot_pool.start_instance(valid_id)
+
+    assert bot_pool.bot_inst_dict[valid_id].is_started is True, 'the bot instance should have been started'
+    assert msg == bot_instance_started_msg, 'the return message should be correct'
 
 
 def BotPool_StartInstance_Error():
-    pass
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    bot_pool = BotPool()
+
+    bot_pool.add_instance(valid_id, test_bot_instance)
+    bot_pool.start_instance(valid_id)
+    msg_1 = bot_pool.start_instance(valid_id)
+    msg_2 = bot_pool.start_instance(invalid_id)
+
+    assert msg_1 == bot_instance_already_started_msg, 'the return message should be correct'
+    assert msg_2 == instance_id_not_found_msg, 'the return message should be correct'
 
 
 def BotPool_RemoveInstance_Equal():
-    pass
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    bot_pool = BotPool()
+
+    bot_pool.add_instance(valid_id, test_bot_instance)
+    msg = bot_pool.remove_instance(valid_id)
+
+    assert bot_pool.size() == 0, 'the bot pool should be empty'
+    assert msg == bot_instance_removed_msg, 'the return message should be correct'
 
 
 def BotPool_RemoveInstance_Error():
-    pass
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    bot_pool = BotPool()
+
+    bot_pool.add_instance(valid_id, test_bot_instance)
+    bot_pool.start_instance(valid_id)
+    msg_1 = bot_pool.remove_instance(valid_id)
+    msg_2 = bot_pool.remove_instance(invalid_id)
+
+    assert bot_pool.size() == 1, 'the bot pool size should be 1'
+    assert msg_1 == bot_instance_not_stopped_msg, 'the return message should be correct'
+    assert msg_2 == instance_id_not_found_msg, 'the return message should be correct'
 
 
 def BotPool_StopInstance_Equal():
-    pass
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    bot_pool = BotPool()
+
+    bot_pool.add_instance(valid_id, test_bot_instance)
+    bot_pool.start_instance(valid_id)
+    msg = bot_pool.stop_instance(valid_id)
+
+    assert msg == bot_instance_stopped_msg, 'the return message should be correct'
 
 
 def BotPool_StopInstance_Error():
-    pass
+    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    bot_pool = BotPool()
+
+    bot_pool.add_instance(valid_id, test_bot_instance)
+    msg_1 = bot_pool.stop_instance(valid_id)
+    msg_2 = bot_pool.stop_instance(invalid_id)
+
+    assert msg_1 == bot_instance_already_stopped_msg, 'the return message should be correct'
+    assert msg_2 == instance_id_not_found_msg, 'the return message should be correct'
