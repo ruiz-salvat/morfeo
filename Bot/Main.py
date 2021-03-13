@@ -49,3 +49,8 @@ def stop_bot_instance():
 @app.route('/get_bot_pool', methods=['GET'])
 def get_bot_pool():
     return bot_pool.__repr__()
+
+
+@app.route('/get_bot_pool_size', methods=['GET'])
+def get_bot_pool_size():
+    return bot_pool.size()
