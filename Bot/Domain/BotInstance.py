@@ -1,3 +1,4 @@
+from Domain.Indicators.WaveTrendIndicator import WaveTrendIndicator
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Domain.Runners.IndicatorIngestion import IndicatorIngestion
 from Domain.Runners.ModelUpdater import ModelUpdater
@@ -9,8 +10,10 @@ from Util.Waves import Waves
 
 class BotInstance:
 
-    def __init__(self, symbol, indicator, model_name):
+    def __init__(self, symbol, model_name, time_scale, budget, partition_size, n_partition_limit):
         self.symbol = symbol
+        # TODO: make it generic by model name
+        self.indicator = WaveTrendIndicator(None, time_scale, budget, partition_size, n_partition_limit)
 
         # initialize threads
         self.indicator_ingestion = IndicatorIngestion(symbol, indicator)
@@ -25,13 +28,13 @@ class BotInstance:
         summary = summarize(values)
         initial_parameters = self.parameters_updater.model.predict(summary.std, summary.skewness, summary.kurtosis,
                                                                    summary.entropy)
-        # TODO: make it generic
+        # TODO: make it generic by model name
         waves = Waves(initial_parameters['k'])
         pattern = WaveTrendPattern(waves, initial_parameters['ob_level'], initial_parameters['os_level'])
         self.indicator_ingestion.indicator.pattern = pattern
 
         self.is_started = False
-        print('bot instance: ' + symbol + ' initialization completed')
+        print('bot instance: (' + symbol + ' - ' + model_name + ' initialization completed')
 
     def start_instance(self):
         if self.indicator_ingestion.is_alive() is False:

@@ -1,5 +1,6 @@
 # URLs
 binance_api_url = 'https://api.binance.com'
+db_url = 'mongodb://localhost:27017/'
 
 # File Paths
 wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv'
