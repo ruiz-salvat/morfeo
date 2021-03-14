@@ -2,6 +2,16 @@
 binance_api_url = 'https://api.binance.com'
 db_url = 'mongodb://localhost:27017/'
 
+# Database Names
+database_name = 'morfeo_db'
+symbols_table_name = 'Symbols'
+prices_table_name = 'Prices'
+instances_table_name = 'Instances'
+instance_states_table_name = 'InstanceStates'
+trades_table_name = 'Trades'
+customers_table_name = 'Customers'
+models_table_name = 'Models'
+
 # File Paths
 wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv'
 

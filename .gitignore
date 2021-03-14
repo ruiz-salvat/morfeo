@@ -119,3 +119,14 @@ Bot/Tests/Mock/__pycache__/MockIndicator.cpython-38.pyc
 Bot/Tests/Mock/__pycache__/MockPattern.cpython-38.pyc
 Bot/Tests/Mock/__pycache__/TestConstants.cpython-38.pyc
 Bot/Tests/__pycache__/BotPoolTest.cpython-38.pyc
+Bot/Database/__pycache__/__init__.cpython-38.pyc
+Bot/Database/__pycache__/DatabaseConnector.cpython-38.pyc
+Bot/Database/__pycache__/DatabaseInitializer.cpython-38.pyc
+Bot/DataObjects/Database/__pycache__/__init__.cpython-38.pyc
+Bot/DataObjects/Database/__pycache__/Customers.cpython-38.pyc
+Bot/DataObjects/Database/__pycache__/Instances.cpython-38.pyc
+Bot/DataObjects/Database/__pycache__/InstanceStates.cpython-38.pyc
+Bot/DataObjects/Database/__pycache__/Models.cpython-38.pyc
+Bot/DataObjects/Database/__pycache__/Prices.cpython-38.pyc
+Bot/DataObjects/Database/__pycache__/Symbols.cpython-38.pyc
+Bot/DataObjects/Database/__pycache__/Trades.cpython-38.pyc

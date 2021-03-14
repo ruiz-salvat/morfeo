@@ -1,4 +1,3 @@
-from Tests.Mock.MockBotInstance import MockBotInstance
 from Tests.Mock.MockIndicator import MockIndicator
 from Tests.Mock.MockPattern import MockPattern
 

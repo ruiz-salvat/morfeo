@@ -6,7 +6,7 @@ from Domain.BotInstance import BotInstance
 from Domain.BotPool import BotPool
 
 initialize_database()
-
+'''
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
@@ -54,3 +54,4 @@ def get_bot_pool():
 @app.route('/get_bot_pool_size', methods=['GET'])
 def get_bot_pool_size():
     return bot_pool.size()
+'''
