@@ -11,3 +11,6 @@ class MockPattern(Pattern):
 
     def sell_condition(self, array):
         return True
+
+    def get_max_arr_len(self):
+        return 10

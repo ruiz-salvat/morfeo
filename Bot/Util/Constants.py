@@ -1,3 +1,5 @@
+import numpy as np
+
 # URLs
 binance_api_url = 'https://api.binance.com'
 db_url = 'mongodb://localhost:27017/'
@@ -10,13 +12,18 @@ instances_table_name = 'Instances'
 instance_states_table_name = 'InstanceStates'
 trades_table_name = 'Trades'
 customers_table_name = 'Customers'
-models_table_name = 'Models'
+patterns_table_name = 'Patterns'
 
 # File Paths
 wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv'
 
-# Model Names
-wave_trend_model_name = 'wave_trend_model'
+# Pattern Names
+wave_trend_pattern_name = 'wave_trend_pattern'
+
+# Parameters
+wave_trend_parameters = ['ob_level', 'os_level', 'k']  # !!! the parameters order must match with the ranges order !!!!
+wave_trend_parameter_ranges = [range(43, 63, 5), range(-63, -43, 5), np.arange(0.001, 0.030, 0.001)]
+model_global_parameters = ['std', 'skewness', 'kurtosis', 'entropy']
 
 # Event Names
 model_refresh_event = 'model_refresh_event'
@@ -36,3 +43,6 @@ bot_instance_stopped_msg = 'Bot instance stopped successfully'
 bot_instance_not_stopped_msg = 'Error: stop instance before removing it'
 bot_instance_already_stopped_msg = 'Error: the bot instance was already stopped'
 instance_id_not_found_msg = 'Error: instance id not found'
+
+# Exceptions
+pattern_not_found = 'Pattern name not found'

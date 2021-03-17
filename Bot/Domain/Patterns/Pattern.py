@@ -14,5 +14,9 @@ class Pattern(ABC):
     def sell_condition(self, array):
         pass
 
+    @abstractmethod
+    def get_max_arr_len(self):
+        pass
+
     def __repr__(self):
         return str(self.__dict__)

@@ -1,7 +1,4 @@
-from abc import ABC, abstractmethod
-
-
-class Indicator(ABC):
+class Ingestor:
 
     def __init__(self, pattern, time_scale, budget, partition_size, n_partition_limit):
         self.pattern = pattern
@@ -37,9 +34,12 @@ class Indicator(ABC):
         else:
             return array
 
-    @abstractmethod
     def ingest(self, array):
-        pass
+        last_value = array[len(array) - 1]
+        if self.pattern.buy_condition(array):
+            self.buy(last_value)
+        elif self.pattern.sell_condition(array):
+            self.sell(last_value)
 
     def buy(self, price):
         if self.budget >= self.partition_size:
@@ -55,7 +55,3 @@ class Indicator(ABC):
             self.budget = self.budget + sold_coins * price
             self.clean_gains = self.clean_gains + (sold_coins * price - self.partition_size)
             self.n_partitions -= 1
-
-    @abstractmethod
-    def get_max_arr_len(self):
-        pass

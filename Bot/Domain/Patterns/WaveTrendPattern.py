@@ -56,3 +56,6 @@ class WaveTrendPattern(Pattern):
             return True
         else:
             return False
+
+    def get_max_arr_len(self):
+        return WaveTrendPattern.max_arr_len

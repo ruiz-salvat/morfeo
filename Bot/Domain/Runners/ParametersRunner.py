@@ -7,7 +7,7 @@ from Util.Observable.Target import Target
 from Util.Summarizer import summarize
 
 
-class ParametersUpdater(Thread, Target, Observer):
+class ParametersRunner(Thread, Target, Observer):
 
     def __init__(self, model, indicator_ingestion):
         Thread.__init__(self)

@@ -9,11 +9,11 @@ from Util.Observable.Observer import Observer
 from Util.Waves import Waves
 
 
-class IndicatorIngestion(Thread, Observer):
+class IngestorRunner(Thread, Observer):
 
-    def __init__(self, symbol, indicator):
+    def __init__(self, symbol, ingestor):
         Thread.__init__(self)
-        self.indicator = indicator
+        self.ingestor = ingestor
         self.data_retriever = DataRetriever(symbol)
         self.queue = deque()
         self.kill_flag = False
@@ -27,17 +27,17 @@ class IndicatorIngestion(Thread, Observer):
                 old_measurement_time = measurement_time
                 last_price = float(self.data_retriever.retrieve_last_price())
 
-                if len(self.queue) >= self.indicator.get_max_arr_len():
+                if len(self.queue) >= self.ingestor.pattern.get_max_arr_len():
                     self.queue.popleft()
                     self.queue.append(last_price)
-                    self.indicator.ingest(list(self.queue))
+                    self.ingestor.ingest(list(self.queue))
                 else:
                     self.queue.append(last_price)
-                print('clean gains: ' + str(self.indicator.clean_gains) + '  |  ' + str(self.indicator.pattern))
+                print('clean gains: ' + str(self.ingestor.clean_gains) + '  |  ' + str(self.ingestor.pattern))
 
     def notify(self, *args, **kwargs):
         if args[0] == parameters_refresh_event:
             # TODO: make it generic
             waves = Waves(args[1]['k'])
             pattern = WaveTrendPattern(waves, args[1]['ob_level'], args[1]['os_level'])
-            self.indicator.pattern = pattern
+            self.ingestor.pattern = pattern

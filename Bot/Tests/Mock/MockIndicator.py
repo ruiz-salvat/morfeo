@@ -1,7 +1,7 @@
-from Domain.Indicators.Indicator import Indicator
+from Domain.Ingestor import Ingestor
 
 
-class MockIndicator(Indicator):
+class MockIngestor(Ingestor):
 
     def __init__(self, pattern, time_scale, budget, partition_size, n_partition_limit):
         super().__init__(pattern, time_scale, budget, partition_size, n_partition_limit)
