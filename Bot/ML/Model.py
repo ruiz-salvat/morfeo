@@ -6,16 +6,15 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn import metrics
 from sklearn.model_selection import GridSearchCV
-from Util.Constants import wave_trend_pattern_name, wave_trend_parameters, model_global_parameters, pattern_not_found, \
+from Util.Constants import wave_trend_pattern_id, wave_trend_parameters, model_global_parameters, pattern_not_found, \
     wave_trend_parameter_ranges
 
 
 class Model:
 
     def __init__(self, file_path, pattern_name):
-        super().__init__(file_path)
         self.pattern_name = pattern_name
-        if self.pattern_name == wave_trend_pattern_name:
+        if self.pattern_name == wave_trend_pattern_id:
             self.model_parameters = wave_trend_parameters
         else:
             raise Exception(pattern_not_found)
@@ -119,7 +118,7 @@ class Model:
 
 def generate_iterable(pattern_name):
     model_parameters = None
-    if pattern_name == wave_trend_pattern_name:
+    if pattern_name == wave_trend_pattern_id:
         model_parameters = wave_trend_parameters
     else:
         raise Exception(pattern_not_found)

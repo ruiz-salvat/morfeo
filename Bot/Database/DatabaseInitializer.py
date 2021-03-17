@@ -2,7 +2,7 @@ import time
 from DataObjects.Database.Customers import Customers
 from DataObjects.Database.InstanceStates import InstanceStates
 from DataObjects.Database.Instances import Instances
-from DataObjects.Database.Models import Models
+from DataObjects.Database.Patterns import Patterns
 from DataObjects.Database.Prices import Prices
 from DataObjects.Database.Symbols import Symbols
 from DataObjects.Database.Trades import Trades
@@ -22,7 +22,7 @@ def initialize_database():
         instance_states = []
         trades = []
         customers = []
-        models = []
+        patterns = []
 
         # Append mock data objects to the collections
         symbols.append(Symbols('PANDA_DOGE', 'PANDA', 'DOGE'))
@@ -32,7 +32,7 @@ def initialize_database():
         trades.append(Trades(0, time.time() - 10, 'BUY', 420, 10, None))
         trades.append(Trades(0, time.time(), 'SELL', 430, 11, 1))
         customers.append(Customers(0, 'Crocodile'))
-        models.append(Models(0, 'Banana'))
+        patterns.append(Patterns(0, 'Banana'))
 
         # Insert collections
         db[symbols_table_name].insert(list(map(lambda x: x.__dict__, symbols)))
@@ -41,7 +41,7 @@ def initialize_database():
         db[instance_states_table_name].insert(list(map(lambda x: x.__dict__, instance_states)))
         db[trades_table_name].insert(list(map(lambda x: x.__dict__, trades)))
         db[customers_table_name].insert(list(map(lambda x: x.__dict__, customers)))
-        db[patterns_table_name].insert(list(map(lambda x: x.__dict__, models)))
+        db[patterns_table_name].insert(list(map(lambda x: x.__dict__, patterns)))
 
         print('database initialized')
     else:

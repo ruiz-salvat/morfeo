@@ -4,7 +4,9 @@ from flask_cors import CORS
 from Database.DatabaseInitializer import initialize_database
 from Domain.BotInstance import BotInstance
 from Domain.BotPool import BotPool
-from Util.Constants import wave_trend_pattern_name
+from Util.Constants import wave_trend_pattern_id
+
+initialize_database()
 
 bot_pool = BotPool()
 symbol = 'ADAUSDT'
@@ -13,7 +15,7 @@ time_scale = 5
 budget = 1000
 partition_size = 10
 n_partition_limit = 25
-pattern_name = wave_trend_pattern_name
+pattern_name = wave_trend_pattern_id
 bot_instance = BotInstance(symbol, pattern_name, time_scale, budget, partition_size, n_partition_limit)
 resp = bot_pool.add_instance(instance_id, bot_instance)  # TODO: add validation (bot pool is full)
 bot_pool.start_instance(instance_id)

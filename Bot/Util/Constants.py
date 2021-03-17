@@ -17,8 +17,8 @@ patterns_table_name = 'Patterns'
 # File Paths
 wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv'
 
-# Pattern Names
-wave_trend_pattern_name = 'wave_trend_pattern'
+# Pattern IDs
+wave_trend_pattern_id = 1
 
 # Parameters
 wave_trend_parameters = ['ob_level', 'os_level', 'k']  # !!! the parameters order must match with the ranges order !!!!
