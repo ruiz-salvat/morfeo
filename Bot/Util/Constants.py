@@ -6,6 +6,9 @@ db_url = 'mongodb://localhost:27017/'
 
 # Database Names
 database_name = 'morfeo_db'
+test_database_name = 'test_db'
+
+# Database Table Names
 symbols_table_name = 'Symbols'
 prices_table_name = 'Prices'
 instances_table_name = 'Instances'
@@ -13,6 +16,15 @@ instance_states_table_name = 'InstanceStates'
 trades_table_name = 'Trades'
 customers_table_name = 'Customers'
 patterns_table_name = 'Patterns'
+
+# Primary Keys
+symbols_pk = 'symbol'
+prices_pk = None  # not known yet
+instances_pk = 'instance_id'
+instance_states_pk = None  # not known yet
+trades_pk = None  # not known yet
+customers_pk = 'customer_id'
+patterns_pk = 'pattern_id'
 
 # File Paths
 wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv'
@@ -43,6 +55,12 @@ bot_instance_stopped_msg = 'Bot instance stopped successfully'
 bot_instance_not_stopped_msg = 'Error: stop instance before removing it'
 bot_instance_already_stopped_msg = 'Error: the bot instance was already stopped'
 instance_id_not_found_msg = 'Error: instance id not found'
+insert_instance_db_msg = 'Instance inserted to database successfully'
+insert_instance_db_error_msg = 'Error inserting instance to database'
+update_instance_db_msg = 'Instance updated correctly'
+update_instance_db_error_msg = 'Error updating instance'
+delete_instance_db_msg = 'Instance deleted correctly'
+delete_instance_db_error_msg = 'Error deleting instance'
 
 # Exceptions
 pattern_not_found = 'Pattern name not found'

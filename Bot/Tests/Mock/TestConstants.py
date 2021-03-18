@@ -3,6 +3,8 @@ from Tests.Mock.MockPattern import MockPattern
 
 valid_id = 1
 invalid_id = -1
+test_time = 999.9
+updated_test_time = 1111
 test_symbol = 'test_symbol'
 test_time_scale = 5
 test_budget = 1000

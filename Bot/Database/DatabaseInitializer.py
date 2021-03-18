@@ -12,7 +12,7 @@ from Util.Constants import symbols_table_name, prices_table_name, instances_tabl
 
 
 def initialize_database():
-    db_connector = DatabaseConnector()
+    db_connector = DatabaseConnector(is_test=False)
     db = db_connector.connect()
     if database_name not in db_connector.db_client.list_database_names():
         # Generate mock data object collections
@@ -43,8 +43,8 @@ def initialize_database():
         db[customers_table_name].insert(list(map(lambda x: x.__dict__, customers)))
         db[patterns_table_name].insert(list(map(lambda x: x.__dict__, patterns)))
 
-        print('database initialized')
+        print('Database initialized')
     else:
-        print('database already exists')
+        print('Database already exists')
 
     db_connector.close_connection()

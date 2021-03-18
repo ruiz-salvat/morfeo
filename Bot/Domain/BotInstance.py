@@ -38,7 +38,7 @@ class BotInstance:
             raise Exception(pattern_not_found)
 
         self.is_active = False
-        print('bot instance: (' + symbol + ' - <pattern_id: ' + str(pattern_id) + '> initialization completed')
+        print('Bot instance: (' + symbol + ' - <pattern_id: ' + str(pattern_id) + '>) initialization completed')
 
     def start_instance(self):
         if self.ingestor_runner.is_alive() is False:

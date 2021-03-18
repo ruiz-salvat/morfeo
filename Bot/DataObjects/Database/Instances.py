@@ -1,7 +1,7 @@
 class Instances:
-    def __init__(self, instance_id, creation_date, symbol, pattern_id, customer_id, time_scale):
+    def __init__(self, instance_id, creation_time, symbol, pattern_id, customer_id, time_scale):
         self.instance_id = instance_id
-        self.creation_date = creation_date
+        self.creation_time = creation_time
         self.symbol = symbol
         self.model_id = pattern_id
         self.customer_id = customer_id

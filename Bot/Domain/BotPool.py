@@ -1,5 +1,4 @@
 import time
-
 from DataObjects.Database.Instances import Instances
 from Database.DatabaseConnector import DatabaseConnector
 from Database.Services.InstancesService import InstancesService
@@ -12,14 +11,14 @@ class BotPool:
 
     def __init__(self):
         self.bot_inst_dict = {}
-        self.instances_service = InstancesService()
+        self.instances_service = InstancesService(is_test=False)
 
-    def add_instance(self, instance_id, bot_instance):
+    def add_instance(self, instance_id, bot_instance, customer_id):
         if instance_id not in self.bot_inst_dict.keys():
             self.bot_inst_dict[instance_id] = bot_instance
-            # TODO: implement Customer functionality
-            self.instances_service.insert_element(instance_id, 9999, bot_instance.symbol, bot_instance.pattern_id,
-                                                  'test_customer', bot_instance.time_scale)
+            msg = self.instances_service.insert_element(instance_id, time.time(), bot_instance.symbol,
+                                                        bot_instance.pattern_id, customer_id, bot_instance.time_scale)
+            print(msg)
             return bot_instance_added_msg
         else:
             return bot_instance_exists_msg
@@ -28,6 +27,8 @@ class BotPool:
         if instance_id in self.bot_inst_dict.keys():
             if self.bot_inst_dict[instance_id].is_active is False:
                 self.bot_inst_dict[instance_id].start_instance()
+                msg = self.instances_service.update_element_is_active(instance_id, True)
+                print(msg)
                 return bot_instance_started_msg
             else:
                 return bot_instance_already_started_msg
@@ -38,6 +39,8 @@ class BotPool:
         if instance_id in self.bot_inst_dict.keys():
             if self.bot_inst_dict[instance_id].is_active is False:
                 del self.bot_inst_dict[instance_id]
+                msg = self.instances_service.delete_element(instance_id)
+                print(msg)
                 return bot_instance_removed_msg
             else:
                 return bot_instance_not_stopped_msg
@@ -48,6 +51,8 @@ class BotPool:
         if instance_id in self.bot_inst_dict.keys():
             if self.bot_inst_dict[instance_id].is_active is True:
                 self.bot_inst_dict[instance_id].stop_instance()
+                msg = self.instances_service.update_element_is_active(instance_id, False)
+                print(msg)
                 return bot_instance_stopped_msg
             else:
                 return bot_instance_already_stopped_msg
