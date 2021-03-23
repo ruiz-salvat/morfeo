@@ -11,11 +11,11 @@ from Util.Waves import Waves
 
 class BotInstance:
 
-    def __init__(self, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit):
+    def __init__(self, instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit):
         self.symbol = symbol
         self.pattern_id = pattern_id
         self.time_scale = time_scale
-        self.ingestor = Ingestor(None, time_scale, budget, partition_size, n_partition_limit)
+        self.ingestor = Ingestor(instance_id, None, time_scale, budget, partition_size, n_partition_limit)
 
         # initialize threads
         self.ingestor_runner = IngestorRunner(symbol, self.ingestor)

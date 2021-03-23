@@ -17,7 +17,7 @@ partition_size = 10
 n_partition_limit = 25
 pattern_name = wave_trend_pattern_id
 customer_id = 'test_customer'
-bot_instance = BotInstance(symbol, pattern_name, time_scale, budget, partition_size, n_partition_limit)
+bot_instance = BotInstance(instance_id, symbol, pattern_name, time_scale, budget, partition_size, n_partition_limit)
 
 resp = bot_pool.add_instance(instance_id, bot_instance, customer_id)  # TODO: add validation (bot pool is full)
 print(resp)

@@ -41,6 +41,10 @@ model_global_parameters = ['std', 'skewness', 'kurtosis', 'entropy']
 model_refresh_event = 'model_refresh_event'
 parameters_refresh_event = 'parameters_refresh_event'
 
+# Operation Names
+buy_operation_name = 'BUY'
+sell_operation_name = 'SELL'
+
 # Time Intervals
 model_updater_sleep_time = 300  # seconds
 parameters_updater_sleep_time = 60  # seconds
@@ -61,6 +65,12 @@ update_instance_db_msg = 'Instance updated correctly'
 update_instance_db_error_msg = 'Error updating instance'
 delete_instance_db_msg = 'Instance deleted correctly'
 delete_instance_db_error_msg = 'Error deleting instance'
+insert_trades_db_msg = 'Trades record inserted to database successfully'
+insert_trades_db_error_msg = 'Error inserting trades record to database'
+updates_trades_db_msg = 'Trades record updated successfully'
+updates_trades_db_error_db = 'Error updating trades record'
+delete_trades_db_msg = 'Trades record deleted correctly'
+delete_trades_db_error_msg = 'Error deleting trades record'
 
 # Exceptions
 pattern_not_found = 'Pattern name not found'

@@ -6,6 +6,9 @@ from Tests.InstancesServiceTest import InstancesService_InsertElement_Equal, Ins
     InstancesService_DeleteElement_Error, InstancesService_UpdateElementIsActive_Equal, \
     InstancesService_UpdateElementIsActive_Error
 from Tests.ModelTest import Model_GenerateIterable_Equal
+from Tests.TradesServiceTest import TradesService_InsertElement_Equal, TradesService_InsertElement_Error, \
+    TradesService_UpdateElement_Equal, TradesService_UpdateElement_Error, TradesService_DeleteElement_Equal, \
+    TradesService_DeleteElement_Error
 
 
 def run_tests():
@@ -27,6 +30,12 @@ def run_tests():
     InstancesService_UpdateElementIsActive_Error()
     InstancesService_DeleteElement_Equal()
     InstancesService_DeleteElement_Error()
+    TradesService_InsertElement_Equal()
+    TradesService_InsertElement_Error()
+    TradesService_UpdateElement_Equal()
+    TradesService_UpdateElement_Error()
+    TradesService_DeleteElement_Equal()
+    TradesService_DeleteElement_Error()
     print('Everything passed')
 
 
