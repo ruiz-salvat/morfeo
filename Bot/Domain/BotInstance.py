@@ -1,3 +1,4 @@
+from Database.Services.TradesService import TradesService
 from Domain.Ingestor import Ingestor
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Domain.Runners.IngestorRunner import IngestorRunner
@@ -15,7 +16,8 @@ class BotInstance:
         self.symbol = symbol
         self.pattern_id = pattern_id
         self.time_scale = time_scale
-        self.ingestor = Ingestor(instance_id, None, time_scale, budget, partition_size, n_partition_limit)
+        self.ingestor = Ingestor(instance_id, None, time_scale, budget, partition_size, n_partition_limit,
+                                 TradesService(is_test=False))
 
         # initialize threads
         self.ingestor_runner = IngestorRunner(symbol, self.ingestor)

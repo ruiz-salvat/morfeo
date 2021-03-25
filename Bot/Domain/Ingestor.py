@@ -7,7 +7,7 @@ from Util.Constants import buy_operation_name, sell_operation_name
 
 class Ingestor:
 
-    def __init__(self, instance_id, pattern, time_scale, budget, partition_size, n_partition_limit):
+    def __init__(self, instance_id, pattern, time_scale, budget, partition_size, n_partition_limit, trades_service):
         self.instance_id = instance_id
         self.pattern = pattern
         self.time_scale = time_scale
@@ -20,7 +20,7 @@ class Ingestor:
         self.clean_gains = 0
         self.n_partition_limit = n_partition_limit
         self.order_queue = deque()  # queue of tuples
-        self.trades_service = TradesService(is_test=False)
+        self.trades_service = trades_service
 
     def reduce(self, array):
         new_array = []
@@ -73,4 +73,4 @@ class Ingestor:
             diff_price = price - order.buy_price
             gains = diff_price * self.partition_size
             self.trades_service.insert_element(self.instance_id, time.time(), sell_operation_name, price,
-                                               self.partition_size / price, gains)
+                                               sold_coins * price, gains)

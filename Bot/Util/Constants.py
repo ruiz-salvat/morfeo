@@ -71,6 +71,12 @@ updates_trades_db_msg = 'Trades record updated successfully'
 updates_trades_db_error_db = 'Error updating trades record'
 delete_trades_db_msg = 'Trades record deleted correctly'
 delete_trades_db_error_msg = 'Error deleting trades record'
+insert_instance_states_db_msg = 'Instance states record inserted to database successfully'
+insert_instance_states_db_error_msg = 'Error inserting instance states record to database'
+update_instance_states_db_msg = 'Instance states record updated successfully'
+update_instance_states_db_error_msg = 'Error updating instance states record'
+delete_instance_states_db_msg = 'Instance states record deleted successfully'
+delete_instance_states_db_error_msg = 'Error deleting instance states record'
 
 # Exceptions
 pattern_not_found = 'Pattern name not found'

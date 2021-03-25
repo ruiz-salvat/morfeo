@@ -1,10 +1,12 @@
+from Database.Services.TradesService import TradesService
 from Domain.Ingestor import Ingestor
 
 
 class MockIngestor(Ingestor):
 
     def __init__(self, instance_id, pattern, time_scale, budget, partition_size, n_partition_limit):
-        super().__init__(instance_id, pattern, time_scale, budget, partition_size, n_partition_limit)
+        super().__init__(instance_id, pattern, time_scale, budget, partition_size, n_partition_limit,
+                         TradesService(is_test=True))
 
     def ingest(self, array):
         pass
