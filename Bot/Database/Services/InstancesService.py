@@ -1,7 +1,8 @@
 from DataObjects.Database.Instances import Instances
 from Database.Services.Service import Service
 from Util.Constants import instances_table_name, instances_pk, insert_instance_db_msg, insert_instance_db_error_msg, \
-    update_instance_db_msg, update_instance_db_error_msg, delete_instance_db_msg, delete_instance_db_error_msg
+    update_instance_db_msg, update_instance_db_error_msg, delete_instance_db_msg, delete_instance_db_error_msg, \
+    instance_states_table_name
 
 
 class InstancesService(Service):
@@ -42,6 +43,9 @@ class InstancesService(Service):
 
     def delete_element(self, instance_id):
         instance = self.db[instances_table_name].find_one({instances_pk: instance_id})
+        instance_states_elements = self.db[instance_states_table_name].find({instances_pk: instance_id})
+        if instance_states_elements.count() > 0:
+            return delete_instance_db_error_msg
         if instance is not None:
             filt = {instances_pk: instance_id}
             self.db[instances_table_name].delete_one(filt)

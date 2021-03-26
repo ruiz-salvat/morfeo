@@ -8,6 +8,7 @@ updated_test_time = 1111
 test_symbol = 'test_symbol'
 test_time_scale = 5
 test_budget = 1000
+updated_test_budget = 666
 test_partition_size = 10
 test_n_partition_limit = 50
 test_model_name = 'test_model_name'

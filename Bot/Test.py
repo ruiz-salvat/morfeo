@@ -9,7 +9,7 @@ from Tests.InstanceStatesServiceTest import InstanceStatesService_InsertElement_
 from Tests.InstancesServiceTest import InstancesService_InsertElement_Equal, InstancesService_UpdateElement_Equal, \
     InstancesService_DeleteElement_Equal, InstancesService_InsertElement_Error, InstancesService_UpdateElement_Error, \
     InstancesService_DeleteElement_Error, InstancesService_UpdateElementIsActive_Equal, \
-    InstancesService_UpdateElementIsActive_Error
+    InstancesService_UpdateElementIsActive_Error, InstancesService_DeleteElement_ErrorInstanceStates
 from Tests.ModelTest import Model_GenerateIterable_Equal
 from Tests.TradesServiceTest import TradesService_InsertElement_Equal, TradesService_InsertElement_Error, \
     TradesService_UpdateElement_Equal, TradesService_UpdateElement_Error, TradesService_DeleteElement_Equal, \
@@ -17,7 +17,6 @@ from Tests.TradesServiceTest import TradesService_InsertElement_Equal, TradesSer
 
 
 def run_tests():
-    '''
     BotPool_Size_Equal()
     BotPool_AddInstance_Equal()
     BotPool_AddInstance_Error()
@@ -36,6 +35,7 @@ def run_tests():
     InstancesService_UpdateElementIsActive_Error()
     InstancesService_DeleteElement_Equal()
     InstancesService_DeleteElement_Error()
+    InstancesService_DeleteElement_ErrorInstanceStates()
     TradesService_InsertElement_Equal()
     TradesService_InsertElement_Error()
     TradesService_UpdateElement_Equal()
@@ -45,7 +45,6 @@ def run_tests():
     Ingestor_Buy_Equal()
     Ingestor_Sell_Equal()
     #Ingestor_Reduce_Equal()
-    '''
     InstanceStatesService_InsertElement_Equal()
     InstanceStatesService_InsertElement_Error()
     InstanceStatesService_UpdateElement_Equal()

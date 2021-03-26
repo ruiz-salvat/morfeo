@@ -19,10 +19,7 @@ patterns_table_name = 'Patterns'
 
 # Primary Keys
 symbols_pk = 'symbol'
-prices_pk = None  # not known yet
 instances_pk = 'instance_id'
-instance_states_pk = None  # not known yet
-trades_pk = None  # not known yet
 customers_pk = 'customer_id'
 patterns_pk = 'pattern_id'
 

@@ -7,7 +7,8 @@ from Util.Constants import buy_operation_name, sell_operation_name
 
 class Ingestor:
 
-    def __init__(self, instance_id, pattern, time_scale, budget, partition_size, n_partition_limit, trades_service):
+    def __init__(self, instance_id, pattern, time_scale, budget, partition_size, n_partition_limit, trades_service,
+                 instance_states_service):
         self.instance_id = instance_id
         self.pattern = pattern
         self.time_scale = time_scale
@@ -21,6 +22,7 @@ class Ingestor:
         self.n_partition_limit = n_partition_limit
         self.order_queue = deque()  # queue of tuples
         self.trades_service = trades_service
+        self.instance_states_service = instance_states_service
 
     def reduce(self, array):
         new_array = []

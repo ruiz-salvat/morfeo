@@ -1,6 +1,7 @@
 import time
 from DataObjects.Database.Instances import Instances
 from Database.DatabaseConnector import DatabaseConnector
+from Database.Services.InstanceStatesService import InstanceStatesService
 from Database.Services.InstancesService import InstancesService
 from Util.Constants import bot_instance_added_msg, bot_instance_exists_msg, bot_instance_started_msg, \
     bot_instance_already_started_msg, instance_id_not_found_msg, bot_instance_removed_msg, bot_instance_not_stopped_msg, \
@@ -9,16 +10,18 @@ from Util.Constants import bot_instance_added_msg, bot_instance_exists_msg, bot_
 
 class BotPool:
 
-    def __init__(self):
+    def __init__(self, instances_service, instance_states_service):
         self.bot_inst_dict = {}
-        self.instances_service = InstancesService(is_test=False)
+        self.instances_service = instances_service
+        self.instance_states_service = instance_states_service
 
     def add_instance(self, instance_id, bot_instance, customer_id):
         if instance_id not in self.bot_inst_dict.keys():
             self.bot_inst_dict[instance_id] = bot_instance
-            msg = self.instances_service.insert_element(instance_id, time.time(), bot_instance.symbol,
-                                                        bot_instance.pattern_id, customer_id, bot_instance.time_scale)
-            print(msg)
+            msg_1 = self.instances_service.insert_element(instance_id, time.time(), bot_instance.symbol,
+                                                          bot_instance.pattern_id, customer_id, bot_instance.time_scale)
+            msg_2 = self.instance_states_service.insert_element(instance_id, None, None, None, None, None, None)
+            print(msg_1 + '\n' + msg_2)
             return bot_instance_added_msg
         else:
             return bot_instance_exists_msg
@@ -39,8 +42,9 @@ class BotPool:
         if instance_id in self.bot_inst_dict.keys():
             if self.bot_inst_dict[instance_id].is_active is False:
                 del self.bot_inst_dict[instance_id]
-                msg = self.instances_service.delete_element(instance_id)
-                print(msg)
+                msg_1 = self.instance_states_service.delete_element(instance_id)
+                msg_2 = self.instances_service.delete_element(instance_id)
+                print(msg_1 + '\n' + msg_2)
                 return bot_instance_removed_msg
             else:
                 return bot_instance_not_stopped_msg
