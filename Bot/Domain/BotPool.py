@@ -18,10 +18,10 @@ class BotPool:
     def add_instance(self, instance_id, bot_instance, customer_id):
         if instance_id not in self.bot_inst_dict.keys():
             self.bot_inst_dict[instance_id] = bot_instance
-            msg_1 = self.instances_service.insert_element(instance_id, time.time(), bot_instance.symbol,
-                                                          bot_instance.pattern_id, customer_id, bot_instance.time_scale)
-            msg_2 = self.instance_states_service.insert_element(instance_id, None, None, None, None, None, None)
-            print(msg_1 + '\n' + msg_2)
+            msg = self.instances_service.insert_element(instance_id, time.time(), bot_instance.symbol,
+                                                        bot_instance.pattern_id, customer_id, bot_instance.time_scale)
+            bot_instance.initialize_instance_states()
+            print(msg)
             return bot_instance_added_msg
         else:
             return bot_instance_exists_msg

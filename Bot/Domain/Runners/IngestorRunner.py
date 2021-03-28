@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from threading import Thread
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Net.DataRetriever import DataRetriever
-from Util.Constants import parameters_refresh_event
+from Util.Constants import parameters_refresh_event, wave_trend_pattern_id, pattern_not_found
 from Util.Observable.Observer import Observer
 from Util.Waves import Waves
 
@@ -37,7 +37,9 @@ class IngestorRunner(Thread, Observer):
 
     def notify(self, *args, **kwargs):
         if args[0] == parameters_refresh_event:
-            # TODO: make it generic
-            waves = Waves(args[1]['k'])
-            pattern = WaveTrendPattern(waves, args[1]['ob_level'], args[1]['os_level'])
-            self.ingestor.pattern = pattern
+            if args[1]['pattern_id'] == wave_trend_pattern_id:
+                waves = Waves(args[1]['k'])
+                pattern = WaveTrendPattern(waves, args[1]['ob_level'], args[1]['os_level'])
+                self.ingestor.pattern = pattern
+            else:
+                raise Exception(pattern_not_found)

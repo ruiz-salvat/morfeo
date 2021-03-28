@@ -12,9 +12,9 @@ from Util.Constants import wave_trend_pattern_id, wave_trend_parameters, model_g
 
 class Model:
 
-    def __init__(self, file_path, pattern_name):
-        self.pattern_name = pattern_name
-        if self.pattern_name == wave_trend_pattern_id:
+    def __init__(self, file_path, pattern_id):
+        self.pattern_id = pattern_id
+        if self.pattern_id == wave_trend_pattern_id:
             self.model_parameters = wave_trend_parameters
         else:
             raise Exception(pattern_not_found)
@@ -96,11 +96,11 @@ class Model:
 
     def predict(self, std, skewness, kurtosis, entropy):
         best_pred = 0
-        best_params = {}
+        best_params = {'pattern_id': self.pattern_id}
         for p in self.model_parameters:
             best_params[p] = None
 
-        parameter_combinations = generate_iterable(self.pattern_name)
+        parameter_combinations = generate_iterable(self.pattern_id)
         for comb in parameter_combinations:
             aux = comb.copy()
             aux.extend([std, skewness, kurtosis, entropy])

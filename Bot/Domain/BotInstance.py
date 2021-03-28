@@ -13,10 +13,16 @@ from Util.Waves import Waves
 
 class BotInstance:
 
-    def __init__(self, instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit):
+    def __init__(self, instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit,
+                 instance_states_service):
+        self.instance_id = instance_id
         self.symbol = symbol
         self.pattern_id = pattern_id
         self.time_scale = time_scale
+        self.budget = budget
+        self.partition_size = partition_size
+        self.n_partition_limit = n_partition_limit
+
         self.ingestor = Ingestor(instance_id, None, time_scale, budget, partition_size, n_partition_limit,
                                  TradesService(is_test=False), InstanceStatesService(is_test=False))
 
@@ -40,17 +46,25 @@ class BotInstance:
         else:
             raise Exception(pattern_not_found)
 
+        self.instance_states_service = instance_states_service
+        self.instance_states_initialized = False
         self.is_active = False
         print('Bot instance: (' + symbol + ' - <pattern_id: ' + str(pattern_id) + '>) initialization completed')
 
+    def initialize_instance_states(self):
+        self.instance_states_service.insert_element(self.instance_id, self.budget, 0, self.partition_size, 0, 0,
+                                                    self.n_partition_limit)
+        self.instance_states_initialized = True
+
     def start_instance(self):
-        if self.ingestor_runner.is_alive() is False:
-            self.ingestor_runner.start()
-        if self.model_runner.is_alive() is False:
-            self.model_runner.start()
-        if self.parameters_runner.is_alive() is False:
-            self.parameters_runner.start()
-        self.is_active = True
+        if self.instance_states_initialized:
+            if self.ingestor_runner.is_alive() is False:
+                self.ingestor_runner.start()
+            if self.model_runner.is_alive() is False:
+                self.model_runner.start()
+            if self.parameters_runner.is_alive() is False:
+                self.parameters_runner.start()
+            self.is_active = True
 
     def stop_instance(self):
         if self.ingestor_runner.is_alive() is True:

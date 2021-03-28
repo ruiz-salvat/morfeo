@@ -15,7 +15,7 @@ class Ingestor:
         self.initial_budget = budget
         self.budget = budget
         self.partition_size = partition_size
-        self.coins = 0
+        self.base_amount = 0
         self.n_partitions = 0
         self.n_total_partitions = 0
         self.clean_gains = 0
@@ -55,7 +55,7 @@ class Ingestor:
 
     def buy(self, price):
         if self.budget >= self.partition_size:
-            self.coins = self.coins + self.partition_size / price
+            self.base_amount = self.base_amount + self.partition_size / price
             self.budget = self.budget - self.partition_size
             self.n_partitions += 1
             self.n_total_partitions += 1
@@ -63,11 +63,14 @@ class Ingestor:
             self.order_queue.append(Order(operation_time, price, self.partition_size))
             self.trades_service.insert_element(self.instance_id, time.time(), buy_operation_name, price,
                                                self.partition_size / price, None)
+            self.instance_states_service.update_element(self.instance_id, self.budget, self.clean_gains,
+                                                        self.partition_size, self.base_amount, self.n_partitions,
+                                                        self.n_partition_limit)
 
     def sell(self, price):
         if self.n_partitions > 0:
-            sold_coins = self.coins / self.n_partitions
-            self.coins = self.coins - sold_coins
+            sold_coins = self.base_amount / self.n_partitions
+            self.base_amount = self.base_amount - sold_coins
             self.budget = self.budget + sold_coins * price
             self.clean_gains = self.clean_gains + (sold_coins * price - self.partition_size)
             self.n_partitions -= 1
@@ -76,3 +79,6 @@ class Ingestor:
             gains = diff_price * self.partition_size
             self.trades_service.insert_element(self.instance_id, time.time(), sell_operation_name, price,
                                                sold_coins * price, gains)
+            self.instance_states_service.update_element(self.instance_id, self.budget, self.clean_gains,
+                                                        self.partition_size, self.base_amount, self.n_partitions,
+                                                        self.n_partition_limit)

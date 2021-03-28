@@ -16,7 +16,7 @@ def Ingestor_Buy_Equal():
     ingestor.buy(1)  # price is 1
 
     assert ingestor.budget == 990, 'budget has been subtracted by 10'
-    assert ingestor.coins == 10, 'the amount of coins should be 1 * 10 = 10'
+    assert ingestor.base_amount == 10, 'the amount of coins should be 1 * 10 = 10'
     assert ingestor.n_partitions == 1, 'n_partitions should be 1'
     assert ingestor.n_total_partitions == 1, 'n_total_partitions should be 1'
     assert len(ingestor.order_queue) == 1, 'the size of the queue must be 1'
@@ -35,7 +35,7 @@ def Ingestor_Sell_Equal():
     ingestor.sell(2)  # sell price is 2
 
     assert ingestor.budget == 1010, 'budget has been updated like 90 + 2 * 10 = 110'
-    assert ingestor.coins == 0, 'the amount of coins should be 0'
+    assert ingestor.base_amount == 0, 'the amount of coins should be 0'
     assert ingestor.clean_gains == 10, 'the clean gains should be 110 - 100 = 10'
     assert ingestor.n_partitions == 0, 'n_partitions should be 0'
     assert ingestor.n_total_partitions == 1, 'n_total_partitions should be 1'

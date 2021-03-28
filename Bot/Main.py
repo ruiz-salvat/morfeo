@@ -19,14 +19,15 @@ partition_size = 10
 n_partition_limit = 25
 pattern_id = wave_trend_pattern_id
 customer_id = 'test_customer'
-bot_instance = BotInstance(instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit)
+bot_instance = BotInstance(instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit,
+                           InstanceStatesService(is_test=False))
 
 resp = bot_pool.add_instance(instance_id, bot_instance, customer_id)  # TODO: add validation (bot pool is full)
 print(resp)
 
 resp = bot_pool.start_instance(instance_id)
 print(resp)
-
+'''
 resp = bot_pool.stop_instance(instance_id)
 print(resp)
 
@@ -34,7 +35,7 @@ resp = bot_pool.remove_instance(instance_id)
 print(resp)
 
 
-'''
+
 initialize_database()
 
 app = Flask(__name__)
