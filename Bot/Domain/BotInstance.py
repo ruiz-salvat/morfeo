@@ -23,11 +23,11 @@ class BotInstance:
         self.partition_size = partition_size
         self.n_partition_limit = n_partition_limit
 
-        self.ingestor = Ingestor(instance_id, None, time_scale, budget, partition_size, n_partition_limit,
+        self.ingestor = Ingestor(instance_id, None, budget, partition_size, n_partition_limit,
                                  TradesService(is_test=False), InstanceStatesService(is_test=False))
 
         # initialize threads
-        self.ingestor_runner = IngestorRunner(symbol, self.ingestor)
+        self.ingestor_runner = IngestorRunner(symbol, self.ingestor, time_scale)
         self.parameters_runner = ParametersRunner(None, self.ingestor_runner)
         self.model_runner = ModelRunner(pattern_id, self.parameters_runner)
 

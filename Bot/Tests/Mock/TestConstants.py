@@ -19,5 +19,5 @@ test_base_amount = 15
 test_n_partitions = 2
 test_gain = 1
 test_pattern = MockPattern()
-test_indicator = MockIngestor(valid_id, test_pattern, test_time_scale, test_budget, test_partition_size,
-                              test_n_partition_limit)
+test_ingestor = MockIngestor(valid_id, test_pattern, test_time_scale, test_budget, test_partition_size,
+                             test_n_partition_limit)

@@ -11,12 +11,35 @@ from Util.Waves import Waves
 
 class IngestorRunner(Thread, Observer):
 
-    def __init__(self, symbol, ingestor):
+    def __init__(self, symbol, ingestor, time_scale):
         Thread.__init__(self)
-        self.ingestor = ingestor
         self.data_retriever = DataRetriever(symbol)
+        self.ingestor = ingestor
+        self.time_scale = time_scale
         self.queue = deque()
         self.kill_flag = False
+
+    def reduce(self, array):
+        new_array = []
+        counter = 0
+        aux_value = 0
+        if self.time_scale > 1:
+            for value in array:
+                if counter >= self.time_scale - 1:
+                    aux_value = aux_value + value  # inserts the remaining value
+                    aux_value = aux_value / self.time_scale
+                    new_array.append(aux_value)
+                    aux_value = 0
+                    counter = 0
+                else:
+                    aux_value = aux_value + value
+                    counter += 1
+            if counter > 0:
+                aux_value = aux_value / (counter + 1)
+                new_array.append(aux_value)
+            return new_array
+        else:
+            return array
 
     def run(self):
         old_measurement_time = datetime.fromtimestamp(time.time())
@@ -27,10 +50,11 @@ class IngestorRunner(Thread, Observer):
                 old_measurement_time = measurement_time
                 last_price = float(self.data_retriever.retrieve_last_price())
 
-                if len(self.queue) >= self.ingestor.pattern.get_max_arr_len():
+                if len(self.queue) >= self.ingestor.pattern.get_max_arr_len() * self.time_scale:
                     self.queue.popleft()
                     self.queue.append(last_price)
-                    self.ingestor.ingest(list(self.queue))
+                    reduced_list = self.reduce(list(self.queue))
+                    self.ingestor.ingest(reduced_list)
                 else:
                     self.queue.append(last_price)
                 print('clean gains: ' + str(self.ingestor.clean_gains) + '  |  ' + str(self.ingestor.pattern))

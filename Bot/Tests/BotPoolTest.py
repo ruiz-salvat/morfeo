@@ -2,14 +2,14 @@ from Database.Services.InstanceStatesService import InstanceStatesService
 from Database.Services.InstancesService import InstancesService
 from Domain.BotPool import BotPool
 from Tests.Mock.MockBotInstance import MockBotInstance
-from Tests.Mock.TestConstants import test_symbol, test_model_name, valid_id, test_indicator, invalid_id
+from Tests.Mock.TestConstants import test_symbol, test_model_name, valid_id, test_ingestor, invalid_id
 from Util.Constants import bot_instance_added_msg, bot_instance_exists_msg, bot_instance_started_msg, \
     bot_instance_already_started_msg, instance_id_not_found_msg, bot_instance_removed_msg, bot_instance_not_stopped_msg, \
     bot_instance_stopped_msg, bot_instance_already_stopped_msg
 
 
 def BotPool_Size_Equal():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     bot_pool.add_instance(valid_id, test_bot_instance, valid_id)
@@ -19,7 +19,7 @@ def BotPool_Size_Equal():
 
 
 def BotPool_AddInstance_Equal():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     msg_1 = bot_pool.add_instance(valid_id, test_bot_instance, valid_id)
@@ -30,7 +30,7 @@ def BotPool_AddInstance_Equal():
 
 
 def BotPool_AddInstance_Error():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     bot_pool.add_instance(valid_id, test_bot_instance, valid_id)
@@ -41,7 +41,7 @@ def BotPool_AddInstance_Error():
 
 
 def BotPool_StartInstance_Equal():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     bot_pool.add_instance(valid_id, test_bot_instance, valid_id)
@@ -52,7 +52,7 @@ def BotPool_StartInstance_Equal():
 
 
 def BotPool_StartInstance_Error():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     bot_pool.add_instance(valid_id, test_bot_instance, valid_id)
@@ -65,7 +65,7 @@ def BotPool_StartInstance_Error():
 
 
 def BotPool_RemoveInstance_Equal():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     bot_pool.add_instance(valid_id, test_bot_instance, valid_id)
@@ -76,7 +76,7 @@ def BotPool_RemoveInstance_Equal():
 
 
 def BotPool_RemoveInstance_Error():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     bot_pool.add_instance(valid_id, test_bot_instance, valid_id)
@@ -90,7 +90,7 @@ def BotPool_RemoveInstance_Error():
 
 
 def BotPool_StopInstance_Equal():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     bot_pool.add_instance(valid_id, test_bot_instance, valid_id)
@@ -101,7 +101,7 @@ def BotPool_StopInstance_Equal():
 
 
 def BotPool_StopInstance_Error():
-    test_bot_instance = MockBotInstance(test_symbol, test_indicator, test_model_name)
+    test_bot_instance = MockBotInstance(test_symbol, test_ingestor, test_model_name)
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
 
     bot_pool.add_instance(valid_id, test_bot_instance, valid_id)

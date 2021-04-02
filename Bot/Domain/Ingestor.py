@@ -1,17 +1,15 @@
 import time
 from collections import deque
 from DataObjects.Order import Order
-from Database.Services.TradesService import TradesService
 from Util.Constants import buy_operation_name, sell_operation_name
 
 
 class Ingestor:
 
-    def __init__(self, instance_id, pattern, time_scale, budget, partition_size, n_partition_limit, trades_service,
+    def __init__(self, instance_id, pattern, budget, partition_size, n_partition_limit, trades_service,
                  instance_states_service):
         self.instance_id = instance_id
         self.pattern = pattern
-        self.time_scale = time_scale
         self.initial_budget = budget
         self.budget = budget
         self.partition_size = partition_size
@@ -23,28 +21,6 @@ class Ingestor:
         self.order_queue = deque()  # queue of tuples
         self.trades_service = trades_service
         self.instance_states_service = instance_states_service
-
-    def reduce(self, array):
-        new_array = []
-        counter = 0
-        aux_value = 0
-        if self.time_scale > 1:
-            for value in array:
-                if counter >= self.time_scale - 1:
-                    aux_value = aux_value + value  # inserts the remaining value
-                    aux_value = aux_value / self.time_scale
-                    new_array.append(aux_value)
-                    aux_value = 0
-                    counter = 0
-                else:
-                    aux_value = aux_value + value
-                    counter += 1
-            if counter > 0:
-                aux_value = aux_value / (counter + 1)
-                new_array.append(aux_value)
-            return new_array
-        else:
-            return array
 
     def ingest(self, array):
         last_value = array[len(array) - 1]
