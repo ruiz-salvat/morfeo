@@ -9,6 +9,9 @@ class MockBotInstance:
         self.pattern_id = valid_id
         self.time_scale = test_time_scale
 
+    def initialize_instance_states(self):
+        pass
+
     def start_instance(self):
         self.is_active = True
 

@@ -30,7 +30,7 @@ class Ingestor:
             self.sell(last_value)
 
     def buy(self, price):
-        if self.budget >= self.partition_size:
+        if self.budget >= self.partition_size and self.n_partitions < self.n_partition_limit:
             self.base_amount = self.base_amount + self.partition_size / price
             self.budget = self.budget - self.partition_size
             self.n_partitions += 1

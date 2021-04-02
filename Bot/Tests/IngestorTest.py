@@ -24,6 +24,22 @@ def Ingestor_Buy_Equal():
     assert ingestor.order_queue[0].buy_price == 1, 'the buy price of the order should be 1'
 
 
+def Ingestor_Buy_PartitionLimit():
+    trades_service = TradesService(is_test=True)
+    instances_service = InstancesService(is_test=True)
+    instance_states_service = InstanceStatesService(is_test=True)
+    trades_service.db_connector.drop_database()
+    instances_service.insert_element(valid_id, test_time, test_symbol, valid_id, valid_id, test_time_scale)
+    ingestor = Ingestor(valid_id, test_pattern, test_budget, test_partition_size,
+                        2, trades_service, instance_states_service)  # partition limit is 1
+
+    ingestor.buy(1)
+    ingestor.buy(1)
+    ingestor.buy(1)
+
+    assert ingestor.n_partitions == 2, 'just 2 partitions should be bought'
+
+
 def Ingestor_Sell_Equal():
     trades_service = TradesService(is_test=True)
     instances_service = InstancesService(is_test=True)
