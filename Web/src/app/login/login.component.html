@@ -1,0 +1,12 @@
+<img src="/assets/logo.png" alt="image" class="logo">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <label>
+        Username:
+        <input type="text" formControlName="username">
+    </label>
+    <label>
+        Password:
+        <input type="password" formControlName="password">
+    </label>
+    <button type="submit" [disabled]="!loginForm.valid">Log in</button>
+</form>
