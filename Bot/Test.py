@@ -1,6 +1,9 @@
 from Tests.BotPoolTest import BotPool_AddInstance_Equal, BotPool_AddInstance_Error, BotPool_RemoveInstance_Equal, \
     BotPool_RemoveInstance_Error, BotPool_StartInstance_Equal, BotPool_StartInstance_Error, BotPool_StopInstance_Equal, \
     BotPool_StopInstance_Error, BotPool_Size_Equal
+from Tests.FunctionsTest import Functions_Average_Equal, Functions_SimpleMovingAverage_Equal, \
+    Functions_ExponentialMovingAverage_Equal, Functions_AbsoluteValueArray_Equal, Functions_Cross_Equal_True, \
+    Functions_Cross_Equal_False
 from Tests.IngestorRunnerTest import IngestorRunner_Reduce_Equal
 from Tests.IngestorTest import Ingestor_Buy_Equal, Ingestor_Sell_Equal, Ingestor_Buy_PartitionLimit
 from Tests.InstanceStatesServiceTest import InstanceStatesService_InsertElement_Equal, \
@@ -15,9 +18,11 @@ from Tests.ModelTest import Model_GenerateIterable_Equal
 from Tests.TradesServiceTest import TradesService_InsertElement_Equal, TradesService_InsertElement_Error, \
     TradesService_UpdateElement_Equal, TradesService_UpdateElement_Error, TradesService_DeleteElement_Equal, \
     TradesService_DeleteElement_Error
+from Tests.WaveTrendPatternTest import WaveTrendPattern_BuyCondition_Equal, WaveTrendPattern_SellCondition_Equal
 
 
 def run_tests():
+    '''
     BotPool_Size_Equal()
     BotPool_AddInstance_Equal()
     BotPool_AddInstance_Error()
@@ -53,6 +58,15 @@ def run_tests():
     InstanceStatesService_UpdateElement_Error()
     InstanceStatesService_DeleteElement_Equal()
     InstanceStatesService_DeleteElement_Error()
+    '''
+    WaveTrendPattern_BuyCondition_Equal()
+    WaveTrendPattern_SellCondition_Equal()
+    Functions_Average_Equal()
+    Functions_SimpleMovingAverage_Equal()
+    Functions_ExponentialMovingAverage_Equal()
+    Functions_AbsoluteValueArray_Equal()
+    Functions_Cross_Equal_True()
+    Functions_Cross_Equal_False()
     print('Everything passed')
 
 

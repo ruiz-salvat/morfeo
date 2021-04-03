@@ -18,6 +18,10 @@ test_quote_amount = 100
 test_base_amount = 15
 test_n_partitions = 2
 test_gain = 1
+test_ob_level = 53
+test_os_level = -53
+test_waves_array = [14, 13, 14, 15, 17, 16, 13, 12, 11, 12, 11, 12, 11, 12, 13, 14, 15, 13, 15, 12, 11, 9, 10, 8, 12,
+                    11, 12, 11, 12, 13, 14]
 test_pattern = MockPattern()
 test_ingestor = MockIngestor(valid_id, test_pattern, test_time_scale, test_budget, test_partition_size,
                              test_n_partition_limit)
