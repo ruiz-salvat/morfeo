@@ -1,7 +1,7 @@
 from threading import Thread
 
 
-class RunnerThread(Thread):
+class SimulatorThread(Thread):
     def __init__(self, thread_id, simulator, df, symbol, time_scale, budget, partition_size, n_partition_limit):
         Thread.__init__(self)
         self.thread_id = thread_id

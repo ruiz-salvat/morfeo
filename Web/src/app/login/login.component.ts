@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,5 +24,6 @@ export class LoginComponent implements OnInit {
     // TODO: Authenticate
     console.log("username: " + this.loginForm.controls["username"].value);
     console.log("password: " + this.loginForm.controls["password"].value);
+    this.router.navigate(['portal']);
   }
 }

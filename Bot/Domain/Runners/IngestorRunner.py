@@ -46,7 +46,7 @@ class IngestorRunner(Thread, Observer):
         while self.kill_flag is False:
             measurement_time = datetime.fromtimestamp(time.time())
             # if measurement_time > old_measurement_time + timedelta(minutes=1):
-            if measurement_time > old_measurement_time + timedelta(seconds=2):  # TEMP
+            if measurement_time > old_measurement_time + timedelta(seconds=2):  # TODO: replace
                 old_measurement_time = measurement_time
                 last_price = float(self.data_retriever.retrieve_last_price())
 

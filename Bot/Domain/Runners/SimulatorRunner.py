@@ -1,10 +1,7 @@
 from datetime import datetime, timedelta
 import time
 import pandas as pd
-from Runners.RunnerThread import RunnerThread
-from Runners.ThreadPool import ThreadPool
 from Util import Constants
-from Util.Constants import symbols
 
 
 def run_script(data, simulator, time_range_in_days, time_scale):

@@ -39,6 +39,3 @@ class WaveTrendSimulator(Simulator):
                     self.results_df = self.results_df.append(aux_df, ignore_index=True)
                     print('Simulation: ' + str(start_date) + ' (' + str(ob_level) + ', ' + str(os_level) + ', ' +
                           str(k) + ') DONE.')
-
-    def get_indicator_name(self):
-        return 'wave_trend'
