@@ -1,3 +1,4 @@
+from Tests.BotInstanceTest import BotInstance_StartInstance_Equal, BotInstance_StopInstance_Equal
 from Tests.BotPoolTest import BotPool_AddInstance_Equal, BotPool_AddInstance_Error, BotPool_RemoveInstance_Equal, \
     BotPool_RemoveInstance_Error, BotPool_StartInstance_Equal, BotPool_StartInstance_Error, BotPool_StopInstance_Equal, \
     BotPool_StopInstance_Error, BotPool_Size_Equal
@@ -19,10 +20,10 @@ from Tests.TradesServiceTest import TradesService_InsertElement_Equal, TradesSer
     TradesService_UpdateElement_Equal, TradesService_UpdateElement_Error, TradesService_DeleteElement_Equal, \
     TradesService_DeleteElement_Error
 from Tests.WaveTrendPatternTest import WaveTrendPattern_BuyCondition_Equal, WaveTrendPattern_SellCondition_Equal
+from Tests.WavesTest import Waves_Calculate_Size_Equal
 
 
 def run_tests():
-    '''
     BotPool_Size_Equal()
     BotPool_AddInstance_Equal()
     BotPool_AddInstance_Error()
@@ -58,7 +59,6 @@ def run_tests():
     InstanceStatesService_UpdateElement_Error()
     InstanceStatesService_DeleteElement_Equal()
     InstanceStatesService_DeleteElement_Error()
-    '''
     WaveTrendPattern_BuyCondition_Equal()
     WaveTrendPattern_SellCondition_Equal()
     Functions_Average_Equal()
@@ -67,6 +67,9 @@ def run_tests():
     Functions_AbsoluteValueArray_Equal()
     Functions_Cross_Equal_True()
     Functions_Cross_Equal_False()
+    Waves_Calculate_Size_Equal()
+    BotInstance_StartInstance_Equal()  # Time consuming
+    BotInstance_StopInstance_Equal()  # Time consuming
     print('Everything passed')
 
 

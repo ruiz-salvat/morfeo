@@ -1,6 +1,7 @@
-from Indicators.WaveTrendIndicator import WaveTrendIndicator
-from Patterns.WaveTrendPattern import WaveTrendPattern
-from Simulators.Simulator import Simulator
+from Domain.Ingestor import Ingestor
+from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
+from Domain.Simulator.Simulator import Simulator
+from Util.Constants import simulator_instance_id
 from Util.Summarizer import summarize
 from Util.Waves import Waves
 import pandas as pd
@@ -22,11 +23,14 @@ class WaveTrendSimulator(Simulator):
 
                     waves = Waves(k)
                     pattern = WaveTrendPattern(waves, ob_level, os_level)
-                    indicator = WaveTrendIndicator(pattern, symbol, time_scale, budget, partition_size,
-                                                   n_partition_limit)
+                    '''
+                    instance_id, pattern, budget, partition_size, n_partition_limit, trades_service,
+                 instance_states_service
+                    '''
+                    ingestor = Ingestor(simulator_instance_id, pattern, budget, partition_size, )
 
-                    indicator.ingest(df['value'].array)
-                    result = indicator.result
+                    ingestor.ingest(df['value'].array)
+                    result = ingestor.result
 
                     start_date = df.iloc[0]['timestamp']
                     end_date = df.iloc[df.shape[0] - 1]['timestamp']

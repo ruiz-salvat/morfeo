@@ -29,6 +29,9 @@ wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_resul
 # Pattern IDs
 wave_trend_pattern_id = 1
 
+# Util Instance UDs
+simulator_instance_id = 'simulator_id'
+
 # Parameters
 wave_trend_parameters = ['ob_level', 'os_level', 'k']  # !!! the parameters order must match with the ranges order !!!!
 wave_trend_parameter_ranges = [range(43, 63, 5), range(-63, -43, 5), np.arange(0.001, 0.030, 0.001)]
@@ -58,22 +61,22 @@ bot_instance_already_stopped_msg = 'Error: the bot instance was already stopped'
 instance_id_not_found_msg = 'Error: instance id not found'
 insert_instance_db_msg = 'Instance inserted to database successfully'
 insert_instance_db_error_msg = 'Error inserting instance to database'
-update_instance_db_msg = 'Instance updated correctly'
-update_instance_db_error_msg = 'Error updating instance'
-delete_instance_db_msg = 'Instance deleted correctly'
-delete_instance_db_error_msg = 'Error deleting instance'
+update_instance_db_msg = 'Instance updated to database correctly'
+update_instance_db_error_msg = 'Error updating instance to database'
+delete_instance_db_msg = 'Instance deleted from database correctly'
+delete_instance_db_error_msg = 'Error deleting instance from database'
 insert_trades_db_msg = 'Trades record inserted to database successfully'
 insert_trades_db_error_msg = 'Error inserting trades record to database'
-updates_trades_db_msg = 'Trades record updated successfully'
-updates_trades_db_error_db = 'Error updating trades record'
-delete_trades_db_msg = 'Trades record deleted correctly'
-delete_trades_db_error_msg = 'Error deleting trades record'
+updates_trades_db_msg = 'Trades record updated to database successfully'
+updates_trades_db_error_db = 'Error updating trades record to database'
+delete_trades_db_msg = 'Trades record deleted from database correctly'
+delete_trades_db_error_msg = 'Error deleting trades record from database'
 insert_instance_states_db_msg = 'Instance states record inserted to database successfully'
 insert_instance_states_db_error_msg = 'Error inserting instance states record to database'
-update_instance_states_db_msg = 'Instance states record updated successfully'
-update_instance_states_db_error_msg = 'Error updating instance states record'
-delete_instance_states_db_msg = 'Instance states record deleted successfully'
-delete_instance_states_db_error_msg = 'Error deleting instance states record'
+update_instance_states_db_msg = 'Instance states record updated to database successfully'
+update_instance_states_db_error_msg = 'Error updating instance states record to database'
+delete_instance_states_db_msg = 'Instance states record deleted successfully from database'
+delete_instance_states_db_error_msg = 'Error deleting instance states record from database'
 
 # Exceptions
 pattern_not_found = 'Pattern name not found'

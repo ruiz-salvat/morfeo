@@ -4,6 +4,7 @@ from flask_cors import CORS
 from Database.DatabaseInitializer import initialize_database
 from Database.Services.InstanceStatesService import InstanceStatesService
 from Database.Services.InstancesService import InstancesService
+from Database.Services.TradesService import TradesService
 from Domain.BotInstance import BotInstance
 from Domain.BotPool import BotPool
 from Util.Constants import wave_trend_pattern_id
@@ -20,7 +21,7 @@ n_partition_limit = 25
 pattern_id = wave_trend_pattern_id
 customer_id = 'test_customer'
 bot_instance = BotInstance(instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit,
-                           InstanceStatesService(is_test=False))
+                           TradesService(is_test=False), InstanceStatesService(is_test=False))
 
 resp = bot_pool.add_instance(instance_id, bot_instance, customer_id)  # TODO: add validation (bot pool is full)
 print(resp)

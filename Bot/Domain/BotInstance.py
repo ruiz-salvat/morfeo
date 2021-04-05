@@ -14,7 +14,7 @@ from Util.Waves import Waves
 class BotInstance:
 
     def __init__(self, instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit,
-                 instance_states_service):
+                 trades_service, instance_states_service):
         self.instance_id = instance_id
         self.symbol = symbol
         self.pattern_id = pattern_id
@@ -23,8 +23,9 @@ class BotInstance:
         self.partition_size = partition_size
         self.n_partition_limit = n_partition_limit
 
+        # initialize ingestor
         self.ingestor = Ingestor(instance_id, None, budget, partition_size, n_partition_limit,
-                                 TradesService(is_test=False), InstanceStatesService(is_test=False))
+                                 trades_service, instance_states_service)
 
         # initialize threads
         self.ingestor_runner = IngestorRunner(symbol, self.ingestor, time_scale)
@@ -34,8 +35,8 @@ class BotInstance:
         # initialize model
         self.parameters_runner.model = self.model_runner.model
 
-        # initialize indicator pattern parameters
-        values = get_mock_market_data()  # MOCK
+        # initialize pattern parameters
+        values = get_mock_market_data()  # TODO: implement real data
         summary = summarize(values)
         initial_parameters = self.parameters_runner.model.predict(summary.std, summary.skewness, summary.kurtosis,
                                                                   summary.entropy)
