@@ -3,3 +3,6 @@ class Order:
         self.time = time
         self.buy_price = buy_price
         self.invested_quote = invested_quote
+
+    def __repr__(self):
+        return str(self.__dict__)

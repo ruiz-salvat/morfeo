@@ -1,7 +1,7 @@
-from Domain.Ingestor import Ingestor
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
-from Domain.Simulator.Simulator import Simulator
-from Util.Constants import simulator_instance_id
+from Domain.Simulators.Simulator import Simulator
+from Domain.Simulators.SimulatorIngestor import SimulatorIngestor
+from Util.Constants import wave_trend_pattern_id
 from Util.Summarizer import summarize
 from Util.Waves import Waves
 import pandas as pd
@@ -23,19 +23,16 @@ class WaveTrendSimulator(Simulator):
 
                     waves = Waves(k)
                     pattern = WaveTrendPattern(waves, ob_level, os_level)
-                    '''
-                    instance_id, pattern, budget, partition_size, n_partition_limit, trades_service,
-                 instance_states_service
-                    '''
-                    ingestor = Ingestor(simulator_instance_id, pattern, budget, partition_size, )
+                    ingestor = SimulatorIngestor(symbol, pattern, time_scale, budget, partition_size,
+                                                 n_partition_limit)
 
-                    ingestor.ingest(df['value'].array)
+                    ingestor.ingest(df['value'].array, WaveTrendPattern.max_arr_len)
                     result = ingestor.result
 
                     start_date = df.iloc[0]['timestamp']
                     end_date = df.iloc[df.shape[0] - 1]['timestamp']
                     summary = summarize(df['value'].array)
-                    aux_df = pd.DataFrame([[symbol, 'wave_trend', start_date, end_date, ob_level, os_level, k,
+                    aux_df = pd.DataFrame([[symbol, wave_trend_pattern_id, start_date, end_date, ob_level, os_level, k,
                                             summary.mean, summary.std, summary.skewness, summary.kurtosis,
                                             summary.entropy, result.n_total_partitions, result.n_partitions,
                                             result.clean_gains]], columns=self.results_df.columns)

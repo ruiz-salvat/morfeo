@@ -29,9 +29,6 @@ wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_resul
 # Pattern IDs
 wave_trend_pattern_id = 1
 
-# Util Instance UDs
-simulator_instance_id = 'simulator_id'
-
 # Parameters
 wave_trend_parameters = ['ob_level', 'os_level', 'k']  # !!! the parameters order must match with the ranges order !!!!
 wave_trend_parameter_ranges = [range(43, 63, 5), range(-63, -43, 5), np.arange(0.001, 0.030, 0.001)]

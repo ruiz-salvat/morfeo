@@ -1,13 +1,16 @@
 import time
 from collections import deque
 from DataObjects.Order import Order
+from DataObjects.SimulationResult import SimulationResult
+from Util.Reducer import reduce
 
 
 class SimulatorIngestor:
 
-    def __init__(self, instance_id, pattern, budget, partition_size, n_partition_limit):
-        self.instance_id = instance_id
+    def __init__(self, symbol, pattern, time_scale, budget, partition_size, n_partition_limit):
+        self.symbol = symbol
         self.pattern = pattern
+        self.time_scale = time_scale
         self.initial_budget = budget
         self.budget = budget
         self.partition_size = partition_size
@@ -17,13 +20,31 @@ class SimulatorIngestor:
         self.clean_gains = 0
         self.n_partition_limit = n_partition_limit
         self.order_queue = deque()
+        self.result = None
+        self.ingested = False
 
-    def ingest(self, array):
-        last_value = array[len(array) - 1]
-        if self.pattern.buy_condition(array):
-            self.buy(last_value)
-        elif self.pattern.sell_condition(array):
-            self.sell(last_value)
+    def ingest(self, array, max_arr_len):
+        if self.ingested is False:
+            array = reduce(self.time_scale, array)
+            queue = deque()
+
+            for value in array:
+                if len(queue) >= max_arr_len:
+                    queue.popleft()
+                    queue.append(value)
+                else:
+                    queue.append(value)
+
+                if self.pattern.buy_condition(list(queue)):
+                    self.buy(value)
+                elif self.pattern.sell_condition(list(queue)):
+                    self.sell(value)
+
+            self.ingested = True
+            self.result = SimulationResult(self.initial_budget, self.budget, self.base_amount, self.partition_size,
+                                           self.n_partitions, self.n_total_partitions, self.clean_gains)
+        else:
+            raise Exception('The data was already ingested')
 
     def buy(self, price):
         if self.budget >= self.partition_size and self.n_partitions < self.n_partition_limit:

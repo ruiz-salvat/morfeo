@@ -1,5 +1,3 @@
-from Database.Services.InstanceStatesService import InstanceStatesService
-from Database.Services.TradesService import TradesService
 from Domain.Ingestor import Ingestor
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Domain.Runners.IngestorRunner import IngestorRunner
