@@ -1,0 +1,17 @@
+label {
+    margin-left: 25px;
+    margin-bottom: 25px;
+    display: flex;
+}
+
+input {
+    margin-left: 10px;
+}
+
+button {
+    margin-left: 25px;
+}
+
+.add-button {
+    margin-bottom: 20px;
+}

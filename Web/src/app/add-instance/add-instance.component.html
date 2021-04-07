@@ -1,0 +1,32 @@
+<h1>Add instance</h1>
+<form [formGroup]="addInstanceForm" (ngSubmit)="onSubmit()">
+    <label>
+        Instance id:
+        <input type="text" formControlName="instanceId">
+    </label>
+    <label>
+        Symbol:
+        <input type="text" formControlName="symbol">
+    </label>
+    <label>
+        Pattern id:
+        <input type="text" formControlName="patternId">
+    </label>
+    <label>
+        Time scale:
+        <input type="text" formControlName="timeScale">
+    </label>
+    <label>
+        Budget:
+        <input type="text" formControlName="budget">
+    </label>
+    <label>
+        Partition size:
+        <input type="text" formControlName="partitionSize">
+    </label>
+    <label>
+        Partition limit:
+        <input type="text" formControlName="partitionLimit">
+    </label>
+    <button type="submit" [disabled]="!addInstanceForm.valid" class="add-button">Add</button>
+</form>

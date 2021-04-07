@@ -8,6 +8,9 @@ import { HomeComponent } from './home/home.component';
 import { appRoutingModule } from './app.routing';
 import { ContainerComponent } from './container/container.component';
 import { InstancesComponent } from './instances/instances.component';
+import { AddInstanceComponent } from './add-instance/add-instance.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -15,12 +18,15 @@ import { InstancesComponent } from './instances/instances.component';
     LoginComponent,
     HomeComponent,
     ContainerComponent,
-    InstancesComponent
+    InstancesComponent,
+    AddInstanceComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatIconModule,
     appRoutingModule
   ],
   providers: [],

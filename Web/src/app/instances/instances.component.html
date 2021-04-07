@@ -1,12 +1,11 @@
 <h1>Bot instance list</h1>
 <ul>
-    <li *ngFor="let botInstance of botInstances" class="list-element">
-        <button class="element-parameter">{{botInstance.instanceId}}</button> 
-        <span class="element-parameter">{{botInstance.symbol}}</span>
-        <span class="element-parameter">{{botInstance.patternId}}</span>
-        <button class="element-parameter">Start</button>
-        <button class="element-parameter">Stop</button>
-        <button class="element-parameter">Delete</button>
-    </li>
+    <tr *ngFor="let botInstance of botInstances">
+        <th><button class="element-parameter" (click)="showDashboard(botInstance.instanceId)">{{botInstance.instanceId}}</button></th>
+        <th><span class="element-parameter">{{botInstance.symbol}}</span></th>
+        <th><span class="element-parameter">{{botInstance.patternId}}</span></th>
+        <th><button class="element-parameter">Start</button></th>
+        <th><button class="element-parameter">Stop</button></th>
+        <th><button class="element-parameter">Delete</button></th>
+    </tr>
 </ul>
-<button>Add instance</button>
