@@ -3,11 +3,18 @@
     grid-template-columns: auto auto;
 }
 
-.trade-list-span {
-    margin: 20px;
-}
-
-li {
+.detail {
+    display: grid;
+    grid-template-columns: auto auto;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.detail-element {
+    width: 200px;
+    text-align: left;
+}
+
+.trade-list-span {
+    margin: 20px;
 }

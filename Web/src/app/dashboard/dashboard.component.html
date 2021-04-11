@@ -2,23 +2,64 @@
 <div class="section-1">
     <div>
         <h2>Instance details</h2>
-        <ul>
-            <li>Instance id: {{instanceDetails.instanceId}}</li>
-            <li>Symbol: {{instanceDetails.symbol}}</li>
-            <li>Creation time: {{instanceDetails.creationTime}}</li>
-            <li>Pattern id: {{instanceDetails.patternId}}</li>
-            <li>Time scale: {{instanceDetails.timeScale}}</li>
-            <li>Budget: {{instanceDetails.budget}}</li>
-            <li>Initial budget: {{instanceDetails.initialBudget}}</li>
-            <li>Clean gains: {{instanceDetails.cleanGains}}</li>
-            <li>Partition size: {{instanceDetails.partitionSize}}</li>
-            <li>Base amount: {{instanceDetails.baseAmount}}</li>
-            <li>Nmbr. partitions: {{instanceDetails.nPartitions}}</li>
-            <li>Partition limit: {{instanceDetails.partitionLimit}}</li>
-        </ul>
+        <div class="detail">
+            <div class="detail-element">Instance id:</div>
+            <div class="detail-element">{{instanceDetails.instanceId}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Symbol:</div>
+            <div class="detail-element">{{instanceDetails.symbol}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Creation time:</div>
+            <div class="detail-element">{{instanceDetails.creationTime}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Pattern id:</div>
+            <div class="detail-element">{{instanceDetails.patternId}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Time scale:</div>
+            <div class="detail-element">{{instanceDetails.timeScale}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Budget:</div>
+            <div class="detail-element">{{instanceDetails.budget}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Initial budget:</div>
+            <div class="detail-element">{{instanceDetails.initialBudget}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Clean gains:</div>
+            <div class="detail-element">{{instanceDetails.cleanGains}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Partition size:</div>
+            <div class="detail-element">{{instanceDetails.partitionSize}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Base amount:</div>
+            <div class="detail-element">{{instanceDetails.baseAmount}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Nmbr. partitions:</div>
+            <div class="detail-element">{{instanceDetails.nPartitions}}</div>
+        </div>
+        <div class="detail">
+            <div class="detail-element">Partition limit:</div>
+            <div class="detail-element">{{instanceDetails.partitionLimit}}</div>
+        </div>
     </div>
     <div>
         <h2>Trades list</h2>
+        <tr>
+            <th><span class="trade-list-span">Time</span></th>
+            <th><span class="trade-list-span">Operation</span></th>
+            <th><span class="trade-list-span">Price</span></th>
+            <th><span class="trade-list-span">Quote amount</span></th>
+            <th><span class="trade-list-span">Gain</span></th>
+        </tr>
         <tr *ngFor="let trade of trades">
             <th><span class="trade-list-span">{{trade.time}}</span></th>
             <th><span class="trade-list-span">{{trade.operation}}</span></th>
@@ -30,5 +71,5 @@
 </div>
 <div>
     <h2>Gains chart</h2>
-    <app-line-chart></app-line-chart>
+    <app-line-chart [data]="data"></app-line-chart>
 </div>
