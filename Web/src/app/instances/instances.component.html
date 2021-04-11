@@ -1,5 +1,5 @@
 <h1>Bot instance list</h1>
-<ul>
+<div class="table-container">
     <tr *ngFor="let botInstance of botInstances">
         <th><button class="element-parameter" (click)="showDashboard(botInstance.instanceId)">{{botInstance.instanceId}}</button></th>
         <th><span class="element-parameter">{{botInstance.symbol}}</span></th>
@@ -8,4 +8,4 @@
         <th><button class="element-parameter">Stop</button></th>
         <th><button class="element-parameter">Delete</button></th>
     </tr>
-</ul>
+</div>

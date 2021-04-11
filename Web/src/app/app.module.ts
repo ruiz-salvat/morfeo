@@ -11,6 +11,7 @@ import { InstancesComponent } from './instances/instances.component';
 import { AddInstanceComponent } from './add-instance/add-instance.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatIconModule} from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatIconModule} from '@angular/material/icon';
     AppRoutingModule,
     ReactiveFormsModule,
     MatIconModule,
-    appRoutingModule
+    appRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

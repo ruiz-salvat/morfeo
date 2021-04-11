@@ -1,1 +1,34 @@
-<p>dashboard works!</p>
+<h1>Dashboard</h1>
+<div class="section-1">
+    <div>
+        <h2>Instance details</h2>
+        <ul>
+            <li>Instance id: {{instanceDetails.instanceId}}</li>
+            <li>Symbol: {{instanceDetails.symbol}}</li>
+            <li>Creation time: {{instanceDetails.creationTime}}</li>
+            <li>Pattern id: {{instanceDetails.patternId}}</li>
+            <li>Time scale: {{instanceDetails.timeScale}}</li>
+            <li>Budget: {{instanceDetails.budget}}</li>
+            <li>Initial budget: {{instanceDetails.initialBudget}}</li>
+            <li>Clean gains: {{instanceDetails.cleanGains}}</li>
+            <li>Partition size: {{instanceDetails.partitionSize}}</li>
+            <li>Base amount: {{instanceDetails.baseAmount}}</li>
+            <li>Nmbr. partitions: {{instanceDetails.nPartitions}}</li>
+            <li>Partition limit: {{instanceDetails.partitionLimit}}</li>
+        </ul>
+    </div>
+    <div>
+        <h2>Trades list</h2>
+        <tr *ngFor="let trade of trades">
+            <th><span class="trade-list-span">{{trade.time}}</span></th>
+            <th><span class="trade-list-span">{{trade.operation}}</span></th>
+            <th><span class="trade-list-span">{{trade.price}}</span></th>
+            <th><span class="trade-list-span">{{trade.quoteAmount}}</span></th>
+            <th><span class="trade-list-span">{{trade.gain}}</span></th>
+        </tr>
+    </div>
+</div>
+<div>
+    <h2>Gains chart</h2>
+    <p>stuff</p>
+</div>
