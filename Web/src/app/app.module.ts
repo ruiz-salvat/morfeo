@@ -12,6 +12,7 @@ import { AddInstanceComponent } from './add-instance/add-instance.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LineChartComponent } from './line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ContainerComponent,
     InstancesComponent,
     AddInstanceComponent,
-    DashboardComponent
+    DashboardComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
