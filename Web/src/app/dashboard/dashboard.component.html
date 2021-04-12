@@ -1,6 +1,6 @@
 <h1>Dashboard</h1>
 <div class="section-1">
-    <div>
+    <div class="details-div">
         <h2>Instance details</h2>
         <div class="detail">
             <div class="detail-element">Instance id:</div>
@@ -51,22 +51,18 @@
             <div class="detail-element">{{instanceDetails.partitionLimit}}</div>
         </div>
     </div>
-    <div>
+    <div class="trades-div">
         <h2>Trades list</h2>
-        <tr>
-            <th><span class="trade-list-span">Time</span></th>
-            <th><span class="trade-list-span">Operation</span></th>
-            <th><span class="trade-list-span">Price</span></th>
-            <th><span class="trade-list-span">Quote amount</span></th>
-            <th><span class="trade-list-span">Gain</span></th>
-        </tr>
-        <tr *ngFor="let trade of trades">
-            <th><span class="trade-list-span">{{trade.time}}</span></th>
-            <th><span class="trade-list-span">{{trade.operation}}</span></th>
-            <th><span class="trade-list-span">{{trade.price}}</span></th>
-            <th><span class="trade-list-span">{{trade.quoteAmount}}</span></th>
-            <th><span class="trade-list-span">{{trade.gain}}</span></th>
-        </tr>
+        <p>(Time / Operation / Price / Quote amount / Gain)</p>
+        <cdk-virtual-scroll-viewport itemSize="1" class="viewport">
+            <tr *cdkVirtualFor="let trade of trades" class="viewport-item">
+                <th class="table-element">{{trade.time}}</th>
+                <th class="table-element">{{trade.operation}}</th>
+                <th class="table-element">{{trade.price}}</th>
+                <th class="table-element">{{trade.quoteAmount}}</th>
+                <th class="table-element">{{trade.gain}}</th>
+            </tr>
+        </cdk-virtual-scroll-viewport>
     </div>
 </div>
 <div>

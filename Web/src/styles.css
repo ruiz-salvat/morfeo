@@ -1,4 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Consolas;
+    background-color: black;
+    color: lime;
+}
+
+button {
+    background-color: black;
+    color: lime;
+    border: 2px solid lime;
+    padding: 10px;
+}
+
+h1 {
+    color:violet;
+}
+
+h2 {
+    color: violet;
+}

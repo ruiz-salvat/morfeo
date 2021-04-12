@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HomeComponent } from './home/home.component';
 import { appRoutingModule } from './app.routing';
 import { ContainerComponent } from './container/container.component';
@@ -30,6 +31,7 @@ import { LineChartComponent } from './line-chart/line-chart.component';
     AppRoutingModule,
     ReactiveFormsModule,
     MatIconModule,
+    ScrollingModule,
     appRoutingModule,
     BrowserAnimationsModule
   ],

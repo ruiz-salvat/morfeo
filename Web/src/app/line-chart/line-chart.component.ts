@@ -8,9 +8,9 @@ import * as d3 from 'd3';
 })
 export class LineChartComponent implements OnInit {
 
-  private width = 700;
-  private height = 700;
-  private margin = 50;
+  private width = 400;
+  private height = 400;
+  private margin = 25;
   public svg;
   public svgInner;
   public yScale;

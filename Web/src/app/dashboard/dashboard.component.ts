@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { InstanceDetails } from '../models/instance-details.model';
 import { Trade } from '../models/trade.model';
 
@@ -249,5 +249,4 @@ export class DashboardComponent implements OnInit {
     quoteAmount: 12.1,
     gain: 2.1
   }];
-
 }

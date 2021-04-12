@@ -1,12 +1,15 @@
-<img src="/assets/logo.png" alt="image" class="logo">
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label>
-        Username:
-        <input type="text" formControlName="username">
-    </label>
-    <label>
-        Password:
-        <input type="password" formControlName="password">
-    </label>
-    <button type="submit" [disabled]="!loginForm.valid">Log in</button>
-</form>
+<div class="login-div">
+    <h1>Morpheus.protocol</h1>
+    <img src="/assets/logo.jpg" alt="image" class="logo">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <label>
+            Username:
+            <input type="text" formControlName="username">
+        </label>
+        <label>
+            Password:
+            <input type="password" formControlName="password">
+        </label>
+        <button type="submit" [disabled]="!loginForm.valid">Log in</button>
+    </form>
+</div>

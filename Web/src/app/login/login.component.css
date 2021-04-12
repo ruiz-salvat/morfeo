@@ -1,6 +1,6 @@
 label {
-    margin-left: 25px;
-    margin-bottom: 25px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
 }
 
@@ -8,10 +8,6 @@ input {
     margin-left: 10px;
 }
 
-button {
-    margin-left: 25px;
-}
-
-.logo {
-    margin: 25px;
+.login-div {
+    margin: 100px;
 }
