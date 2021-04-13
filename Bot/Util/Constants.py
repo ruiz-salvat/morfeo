@@ -37,13 +37,14 @@ model_global_parameters = ['std', 'skewness', 'kurtosis', 'entropy']
 # Event Names
 model_refresh_event = 'model_refresh_event'
 parameters_refresh_event = 'parameters_refresh_event'
+simulation_refresh_event = 'simulation_refresh_event'
 
 # Operation Names
 buy_operation_name = 'BUY'
 sell_operation_name = 'SELL'
 
 # Time Intervals
-model_updater_sleep_time = 300  # seconds
+simulation_updater_sleep_time = 300  # seconds
 parameters_updater_sleep_time = 60  # seconds
 
 # Return Messages

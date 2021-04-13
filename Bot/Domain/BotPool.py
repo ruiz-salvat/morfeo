@@ -1,11 +1,7 @@
 import time
-from DataObjects.Database.Instances import Instances
-from Database.DatabaseConnector import DatabaseConnector
-from Database.Services.InstanceStatesService import InstanceStatesService
-from Database.Services.InstancesService import InstancesService
 from Util.Constants import bot_instance_added_msg, bot_instance_exists_msg, bot_instance_started_msg, \
-    bot_instance_already_started_msg, instance_id_not_found_msg, bot_instance_removed_msg, bot_instance_not_stopped_msg, \
-    bot_instance_stopped_msg, bot_instance_already_stopped_msg, instances_table_name
+    bot_instance_already_started_msg, instance_id_not_found_msg, bot_instance_removed_msg, \
+    bot_instance_not_stopped_msg, bot_instance_stopped_msg, bot_instance_already_stopped_msg
 
 
 class BotPool:
