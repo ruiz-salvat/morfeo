@@ -7,8 +7,8 @@ from Util.Observable.Target import Target
 
 class ModelRunner(Target, Observer):
 
-    def __init__(self, parameters_updater):
-        Target.__init__(self, [parameters_updater])
+    def __init__(self, parameters_runner):
+        Target.__init__(self, [parameters_runner])
 
     def notify(self, *args, **kwargs):
         if args[0] == simulation_refresh_event:

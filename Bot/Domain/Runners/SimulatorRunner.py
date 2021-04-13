@@ -10,11 +10,11 @@ from Util.ThreadPool import ThreadPool
 
 class SimulatorRunner(Thread, Target):
 
-    def __init__(self, df, simulator, symbol, pattern_id, time_range_in_days, time_scale, budget, partition_size,
+    def __init__(self, simulator, symbol, pattern_id, time_range_in_days, time_scale, budget, partition_size,
                  n_partition_limit, model_runner):
         Thread.__init__(self)
         Target.__init__(self, [model_runner])
-        self.df = df
+        self.df = pd.read_csv('../Data/test_data.csv')  # TODO: Get data from database
         self.simulator = simulator
         self.symbol = symbol
         self.pattern_id = pattern_id

@@ -3,6 +3,8 @@ from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Domain.Runners.IngestorRunner import IngestorRunner
 from Domain.Runners.ModelRunner import ModelRunner
 from Domain.Runners.ParametersRunner import ParametersRunner
+from Domain.Runners.SimulatorRunner import SimulatorRunner
+from Domain.Simulators.WaveTrendSimulator import WaveTrendSimulator
 from Tests.Mock.MockMarketData import get_mock_market_data
 from Util.Constants import wave_trend_pattern_id, pattern_not_found
 from Util.Summarizer import summarize
@@ -11,11 +13,12 @@ from Util.Waves import Waves
 
 class BotInstance:
 
-    def __init__(self, instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit,
-                 trades_service, instance_states_service):
+    def __init__(self, instance_id, symbol, pattern_id, time_range_in_days, time_scale, budget, partition_size,
+                 n_partition_limit, trades_service, instance_states_service):
         self.instance_id = instance_id
         self.symbol = symbol
         self.pattern_id = pattern_id
+        self.time_range_in_days = time_range_in_days
         self.time_scale = time_scale
         self.budget = budget
         self.partition_size = partition_size
@@ -28,7 +31,14 @@ class BotInstance:
         # initialize threads
         self.ingestor_runner = IngestorRunner(symbol, self.ingestor, time_scale)
         self.parameters_runner = ParametersRunner(None, self.ingestor_runner)
-        self.model_runner = ModelRunner(pattern_id, self.parameters_runner)
+        self.model_runner = ModelRunner(self.parameters_runner)
+        if self.pattern_id == wave_trend_pattern_id:
+            self.simulator = WaveTrendSimulator()
+        else:
+            raise Exception(pattern_not_found)
+        self.simulator_runner = SimulatorRunner(self.simulator, self.symbol, self.pattern_id, self.time_range_in_days,
+                                                self.time_scale, self.budget, self.partition_size,
+                                                self.n_partition_limit, self.model_runner)
 
         # initialize model
         self.parameters_runner.model = self.model_runner.model
