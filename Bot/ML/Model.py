@@ -94,7 +94,7 @@ class Model:
                 self.max_r2 = t[1]
                 self.best_model = t[0]
 
-    def predict(self, std, skewness, kurtosis, entropy):
+    def predict(self, mean, std, skewness, kurtosis, entropy):
         best_pred = 0
         best_params = {'pattern_id': self.pattern_id}
         for p in self.model_parameters:

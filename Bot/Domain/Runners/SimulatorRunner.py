@@ -3,7 +3,7 @@ import time
 from threading import Thread
 import pandas as pd
 from Domain.Simulators.SimulatorThread import SimulatorThread
-from Util.Constants import simulation_refresh_event, wave_trend_pattern_id
+from Util.Constants import simulation_refresh_event, wave_trend_pattern_id, simulation_runner_sleep_time
 from Util.Observable.Target import Target
 from Util.ThreadPool import ThreadPool
 
@@ -23,8 +23,10 @@ class SimulatorRunner(Thread, Target):
         self.budget = budget
         self.partition_size = partition_size
         self.n_partition_limit = n_partition_limit
+        self.kill_flag = False
 
-    def run(self):
+    def generate_simulation_results(self):
+        '''
         count = 0
         thread_pool = ThreadPool(10)  # pool limit 10
 
@@ -53,5 +55,11 @@ class SimulatorRunner(Thread, Target):
         self.simulator.results_df.to_csv('../Data/ResultData/' + self.symbol.replace('/', '') + '_' +
                                          str(self.time_range_in_days) + '_' + str(self.time_scale) + '_' +
                                          self.pattern_id + '_results.csv', index=False)
-
+        '''
+        print('simulations completed')
         self.event(simulation_refresh_event, wave_trend_pattern_id)
+
+    def run(self):
+        while self.kill_flag is False:
+            self.generate_simulation_results()
+            time.sleep(simulation_runner_sleep_time)

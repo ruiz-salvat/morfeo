@@ -44,8 +44,8 @@ buy_operation_name = 'BUY'
 sell_operation_name = 'SELL'
 
 # Time Intervals
-simulation_updater_sleep_time = 300  # seconds
-parameters_updater_sleep_time = 60  # seconds
+simulation_runner_sleep_time = 300  # seconds
+parameters_runner_sleep_time = 60  # seconds
 
 # Return Messages
 bot_instance_added_msg = 'Bot instance added successfully'

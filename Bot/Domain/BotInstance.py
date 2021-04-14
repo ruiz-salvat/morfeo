@@ -1,3 +1,5 @@
+import time
+
 from Domain.Ingestor import Ingestor
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Domain.Runners.IngestorRunner import IngestorRunner
@@ -40,14 +42,14 @@ class BotInstance:
                                                 self.time_scale, self.budget, self.partition_size,
                                                 self.n_partition_limit, self.model_runner)
 
-        # initialize model
-        self.parameters_runner.model = self.model_runner.model
-
-        # initialize pattern parameters
+        # get initial data
         values = get_mock_market_data()  # TODO: implement real data
         summary = summarize(values)
-        initial_parameters = self.parameters_runner.model.predict(summary.std, summary.skewness, summary.kurtosis,
-                                                                  summary.entropy)
+
+        # initialize parameters
+        self.simulator_runner.generate_simulation_results()
+        initial_parameters = self.parameters_runner.model.predict(summary.mean, summary.std, summary.skewness,
+                                                                  summary.kurtosis, summary.entropy)
         if pattern_id == wave_trend_pattern_id:
             waves = Waves(initial_parameters['k'])
             pattern = WaveTrendPattern(waves, initial_parameters['ob_level'], initial_parameters['os_level'])
@@ -69,17 +71,17 @@ class BotInstance:
         if self.instance_states_initialized:
             if self.ingestor_runner.is_alive() is False:
                 self.ingestor_runner.start()
-            if self.model_runner.is_alive() is False:
-                self.model_runner.start()
             if self.parameters_runner.is_alive() is False:
                 self.parameters_runner.start()
+            if self.simulator_runner.is_alive() is False:
+                self.simulator_runner.start()
             self.is_active = True
 
     def stop_instance(self):
         if self.ingestor_runner.is_alive() is True:
             self.ingestor_runner.kill_flag = True
-        if self.model_runner.is_alive() is True:
-            self.model_runner.kill_flag = True
         if self.parameters_runner.is_alive() is True:
             self.parameters_runner.kill_flag = True
+        if self.simulator_runner.is_alive() is True:
+            self.simulator_runner.kill_flag = True
         self.is_active = False

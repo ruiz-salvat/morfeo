@@ -1,7 +1,7 @@
 import time
 from threading import Thread
 from Tests.Mock.MockMarketData import get_mock_market_data
-from Util.Constants import parameters_refresh_event, parameters_updater_sleep_time, model_refresh_event
+from Util.Constants import parameters_refresh_event, parameters_runner_sleep_time, model_refresh_event
 from Util.Observable.Observer import Observer
 from Util.Observable.Target import Target
 from Util.Summarizer import summarize
@@ -21,10 +21,11 @@ class ParametersRunner(Thread, Target, Observer):
             values = get_mock_market_data()
             summary = summarize(values)
 
-            parameters = self.model.predict(summary.std, summary.skewness, summary.kurtosis, summary.entropy)
+            parameters = self.model.predict(summary.mean, summary.std, summary.skewness, summary.kurtosis,
+                                            summary.entropy)
             self.event(parameters_refresh_event, parameters)
             print(str(parameters) + ' parameters update completed')
-            time.sleep(parameters_updater_sleep_time)
+            time.sleep(parameters_runner_sleep_time)
 
     def notify(self, *args, **kwargs):
         if args[0] == model_refresh_event:

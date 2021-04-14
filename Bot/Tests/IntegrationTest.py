@@ -13,19 +13,28 @@ def IntegrationTest():
     database_initializer.initialize_database()
 
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
-    symbol = 'ADAUSDT'
+    symbol = 'ADA/USDT'
     instance_id = 'test_id'
+    time_range_in_days = 7
     time_scale = 5
     budget = 1000
     partition_size = 10
     n_partition_limit = 25
     pattern_id = wave_trend_pattern_id
     customer_id = 'test_customer'
-    bot_instance = BotInstance(instance_id, symbol, pattern_id, time_scale, budget, partition_size, n_partition_limit,
-                               TradesService(is_test=True), InstanceStatesService(is_test=True))
 
-    resp = bot_pool.add_instance(instance_id, bot_instance, customer_id)  # TODO: add validation (bot pool is full)
+    bot_instance = BotInstance(instance_id, symbol, pattern_id, time_range_in_days, time_scale, budget,
+                               partition_size, n_partition_limit, TradesService(is_test=True),
+                               InstanceStatesService(is_test=True))
+
+    resp = bot_pool.add_instance(bot_instance, customer_id)  # TODO: add validation (bot pool is full)
     print(resp)
 
     resp = bot_pool.start_instance(instance_id)
+    print(resp)
+
+    resp = bot_pool.stop_instance(instance_id)
+    print(resp)
+
+    resp = bot_pool.remove_instance(instance_id)
     print(resp)

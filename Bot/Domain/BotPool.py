@@ -11,10 +11,10 @@ class BotPool:
         self.instances_service = instances_service
         self.instance_states_service = instance_states_service
 
-    def add_instance(self, instance_id, bot_instance, customer_id):
-        if instance_id not in self.bot_inst_dict.keys():
-            self.bot_inst_dict[instance_id] = bot_instance
-            msg = self.instances_service.insert_element(instance_id, time.time(), bot_instance.symbol,
+    def add_instance(self, bot_instance, customer_id):
+        if bot_instance.instance_id not in self.bot_inst_dict.keys():
+            self.bot_inst_dict[bot_instance.instance_id] = bot_instance
+            msg = self.instances_service.insert_element(bot_instance.instance_id, time.time(), bot_instance.symbol,
                                                         bot_instance.pattern_id, customer_id, bot_instance.time_scale)
             bot_instance.initialize_instance_states()
             print(msg)
