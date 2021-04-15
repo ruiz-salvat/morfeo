@@ -11,7 +11,8 @@ from Tests.IngestorTest import Ingestor_Buy_Equal, Ingestor_Sell_Equal, Ingestor
 from Tests.InstanceStatesServiceTest import InstanceStatesService_InsertElement_Equal, \
     InstanceStatesService_InsertElement_Error, InstanceStatesService_UpdateElement_Equal, \
     InstanceStatesService_UpdateElement_Error, InstanceStatesService_DeleteElement_Equal, \
-    InstanceStatesService_DeleteElement_Error
+    InstanceStatesService_DeleteElement_Error, InstanceStatesService_GetElement_Equal, \
+    InstanceStatesService_GetElement_Error
 from Tests.InstancesServiceTest import InstancesService_InsertElement_Equal, InstancesService_UpdateElement_Equal, \
     InstancesService_DeleteElement_Equal, InstancesService_InsertElement_Error, InstancesService_UpdateElement_Error, \
     InstancesService_DeleteElement_Error, InstancesService_UpdateElementIsActive_Equal, \
@@ -57,6 +58,10 @@ def run_tests():
     Ingestor_Buy_PartitionLimit()
     Ingestor_Sell_Equal()
     IngestorRunner_Reduce_Equal()
+    '''
+    InstanceStatesService_GetElement_Equal()
+    InstanceStatesService_GetElement_Error()
+    '''
     InstanceStatesService_InsertElement_Equal()
     InstanceStatesService_InsertElement_Error()
     InstanceStatesService_UpdateElement_Equal()
@@ -77,7 +82,7 @@ def run_tests():
     WaveTrendSimulator_Simulate_Equal()
     '''
     #SimulatorRunner_Run_ProcessCompletes()
-    IntegrationTest()
+    #IntegrationTest()
     print('Everything passed')
 
 

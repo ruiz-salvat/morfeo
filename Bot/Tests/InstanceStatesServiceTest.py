@@ -7,6 +7,14 @@ from Util.Constants import insert_instance_states_db_msg, instance_states_table_
     delete_instance_states_db_msg, delete_instance_states_db_error_msg
 
 
+def InstanceStatesService_GetElement_Equal():
+    pass
+
+
+def InstanceStatesService_GetElement_Error():
+    pass
+
+
 def InstanceStatesService_InsertElement_Equal():
     service = InstanceStatesService(is_test=True)
     instances_service = InstancesService(is_test=True)

@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LineChartComponent } from './line-chart/line-chart.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LineChartComponent } from './line-chart/line-chart.component';
     MatIconModule,
     ScrollingModule,
     appRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

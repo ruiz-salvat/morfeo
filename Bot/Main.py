@@ -1,6 +1,8 @@
 from flask import Flask, request
 from flask_restful import Api
 from flask_cors import CORS
+
+from Controllers.BotInstanceController import bot_instance_controller
 from Controllers.InstanceStatesController import instance_states_controller
 from Database.DatabaseInitializer import DatabaseInitializer
 
@@ -10,6 +12,7 @@ database_initializer.initialize_database()
 
 app = Flask(__name__)
 app.register_blueprint(instance_states_controller)
+app.register_blueprint(bot_instance_controller)
 api = Api(app)
 CORS(app)
 

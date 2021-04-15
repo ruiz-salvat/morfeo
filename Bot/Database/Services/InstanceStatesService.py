@@ -2,13 +2,21 @@ from DataObjects.Database.InstanceStates import InstanceStates
 from Database.Services.Service import Service
 from Util.Constants import instances_table_name, instances_pk, instance_states_table_name, \
     insert_instance_states_db_msg, insert_instance_states_db_error_msg, update_instance_states_db_msg, \
-    delete_instance_states_db_msg, update_instance_states_db_error_msg, delete_instance_states_db_error_msg
+    delete_instance_states_db_msg, update_instance_states_db_error_msg, delete_instance_states_db_error_msg, \
+    get_instance_states_error_msg
 
 
 class InstanceStatesService(Service):
 
     def __init__(self, is_test):
         super().__init__(is_test)
+
+    def get_element(self, instance_id):
+        elements = self.db[instance_states_table_name].find({instances_pk: instance_id})
+        if elements.count() != 1:
+            return get_instance_states_error_msg
+        else:
+            return elements[0]
 
     def insert_element(self, instance_id, initial_budget, clean_gains, partition_size, base_amount,
                        n_partitions, n_partition_limit):
