@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { InstanceDetails } from '../models/instance-details.model';
 import { Trade } from '../models/trade.model';
+import { InstanceStatesService } from '../services/instance-states.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +10,14 @@ import { Trade } from '../models/trade.model';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private instanceSatesService: InstanceStatesService
+  ) { }
 
   ngOnInit(): void {
+    this.instanceSatesService.getInstanceStates().subscribe(res => {
+      console.log(res);
+    });
   }
 
   public data = [

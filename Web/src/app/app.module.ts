@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { API_BASE_URL } from './injection-tokens/api-base-url-token';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: API_BASE_URL, useValue: 'http://localhost:5000/'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
