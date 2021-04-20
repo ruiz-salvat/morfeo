@@ -1,13 +1,20 @@
 from DataObjects.Database.Trades import Trades
 from Database.Services.Service import Service
 from Util.Constants import trades_table_name, insert_trades_db_msg, instances_table_name, instances_pk, \
-    insert_trades_db_error_msg
+    insert_trades_db_error_msg, get_trades_error_msg
 
 
 class TradesService(Service):
 
     def __init__(self, is_test):
         super().__init__(is_test)
+
+    def get_elements(self, instance_id):
+        elements = self.db[trades_table_name].find({instances_pk: instance_id})
+        if elements.count() < 1:
+            return get_trades_error_msg
+        else:
+            return elements
 
     def insert_element(self, instance_id, timestamp, operation, price, quote_amount, gain):
         cursor = self.db[instances_table_name].find({instances_pk: instance_id})

@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_URL } from '../injection-tokens/api-base-url-token';
-import { InstanceDetails } from '../models/instance-details.model';
 import { Trade } from '../models/trade.model';
 import { map } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,17 @@ export class TradesService {
   }
 
   private mapDtoToModel(res): Trade[] {
-    return res;
+    let trades: Trade[] = [];
+    res.forEach(el => {
+      let trade: Trade = {
+        time: moment.unix(el["timestamp"]).format("YYYY-MM-DDThh:mm:ss"),
+        operation: el["operation"],
+        price: el["price"],
+        quoteAmount: el["quote_amount"],
+        gain: el["gain"]
+      };
+      trades.push(trade);
+    });
+    return trades;
   }
 }

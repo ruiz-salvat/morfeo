@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { API_BASE_URL } from '../injection-tokens/api-base-url-token';
 import { InstanceDetails } from '../models/instance-details.model';
 import { map } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class InstanceDetailsService {
     let instanceDetails: InstanceDetails = {
       instanceId: res["instance_id"],
       symbol: res["symbol"],
-      creationTime: res["creation_time"],
+      creationTime: moment.unix(res["creation_time"]).format("DD/MM/YYYY HH:mm"),
       patternId: res["pattern_id"],
       timeScale: res["time_scale"],
       budget: res["budget"],
