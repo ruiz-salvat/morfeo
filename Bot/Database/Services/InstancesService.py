@@ -2,13 +2,20 @@ from DataObjects.Database.Instances import Instances
 from Database.Services.Service import Service
 from Util.Constants import instances_table_name, instances_pk, insert_instance_db_msg, insert_instance_db_error_msg, \
     update_instance_db_msg, update_instance_db_error_msg, delete_instance_db_msg, delete_instance_db_error_msg, \
-    instance_states_table_name
+    instance_states_table_name, get_instances_error_msg
 
 
 class InstancesService(Service):
 
     def __init__(self, is_test):
         super().__init__(is_test)
+
+    def get_element(self, instance_id):
+        elements = self.db[instances_table_name].find({instances_pk: instance_id})
+        if elements.count() != 1:
+            return get_instances_error_msg
+        else:
+            return elements[0]
 
     def insert_element(self, instance_id, creation_time, symbol, pattern_id, customer_id, time_scale):
         cursor = self.db[instances_table_name].find({instances_pk: instance_id})

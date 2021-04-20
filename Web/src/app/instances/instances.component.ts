@@ -23,7 +23,6 @@ export class InstancesComponent implements OnInit {
     {instanceId: "6th_instance", symbol: "GUMBUSD", patternId: "Entropy"}];
 
   showDashboard(instanceId: any) {
-    console.log(instanceId);
     this.dashboardService.notifyObserver();
   }
 

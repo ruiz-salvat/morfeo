@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InstanceDetails } from '../models/instance-details.model';
 import { Trade } from '../models/trade.model';
-import { InstanceStatesService } from '../services/instance-states.service';
+import { InstanceDetailsService } from '../services/instance-details.service';
+import { TradesService } from '../services/trades.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,14 +12,21 @@ import { InstanceStatesService } from '../services/instance-states.service';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private instanceSatesService: InstanceStatesService
+    private instanceSatesService: InstanceDetailsService,
+    private tradesService: TradesService
   ) { }
 
   ngOnInit(): void {
     this.instanceSatesService.getInstanceStates().subscribe(res => {
-      console.log(res);
+      this.instanceDetails = res;
+    });
+    this.tradesService.getTradesList().subscribe(res => {
+      this.trades = res;
     });
   }
+
+  instanceDetails: InstanceDetails;
+  trades: Trade[];
 
   public data = [
     {
@@ -162,97 +170,4 @@ export class DashboardComponent implements OnInit {
       "date": "2020-07-19T12:19:00+00:00"
     }
   ];
-
-  instanceDetails: InstanceDetails = {
-    instanceId: "1st_instance",
-    symbol: "ADAUSDT",
-    creationTime: "06-11-2017 06:15:00",
-    patternId: "WaveTrend",
-    timeScale: 5,
-    budget: 1100,
-    initialBudget: 1000,
-    cleanGains: 100,
-    partitionSize: 10,
-    baseAmount: 14,
-    nPartitions: 5,
-    partitionLimit: 25
-  };
-
-  trades: Trade[] = [{
-    time: "06-11-2017 06:15:00",
-    operation: "BUY",
-    price: 17.300,
-    quoteAmount: 10,
-    gain: null
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  },
-  {
-    time: "06-11-2017 08:15:00",
-    operation: "SELL",
-    price: 17.55,
-    quoteAmount: 12.1,
-    gain: 2.1
-  }];
 }
