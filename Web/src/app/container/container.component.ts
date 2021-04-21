@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-container',
@@ -12,7 +12,7 @@ export class ContainerComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getObservable().subscribe(x => {
+    this.dashboardService.getDashboardObservable().subscribe(x => {
       this.botInstanceList = false;
       this.addInstance = false;
       this.dashboard = true;

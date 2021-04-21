@@ -8,18 +8,31 @@ export class DashboardService {
 
   constructor() { }
 
-  subscriber: Subscriber<any>;
+  dashboardSubscriber: Subscriber<any>;
+  chartSubscriber: Subscriber<any>;
 
-  observable: Observable<any> = new Observable(subscriber => {
-    this.subscriber = subscriber;
+  dashboardObservable: Observable<any> = new Observable(subscriber => {
+    this.dashboardSubscriber = subscriber;
   });
 
-  getObservable(): Observable<any> {
-    return this.observable;
+  chartObservable: Observable<any> = new Observable(subscriber => {
+    this.chartSubscriber = subscriber;
+  });
+
+  getDashboardObservable(): Observable<any> {
+    return this.dashboardObservable;
   }
 
-  notifyObserver() {
-    this.subscriber.next();
+  getChartObservable(): Observable<any> {
+    return this.chartObservable;
+  }
+
+  notifyDashboardObserver() {
+    this.dashboardSubscriber.next();
+  }
+
+  notifyChartObserver(data: any) {
+    this.chartSubscriber.next(data);
   }
 
 }

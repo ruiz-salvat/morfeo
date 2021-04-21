@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { Trade } from '../models/trade.model';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-line-chart',
@@ -19,25 +21,31 @@ export class LineChartComponent implements OnInit {
   public yAxis;
   public lineGroup;
 
-  public constructor(public chartElem: ElementRef) {
-    
-  }
+  public constructor(
+    public chartElem: ElementRef,
+    private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
-
+    this.dashboardService.getChartObservable().subscribe(trades => {
+      let data: { value: number, date: string }[] = [];
+      let cumulativeGains = 0;
+      trades.forEach(t => {
+        if (t.operation == "SELL") {
+          cumulativeGains = cumulativeGains + t.gain;
+          let tradeData = {
+            "value": cumulativeGains,
+            "date": t.time
+          }
+          data.push(tradeData);
+        }
+      });
+      this.initializeChart(data);
+      this.drawChart(data);
+      window.addEventListener('resize', () => this.drawChart(data));
+    });
   }
 
-  @Input() public data: { value: number, date: string }[];
-
-  public ngOnChanges(changes): void {
-    if (changes.hasOwnProperty('data') && this.data) {
-       this.initializeChart();
-       this.drawChart();
-       window.addEventListener('resize', () => this.drawChart());
-    }
-  }
-
-  initializeChart() {
+  initializeChart(data: { value: number, date: string }[]) {
     this.svg = d3
     .select(this.chartElem.nativeElement)
     .select('.linechart')
@@ -50,9 +58,9 @@ export class LineChartComponent implements OnInit {
 
     this.yScale = d3
       .scaleLinear()
-      .domain([d3.max(this.data, d => d.value) + 1, d3.min(this.data, d => d.value) - 1])
+      .domain([d3.max(data, d => d.value) + 1, d3.min(data, d => d.value) - 1])
       .range([0, this.height - 2 * this.margin]);
-    this.xScale = d3.scaleTime().domain(d3.extent(this.data, d => new Date(d.date)));
+    this.xScale = d3.scaleTime().domain(d3.extent(data, d => new Date(d.date)));
 
     this.yAxis = this.svgInner
       .append('g')
@@ -72,7 +80,7 @@ export class LineChartComponent implements OnInit {
       .style('stroke-width', '2px');
   }
 
-  drawChart() {
+  drawChart(data: { value: number, date: string }[]) {
     this.width = this.chartElem.nativeElement.getBoundingClientRect().width;
     this.svg.attr('width', this.width);
 
@@ -91,7 +99,7 @@ export class LineChartComponent implements OnInit {
       .x(d => d[0])
       .y(d => d[1])
       .curve(d3.curveMonotoneX);
-    const points: [number, number][] = this.data.map(
+    const points: [number, number][] = data.map(
       d => [this.xScale(new Date(d.date)), this.yScale(d.value)]
     );
     this.lineGroup.attr('d', line(points));
