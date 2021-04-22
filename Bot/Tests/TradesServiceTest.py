@@ -2,7 +2,31 @@ from Database.Services.InstancesService import InstancesService
 from Database.Services.TradesService import TradesService
 from Tests.Mock.TestConstants import valid_id, test_time, test_operation, test_price, test_quote_amount, test_gain, \
     test_symbol, test_time_scale
-from Util.Constants import insert_trades_db_msg, trades_table_name, instances_pk, insert_trades_db_error_msg
+from Util.Constants import insert_trades_db_msg, trades_table_name, instances_pk, insert_trades_db_error_msg, \
+    get_trades_error_msg
+
+
+def TradesService_GetElement_Equal():
+    service = TradesService(is_test=True)
+    instances_service = InstancesService(is_test=True)
+    service.db_connector.drop_database()
+
+    instances_service.insert_element(valid_id, test_time, test_symbol, valid_id, valid_id, test_time_scale)
+    service.insert_element(valid_id, test_time, test_operation, test_price, test_quote_amount, test_gain)
+
+    element = service.get_elements(valid_id)
+
+    assert element[0]['timestamp'] == test_time, 'the retrieved timestamp should be equal than the expected'
+    assert element.count() == 1, 'there should be just one element with id 1 in the collection'
+
+
+def TradesService_GetElement_Error():
+    service = TradesService(is_test=True)
+    service.db_connector.drop_database()
+
+    element = service.get_elements(valid_id)
+
+    assert element == get_trades_error_msg, 'the error message should be returned'
 
 
 def TradesService_InsertElement_Equal():

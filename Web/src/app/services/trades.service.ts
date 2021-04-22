@@ -17,7 +17,7 @@ export class TradesService {
   ) { }
 
   getTradesList(): Observable<Trade[]> {
-    let headers = new HttpHeaders().set('instance_id', '0');
+    let headers = new HttpHeaders().set('instance_id', 'seed_id');
     return this.http.get<Trade[]>(this.baseUrl + 'get_trades_list', {headers}).pipe(
       map(res => this.mapDtoToModel(res))
     );

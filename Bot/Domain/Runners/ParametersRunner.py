@@ -9,10 +9,10 @@ from Util.Summarizer import summarize
 
 class ParametersRunner(Thread, Target, Observer):
 
-    def __init__(self, model, indicator_ingestion):
+    def __init__(self, indicator_ingestion):
         Thread.__init__(self)
         Target.__init__(self, [indicator_ingestion])
-        self.model = model
+        self.model = None
         self.kill_flag = False
 
     def run(self):

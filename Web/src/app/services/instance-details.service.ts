@@ -17,7 +17,7 @@ export class InstanceDetailsService {
   ) { }
 
   getInstanceStates(): Observable<InstanceDetails> {
-    let headers = new HttpHeaders().set('instance_id', '0');
+    let headers = new HttpHeaders().set('instance_id', 'seed_id');
     return this.http.get<InstanceDetails>(this.baseUrl + 'get_instance_details', {headers}).pipe(
       map(res => this.mapDtoToModel(res))
     );

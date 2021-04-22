@@ -6,6 +6,7 @@ from Tests.FunctionsTest import Functions_Average_Equal, Functions_SimpleMovingA
     Functions_ExponentialMovingAverage_Equal, Functions_AbsoluteValueArray_Equal, Functions_Cross_Equal_True, \
     Functions_Cross_Equal_False
 from Tests.IntegrationTest import IntegrationTest
+from Tests.PricesServiceTest import PricesService_InsertElement_Error, PricesService_InsertElement_Equal
 from Tests.ReducerTest import Reducer_Reduce_Equal
 from Tests.IngestorTest import Ingestor_Buy_Equal, Ingestor_Sell_Equal, Ingestor_Buy_PartitionLimit
 from Tests.InstanceStatesServiceTest import InstanceStatesService_InsertElement_Equal, \
@@ -19,12 +20,18 @@ from Tests.InstancesServiceTest import InstancesService_InsertElement_Equal, Ins
     InstancesService_UpdateElementIsActive_Error, InstancesService_DeleteElement_ErrorInstanceStates
 from Tests.ModelTest import Model_GenerateIterable_Equal
 from Tests.SimulatorRunnerTest import SimulatorRunner_Run_ProcessCompletes
+from Tests.SymbolsServiceTest import SymbolsService_InsertElement_Equal
 from Tests.TradesServiceTest import TradesService_InsertElement_Equal, TradesService_InsertElement_Error, \
     TradesService_UpdateElement_Equal, TradesService_UpdateElement_Error, TradesService_DeleteElement_Equal, \
-    TradesService_DeleteElement_Error
+    TradesService_DeleteElement_Error, TradesService_GetElement_Equal, TradesService_GetElement_Error
 from Tests.WaveTrendPatternTest import WaveTrendPattern_BuyCondition_Equal, WaveTrendPattern_SellCondition_Equal
 from Tests.WaveTrendSimulatorTest import WaveTrendSimulator_Simulate_Equal
 from Tests.WavesTest import Waves_Calculate_Size_Equal
+
+
+def run_non_asserted_tests():
+    # SimulatorRunner_Run_ProcessCompletes()
+    IntegrationTest()
 
 
 def run_tests():
@@ -48,6 +55,8 @@ def run_tests():
     InstancesService_DeleteElement_Equal()
     InstancesService_DeleteElement_Error()
     InstancesService_DeleteElement_ErrorInstanceStates()
+    TradesService_GetElement_Equal()
+    TradesService_GetElement_Error()
     TradesService_InsertElement_Equal()
     TradesService_InsertElement_Error()
     TradesService_UpdateElement_Equal()
@@ -58,16 +67,19 @@ def run_tests():
     Ingestor_Buy_PartitionLimit()
     Ingestor_Sell_Equal()
     IngestorRunner_Reduce_Equal()
-    '''
     InstanceStatesService_GetElement_Equal()
     InstanceStatesService_GetElement_Error()
-    '''
     InstanceStatesService_InsertElement_Equal()
     InstanceStatesService_InsertElement_Error()
     InstanceStatesService_UpdateElement_Equal()
     InstanceStatesService_UpdateElement_Error()
     InstanceStatesService_DeleteElement_Equal()
     InstanceStatesService_DeleteElement_Error()
+    '''
+    SymbolsService_InsertElement_Equal()
+    PricesService_InsertElement_Equal()
+    PricesService_InsertElement_Error()
+    '''
     WaveTrendPattern_BuyCondition_Equal()
     WaveTrendPattern_SellCondition_Equal()
     Functions_Average_Equal()
@@ -81,9 +93,8 @@ def run_tests():
     BotInstance_StopInstance_Equal()  # Time consuming
     WaveTrendSimulator_Simulate_Equal()
     '''
-    #SimulatorRunner_Run_ProcessCompletes()
-    #IntegrationTest()
     print('Everything passed')
 
 
 run_tests()
+#run_non_asserted_tests()

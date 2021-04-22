@@ -1,6 +1,7 @@
 from Database.DatabaseInitializer import DatabaseInitializer
 from Database.Services.InstanceStatesService import InstanceStatesService
 from Database.Services.InstancesService import InstancesService
+from Database.Services.PricesService import PricesService
 from Database.Services.TradesService import TradesService
 from Domain.BotInstance import BotInstance
 from Domain.BotPool import BotPool
@@ -25,16 +26,17 @@ def IntegrationTest():
 
     bot_instance = BotInstance(instance_id, symbol, pattern_id, time_range_in_days, time_scale, budget,
                                partition_size, n_partition_limit, TradesService(is_test=True),
-                               InstanceStatesService(is_test=True))
+                               InstanceStatesService(is_test=True), PricesService(is_test=True))
 
     resp = bot_pool.add_instance(bot_instance, customer_id)  # TODO: add validation (bot pool is full)
     print(resp)
 
     resp = bot_pool.start_instance(instance_id)
     print(resp)
-
+    '''
     resp = bot_pool.stop_instance(instance_id)
     print(resp)
-
+    
     resp = bot_pool.remove_instance(instance_id)
     print(resp)
+    '''

@@ -78,6 +78,12 @@ update_instance_states_db_msg = 'Instance states record updated to database succ
 update_instance_states_db_error_msg = 'Error updating instance states record to database'
 delete_instance_states_db_msg = 'Instance states record deleted successfully from database'
 delete_instance_states_db_error_msg = 'Error deleting instance states record from database'
+insert_symbols_db_msg = 'Symbols inserted to database successfully'
+insert_prices_db_msg = 'Prices inserted to database successfully'
+insert_prices_db_error_msg = 'Error inserting prices to database'
 
 # Exceptions
 pattern_not_found = 'Pattern name not found'
+
+# Other
+seed_id = "seed_id"
