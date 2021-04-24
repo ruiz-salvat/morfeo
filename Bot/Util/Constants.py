@@ -79,6 +79,7 @@ update_instance_states_db_error_msg = 'Error updating instance states record to 
 delete_instance_states_db_msg = 'Instance states record deleted successfully from database'
 delete_instance_states_db_error_msg = 'Error deleting instance states record from database'
 insert_symbols_db_msg = 'Symbols inserted to database successfully'
+insert_symbols_db_error_msg = 'Error inserting symbol to database'
 insert_prices_db_msg = 'Prices inserted to database successfully'
 insert_prices_db_error_msg = 'Error inserting prices to database'
 

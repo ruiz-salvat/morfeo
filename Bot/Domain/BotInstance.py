@@ -1,5 +1,3 @@
-import time
-
 from Domain.Ingestor import Ingestor
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Domain.Runners.IngestorRunner import IngestorRunner
