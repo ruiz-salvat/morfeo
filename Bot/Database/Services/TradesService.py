@@ -1,3 +1,5 @@
+import pymongo
+
 from DataObjects.Database.Trades import Trades
 from Database.Services.Service import Service
 from Util.Constants import trades_table_name, insert_trades_db_msg, instances_table_name, instances_pk, \
@@ -9,8 +11,15 @@ class TradesService(Service):
     def __init__(self, is_test):
         super().__init__(is_test)
 
-    def get_elements(self, instance_id):
-        elements = self.db[trades_table_name].find({instances_pk: instance_id})
+    def get_elements(self, instance_id, order):  # not fully tested
+        order_mongo = None
+        if order == 'ascending':
+            order_mongo = pymongo.ASCENDING
+        elif order == 'descending':
+            order_mongo = pymongo.DESCENDING
+        else:
+            return 'error in parameter: order'
+        elements = self.db[trades_table_name].find({instances_pk: instance_id}).sort('timestamp', order_mongo)
         if elements.count() < 1:
             return get_trades_error_msg
         else:

@@ -1,6 +1,5 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { Trade } from '../models/trade.model';
 import { DashboardService } from '../services/dashboard.service';
 
 @Component({
@@ -76,7 +75,7 @@ export class LineChartComponent implements OnInit {
       .append('path')
       .attr('id', 'line')
       .style('fill', 'none')
-      .style('stroke', 'red')
+      .style('stroke', 'white')
       .style('stroke-width', '2px');
   }
 
@@ -88,7 +87,7 @@ export class LineChartComponent implements OnInit {
     const xAxis = d3
       .axisBottom(this.xScale)
       .ticks(10)
-      .tickFormat(d3.timeFormat('%m / %Y'));
+      .tickFormat(d3.timeFormat('%d / %m / %Y'));
     this.xAxis.call(xAxis);
     const yAxis = d3
       .axisRight(this.yScale);

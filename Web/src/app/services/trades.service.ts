@@ -16,14 +16,40 @@ export class TradesService {
     @Inject(API_BASE_URL) private baseUrl: string
   ) { }
 
-  getTradesList(): Observable<Trade[]> {
-    let headers = new HttpHeaders().set('instance_id', 'seed_id');
+  getTradesList(instanceId: string): Observable<Trade[]> {
+    let headers = new HttpHeaders()
+      .set('instance_id', instanceId)
+      .set('order', 'descending');
     return this.http.get<Trade[]>(this.baseUrl + 'get_trades_list', {headers}).pipe(
       map(res => this.mapDtoToModel(res))
     );
   }
 
+  getTradesListChart(instanceId: string): Observable<Trade[]> {
+    let headers = new HttpHeaders()
+      .set('instance_id', instanceId)
+      .set('order', 'ascending');
+    return this.http.get<Trade[]>(this.baseUrl + 'get_trades_list', {headers}).pipe(
+      map(res => this.mapDtoToModelChart(res))
+    );
+  }
+
   private mapDtoToModel(res): Trade[] {
+    let trades: Trade[] = [];
+    res.forEach(el => {
+      let trade: Trade = {
+        time: moment.unix(el["timestamp"]).format("DD/MM/YYYY HH:mm"),
+        operation: el["operation"],
+        price: el["price"],
+        quoteAmount: el["quote_amount"],
+        gain: el["gain"]
+      };
+      trades.push(trade);
+    });
+    return trades;
+  }
+
+  private mapDtoToModelChart(res): Trade[] {
     let trades: Trade[] = [];
     res.forEach(el => {
       let trade: Trade = {

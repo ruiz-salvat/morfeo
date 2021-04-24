@@ -2,7 +2,7 @@
     <app-instances *ngIf="botInstanceList"></app-instances>
     <app-add-instance *ngIf="addInstance"></app-add-instance>
     <app-dashboard *ngIf="dashboard"></app-dashboard>
-    <button (click)="showAddInstance()" *ngIf="addInstanceButton">Add instance</button>
+    <button (click)="showAddInstance()" *ngIf="addInstanceButton" class="add-instance-button">Add instance</button>
     <button (click)="showBotInstanceList()" *ngIf=backButton class="back-button">
         <mat-icon>arrow_back</mat-icon>
     </button>

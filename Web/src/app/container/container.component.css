@@ -5,4 +5,11 @@
 .back-button {
     margin-top: 25px;
     margin-bottom: 25px;
+    color: red;
+    border-color: red;
+}
+
+.add-instance-button {
+    color: yellow;
+    border-color: yellow;
 }

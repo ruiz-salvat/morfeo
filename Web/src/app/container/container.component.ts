@@ -12,7 +12,7 @@ export class ContainerComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getDashboardObservable().subscribe(x => {
+    this.dashboardService.getContainerObservable().subscribe(x => {
       this.botInstanceList = false;
       this.addInstance = false;
       this.dashboard = true;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BotInstance } from '../models/bot-instance.model';
 import { DashboardService } from '../services/dashboard.service';
+import { InstancesService } from '../services/instances.service';
 
 @Component({
   selector: 'app-instances',
@@ -9,21 +10,21 @@ import { DashboardService } from '../services/dashboard.service';
 })
 export class InstancesComponent implements OnInit {
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(
+    private dashboardService: DashboardService,
+    private instancesService: InstancesService) { }
 
   ngOnInit(): void {
+    this.instancesService.getInstances().subscribe(res => {
+      this.botInstances = res;
+    });
   }
 
-  botInstances: BotInstance[] = [
-    {instanceId: "1st_instance", symbol: "ADAUSDT", patternId: "WaveTrend"},
-    {instanceId: "2nd_instance", symbol: "BTCEUR", patternId: "Bolt"},
-    {instanceId: "3rd_instance", symbol: "LINKUSDT", patternId: "Poisson"},
-    {instanceId: "4th_instance", symbol: "ETHUSDT", patternId: "LSTNN"},
-    {instanceId: "5th_instance", symbol: "BNBUSDT", patternId: "Fractals"},
-    {instanceId: "6th_instance", symbol: "GUMBUSD", patternId: "Entropy"}];
+  botInstances: BotInstance[];
 
   showDashboard(instanceId: any) {
-    this.dashboardService.notifyDashboardObserver();
+    this.dashboardService.instanceId = instanceId;
+    this.dashboardService.notifyContainerObserver();
   }
 
 }

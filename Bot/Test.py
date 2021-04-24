@@ -23,7 +23,7 @@ from Tests.SimulatorRunnerTest import SimulatorRunner_Run_ProcessCompletes
 from Tests.SymbolsServiceTest import SymbolsService_InsertElement_Equal
 from Tests.TradesServiceTest import TradesService_InsertElement_Equal, TradesService_InsertElement_Error, \
     TradesService_UpdateElement_Equal, TradesService_UpdateElement_Error, TradesService_DeleteElement_Equal, \
-    TradesService_DeleteElement_Error, TradesService_GetElement_Equal, TradesService_GetElement_Error
+    TradesService_DeleteElement_Error, TradesService_GetElements_Equal, TradesService_GetElements_Error
 from Tests.WaveTrendPatternTest import WaveTrendPattern_BuyCondition_Equal, WaveTrendPattern_SellCondition_Equal
 from Tests.WaveTrendSimulatorTest import WaveTrendSimulator_Simulate_Equal
 from Tests.WavesTest import Waves_Calculate_Size_Equal

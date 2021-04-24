@@ -1,13 +1,14 @@
 .section-1 {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 .details-div {
-    margin-right: 200px;
+    margin-right: 50px;
 }
 
 .trades-div {
-    margin-left: 200px;
+    margin-left: 50px;
 }
 
 .detail {

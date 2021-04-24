@@ -13,17 +13,20 @@ import { TradesService } from '../services/trades.service';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private instanceSatesService: InstanceDetailsService,
+    private instanceSatesDetails: InstanceDetailsService,
     private tradesService: TradesService,
     private dashboardService: DashboardService
   ) { }
 
   ngOnInit(): void {
-    this.instanceSatesService.getInstanceStates().subscribe(res => {
+    let instanceId = this.dashboardService.instanceId;
+    this.instanceSatesDetails.getInstanceDetails(instanceId).subscribe(res => {
       this.instanceDetails = res;
     });
-    this.tradesService.getTradesList().subscribe(res => {
+    this.tradesService.getTradesList(instanceId).subscribe(res => {
       this.trades = res;
+    });
+    this.tradesService.getTradesListChart(instanceId).subscribe(res => {
       this.dashboardService.notifyChartObserver(res);
     });
   }

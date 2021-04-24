@@ -10,6 +10,10 @@ class InstancesService(Service):
     def __init__(self, is_test):
         super().__init__(is_test)
 
+    def get_all_elements(self):  # there are no tests for this method
+        elements = self.db[instances_table_name].find({})
+        return elements
+
     def get_element(self, instance_id):
         elements = self.db[instances_table_name].find({instances_pk: instance_id})
         if elements.count() != 1:
