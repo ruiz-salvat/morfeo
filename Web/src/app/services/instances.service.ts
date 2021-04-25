@@ -22,6 +22,10 @@ export class InstancesService {
     );
   }
 
+  postInstance(instanceDto: any) {
+    return this.http.post<string>(this.baseUrl + 'add_bot_instance', instanceDto);
+  }
+
   private mapDtoToModel(res) {
     let botInstances: BotInstance[] = [];
     res.forEach(el => {

@@ -46,6 +46,7 @@ sell_operation_name = 'SELL'
 # Time Intervals
 simulation_runner_sleep_time = 300  # seconds
 parameters_runner_sleep_time = 60  # seconds
+data_retriever_sleep_time = 1  # minute
 
 # Return Messages
 bot_instance_added_msg = 'Bot instance added successfully'

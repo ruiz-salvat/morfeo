@@ -33,9 +33,9 @@ from Tests.WavesTest import Waves_Calculate_Size_Equal
 
 def run_non_asserted_tests():
     #SimulatorRunner_Run_ProcessCompletes()
-    #IntegrationTest()
     #DataRetrieverIntegrationTest()
-    DataRetrieverPoolIntegrationTest()
+    #DataRetrieverPoolIntegrationTest()
+    IntegrationTest()
 
 
 def run_tests():

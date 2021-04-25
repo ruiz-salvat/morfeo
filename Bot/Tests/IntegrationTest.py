@@ -2,16 +2,22 @@ from Database.DatabaseInitializer import DatabaseInitializer
 from Database.Services.InstanceStatesService import InstanceStatesService
 from Database.Services.InstancesService import InstancesService
 from Database.Services.PricesService import PricesService
+from Database.Services.Service import Service
 from Database.Services.TradesService import TradesService
 from Domain.BotInstance import BotInstance
 from Domain.BotPool import BotPool
+from Net.DataRetrieverPool import DataRetrieverPool
 from Util.Constants import wave_trend_pattern_id
 
 
 def IntegrationTest():
+    service = Service(is_test=True)
+    service.db_connector.drop_database()
     database_initializer = DatabaseInitializer(is_test=True)
-    database_initializer.drop_database()
     database_initializer.initialize_database()
+
+    data_retriever_pool = DataRetrieverPool(is_test=True)
+    data_retriever_pool.start_retrievers()
 
     bot_pool = BotPool(InstancesService(is_test=True), InstanceStatesService(is_test=True))
     symbol = 'ADA/USDT'

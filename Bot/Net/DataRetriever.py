@@ -1,7 +1,7 @@
 import time
 from datetime import datetime, timedelta
 from threading import Thread
-from Util.Constants import binance_api_url
+from Util.Constants import binance_api_url, data_retriever_sleep_time
 import requests as req
 
 
@@ -18,7 +18,7 @@ class DataRetriever(Thread):
 
         while self.kill_flag is False:
             measurement_time = datetime.fromtimestamp(time.time())
-            if measurement_time > old_measurement_time + timedelta(minutes=1):
+            if measurement_time > old_measurement_time + timedelta(minutes=data_retriever_sleep_time):
                 old_measurement_time = measurement_time
 
                 timestamp = time.time()
