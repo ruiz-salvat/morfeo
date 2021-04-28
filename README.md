@@ -10,7 +10,7 @@
 
 * In the data folder there is some mock data used to test the bot.
 
-* At the Docs folder there is some documentation and diagrams. However, some of the documentation is obsolete and it most of it still needs to be developed.
+* At the Docs folder there is some documentation and diagrams. However, some of the documentation is obsolete and most of it still needs to be done.
 
 * In the Analysis folder there are some experiments done with Jupyter notebook.
 
