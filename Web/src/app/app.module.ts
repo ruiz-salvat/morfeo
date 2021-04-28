@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { API_BASE_URL } from './injection-tokens/api-base-url-token';
+import { LogsComponent } from './logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { API_BASE_URL } from './injection-tokens/api-base-url-token';
     InstancesComponent,
     AddInstanceComponent,
     DashboardComponent,
-    LineChartComponent
+    LineChartComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,

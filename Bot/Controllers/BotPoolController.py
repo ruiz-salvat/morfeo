@@ -18,7 +18,7 @@ instance_states_service = InstanceStatesService(is_test=is_test)
 prices_service = PricesService(is_test=is_test)
 logger_service = LoggerService(is_test=is_test)
 
-bot_pool = BotPool(instances_service, instance_states_service)
+bot_pool = BotPool(instances_service, instance_states_service, logger_service)
 jobs = ThreadPool(10)  # Thread pool limit: 10
 
 

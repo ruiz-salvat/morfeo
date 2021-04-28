@@ -18,6 +18,8 @@ export class ContainerComponent implements OnInit {
       this.dashboard = true;
       this.addInstanceButton = false;
       this.backButton = true;
+      this.logs = false;
+      this.logsButton = false;
     });
   }
 
@@ -26,6 +28,8 @@ export class ContainerComponent implements OnInit {
   dashboard = false;
   addInstanceButton = true;
   backButton = false;
+  logs = false;
+  logsButton = true;
 
   showAddInstance() {
     this.botInstanceList = false;
@@ -33,6 +37,8 @@ export class ContainerComponent implements OnInit {
     this.dashboard = false;
     this.addInstanceButton = false;
     this.backButton = true;
+    this.logs = false;
+    this.logsButton = false;
   }
 
   showBotInstanceList() {
@@ -41,6 +47,18 @@ export class ContainerComponent implements OnInit {
     this.dashboard = false;
     this.addInstanceButton = true;
     this.backButton = false;
+    this.logs = false;
+    this.logsButton = true;
+  }
+
+  showLogs() {
+    this.botInstanceList = false;
+    this.addInstance = false;
+    this.dashboard = false;
+    this.addInstanceButton = false;
+    this.backButton = true;
+    this.logs = true;
+    this.logsButton = false;
   }
 
 }

@@ -3,18 +3,20 @@ import time
 from threading import Thread
 import pandas as pd
 from Domain.Simulators.SimulatorThread import SimulatorThread
-from Util.Constants import simulation_refresh_event, wave_trend_pattern_id, simulation_runner_sleep_time
+from Util.Constants import simulation_refresh_event, wave_trend_pattern_id, simulation_runner_sleep_time, \
+    simulation_process_name
 from Util.Observable.Target import Target
 from Util.ThreadPool import ThreadPool
 
 
 class SimulatorRunner(Thread, Target):
 
-    def __init__(self, simulator, symbol, pattern_id, time_range_in_days, time_scale, budget, partition_size,
-                 n_partition_limit, model_runner):
+    def __init__(self, instance_id, simulator, symbol, pattern_id, time_range_in_days, time_scale, budget,
+                 partition_size, n_partition_limit, model_runner, logger_service):
         Thread.__init__(self)
         Target.__init__(self, [model_runner])
         self.df = pd.read_csv('../Data/test_data.csv')  # TODO: Get data from database
+        self.instance_id = instance_id
         self.simulator = simulator
         self.symbol = symbol
         self.pattern_id = pattern_id
@@ -23,6 +25,7 @@ class SimulatorRunner(Thread, Target):
         self.budget = budget
         self.partition_size = partition_size
         self.n_partition_limit = n_partition_limit
+        self.logger_service = logger_service
         self.kill_flag = False
 
     def generate_simulation_results(self):
@@ -42,7 +45,6 @@ class SimulatorRunner(Thread, Target):
             thread = SimulatorThread(count, self.simulator, day_df, self.symbol, self.time_scale, self.budget,
                                      self.partition_size, self.n_partition_limit)
             thread_pool.add_thread(thread)
-            print('Active threads: ' + str(thread_pool.pool_size()))
 
             start_date = end_date
             end_date = start_date + timedelta(days=self.time_range_in_days)
@@ -54,7 +56,7 @@ class SimulatorRunner(Thread, Target):
         self.simulator.results_df.to_csv('../Data/ResultData/' + self.symbol.replace('/', '') + '_' +
                                          str(self.time_range_in_days) + '_' + str(self.time_scale) + '_' +
                                          self.pattern_id + '_results.csv', index=False)
-        print('simulations completed')
+        self.logger_service.log_bot_instance(self.instance_id, simulation_process_name, 'Simulation completed')
         self.event(simulation_refresh_event, wave_trend_pattern_id)
 
     def run(self):

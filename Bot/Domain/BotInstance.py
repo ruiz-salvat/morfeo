@@ -6,7 +6,7 @@ from Domain.Runners.ParametersRunner import ParametersRunner
 from Domain.Runners.SimulatorRunner import SimulatorRunner
 from Domain.Simulators.WaveTrendSimulator import WaveTrendSimulator
 from Tests.Mock.MockMarketData import get_mock_market_data
-from Util.Constants import wave_trend_pattern_id, pattern_not_found
+from Util.Constants import wave_trend_pattern_id, pattern_not_found, bot_instance_process_name
 from Util.Summarizer import summarize
 from Util.Waves import Waves
 
@@ -29,16 +29,17 @@ class BotInstance:
                                  trades_service, instance_states_service)
 
         # initialize threads
-        self.ingestor_runner = IngestorRunner(symbol, self.ingestor, time_scale, price_service, logger_service)
-        self.parameters_runner = ParametersRunner(self.ingestor_runner)
-        self.model_runner = ModelRunner(self.parameters_runner)
+        self.ingestor_runner = IngestorRunner(instance_id, symbol, self.ingestor, time_scale, price_service, logger_service)
+        self.parameters_runner = ParametersRunner(self.instance_id, self.ingestor_runner, logger_service)
+        self.model_runner = ModelRunner(self.instance_id, self.parameters_runner, logger_service)
         if self.pattern_id == wave_trend_pattern_id:
             self.simulator = WaveTrendSimulator()
         else:
             raise Exception(pattern_not_found)
-        self.simulator_runner = SimulatorRunner(self.simulator, self.symbol, self.pattern_id, self.time_range_in_days,
-                                                self.time_scale, self.budget, self.partition_size,
-                                                self.n_partition_limit, self.model_runner)
+        self.simulator_runner = SimulatorRunner(self.instance_id, self.simulator, self.symbol, self.pattern_id,
+                                                self.time_range_in_days, self.time_scale, self.budget,
+                                                self.partition_size, self.n_partition_limit, self.model_runner,
+                                                logger_service)
 
         # get initial data
         values = get_mock_market_data()  # TODO: implement real data
@@ -58,7 +59,8 @@ class BotInstance:
         self.instance_states_service = instance_states_service
         self.instance_states_initialized = False
         self.is_active = False
-        print('Bot instance: (' + symbol + ' - <pattern_id: ' + str(pattern_id) + '>) initialization completed')
+        logger_service.log_bot_instance(instance_id, bot_instance_process_name,
+                                        'Bot instance: (' + symbol + ' - <pattern_id: ' + str(pattern_id) + '>) initialization completed')
 
     def initialize_instance_states(self):
         self.instance_states_service.insert_element(self.instance_id, self.budget, 0, self.partition_size, 0, 0,

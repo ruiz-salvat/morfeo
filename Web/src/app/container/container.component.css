@@ -2,6 +2,18 @@
     margin: 25px;
 }
 
+.objects-div {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.logs-button {
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 100px;
+    border: none;
+}
+
 .back-button {
     margin-top: 25px;
     margin-bottom: 25px;

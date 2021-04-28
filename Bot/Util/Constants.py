@@ -93,6 +93,13 @@ trades_service_name = 'trades'
 instance_states_service_name = 'instance_states'
 instances_service_name = 'instances'
 
+# Process Names
+bot_instance_process_name = 'bot_instance'
+ingestion_process_name = 'ingestion'
+simulation_process_name = 'simulation'
+model_process_name = 'model'
+parameters_process_name = 'parameters'
+
 # Exceptions
 pattern_not_found = 'Pattern name not found'
 

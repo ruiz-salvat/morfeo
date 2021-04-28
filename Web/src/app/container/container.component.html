@@ -1,7 +1,13 @@
 <div class="container-div">
-    <app-instances *ngIf="botInstanceList"></app-instances>
+    <div class="objects-div">
+        <app-instances *ngIf="botInstanceList"></app-instances>
+        <button class="logs-button" *ngIf="logsButton" (click)="showLogs()">
+            <mat-icon>article</mat-icon>
+        </button>
+    </div>
     <app-add-instance *ngIf="addInstance"></app-add-instance>
     <app-dashboard *ngIf="dashboard"></app-dashboard>
+    <app-logs *ngIf="logs"></app-logs>
     <button (click)="showAddInstance()" *ngIf="addInstanceButton" class="add-instance-button">Add instance</button>
     <button (click)="showBotInstanceList()" *ngIf=backButton class="back-button">
         <mat-icon>arrow_back</mat-icon>

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from threading import Thread
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Net.DataRetriever import DataRetriever
-from Util.Constants import parameters_refresh_event, wave_trend_pattern_id, pattern_not_found
+from Util.Constants import parameters_refresh_event, wave_trend_pattern_id, pattern_not_found, ingestion_process_name
 from Util.Observable.Observer import Observer
 from Util.Reducer import reduce
 from Util.Waves import Waves
@@ -12,11 +12,13 @@ from Util.Waves import Waves
 
 class IngestorRunner(Thread, Observer):
 
-    def __init__(self, symbol, ingestor, time_scale, price_service, logger_service):
+    def __init__(self, instance_id, symbol, ingestor, time_scale, price_service, logger_service):
         Thread.__init__(self)
         self.data_retriever = DataRetriever(symbol, price_service, logger_service)
+        self.instance_id = instance_id
         self.ingestor = ingestor
         self.time_scale = time_scale
+        self.logger_service = logger_service
         self.queue = deque()
         self.kill_flag = False
 
@@ -36,7 +38,7 @@ class IngestorRunner(Thread, Observer):
                     self.ingestor.ingest(reduced_list)
                 else:
                     self.queue.append(last_price)
-                print('clean gains: ' + str(self.ingestor.clean_gains) + '  |  ' + str(self.ingestor.pattern))
+                self.logger_service.log_bot_instance(self.instance_id, ingestion_process_name, 'Ingestion round completed')
 
     def notify(self, *args, **kwargs):
         if args[0] == parameters_refresh_event:

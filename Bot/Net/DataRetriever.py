@@ -30,7 +30,6 @@ class DataRetriever(Thread):
                 self.logger_service.log_service(prices_service_name, msg)
                 self.logger_service.log_data_retriever(True, 'Price retrieved data at: ' +
                                                        str(datetime.fromtimestamp(time.time())))
-                print('kek')
 
     def retrieve_last_price(self):
         header = {'symbol': self.symbol}
