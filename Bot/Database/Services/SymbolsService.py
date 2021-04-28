@@ -5,8 +5,9 @@ from Util.Constants import symbols_table_name, insert_symbols_db_msg, symbols_pk
 
 class SymbolsService(Service):
 
-    def __init__(self, is_test):
+    def __init__(self, is_test, logger_service):
         super().__init__(is_test)
+        self.logger_service = logger_service
 
     def get_element(self):
         raise Exception('Not yet implemented')

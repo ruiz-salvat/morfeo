@@ -7,6 +7,7 @@ db_url = 'mongodb://localhost:27017/'
 # Database Names
 database_name = 'morfeo_db'
 test_database_name = 'test_db'
+log_database_name = 'log_db'
 
 # Database Table Names
 symbols_table_name = 'Symbols'
@@ -16,6 +17,7 @@ instance_states_table_name = 'InstanceStates'
 trades_table_name = 'Trades'
 customers_table_name = 'Customers'
 patterns_table_name = 'Patterns'
+logs_table_name = 'Logs'
 
 # Primary Keys
 symbols_pk = 'symbol'
@@ -80,9 +82,16 @@ update_instance_states_db_error_msg = 'Error updating instance states record to 
 delete_instance_states_db_msg = 'Instance states record deleted successfully from database'
 delete_instance_states_db_error_msg = 'Error deleting instance states record from database'
 insert_symbols_db_msg = 'Symbols inserted to database successfully'
-insert_symbols_db_error_msg = 'Error inserting symbol to database'
+insert_symbols_db_error_msg = 'The symbol was already inserted to database'
 insert_prices_db_msg = 'Prices inserted to database successfully'
 insert_prices_db_error_msg = 'Error inserting prices to database'
+
+# Service Names
+symbols_service_name = 'symbols'
+prices_service_name = 'prices'
+trades_service_name = 'trades'
+instance_states_service_name = 'instance_states'
+instances_service_name = 'instances'
 
 # Exceptions
 pattern_not_found = 'Pattern name not found'

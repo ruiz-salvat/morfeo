@@ -12,9 +12,9 @@ from Util.Waves import Waves
 
 class IngestorRunner(Thread, Observer):
 
-    def __init__(self, symbol, ingestor, time_scale, price_service):
+    def __init__(self, symbol, ingestor, time_scale, price_service, logger_service):
         Thread.__init__(self)
-        self.data_retriever = DataRetriever(symbol, price_service)
+        self.data_retriever = DataRetriever(symbol, price_service, logger_service)
         self.ingestor = ingestor
         self.time_scale = time_scale
         self.queue = deque()

@@ -5,15 +5,18 @@ from Database.Services.InstancesService import InstancesService
 from Database.Services.PricesService import PricesService
 from Database.Services.TradesService import TradesService
 from Domain.BotPool import BotPool
+from Logger.LoggerService import LoggerService
 from Util.AddBotInstanceThread import AddBotInstanceThread
 from Util.ThreadPool import ThreadPool
 
 bot_pool_controller = Blueprint('BotInstanceController', __name__, template_folder='Controllers')
 
-trades_service = TradesService(is_test=False)
-instances_service = InstancesService(is_test=False)
-instance_states_service = InstanceStatesService(is_test=False)
-prices_service = PricesService(is_test=False)
+is_test = False
+trades_service = TradesService(is_test=is_test)
+instances_service = InstancesService(is_test=is_test)
+instance_states_service = InstanceStatesService(is_test=is_test)
+prices_service = PricesService(is_test=is_test)
+logger_service = LoggerService(is_test=is_test)
 
 bot_pool = BotPool(instances_service, instance_states_service)
 jobs = ThreadPool(10)  # Thread pool limit: 10
@@ -47,7 +50,7 @@ def add_bot_instance():
 
     thread = AddBotInstanceThread(bot_pool, instance_id, symbol, pattern_id, time_range_in_days, time_scale, budget,
                                   partition_size, n_partition_limit, customer_id, trades_service,
-                                  instance_states_service, prices_service)
+                                  instance_states_service, prices_service, is_test)
     jobs.add_thread(thread)
 
     return 'Adding bot instance to the pool...'

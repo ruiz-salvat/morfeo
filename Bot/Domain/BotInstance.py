@@ -14,7 +14,7 @@ from Util.Waves import Waves
 class BotInstance:
 
     def __init__(self, instance_id, symbol, pattern_id, time_range_in_days, time_scale, budget, partition_size,
-                 n_partition_limit, trades_service, instance_states_service, price_service):
+                 n_partition_limit, trades_service, instance_states_service, price_service, logger_service):
         self.instance_id = instance_id
         self.symbol = symbol
         self.pattern_id = pattern_id
@@ -29,7 +29,7 @@ class BotInstance:
                                  trades_service, instance_states_service)
 
         # initialize threads
-        self.ingestor_runner = IngestorRunner(symbol, self.ingestor, time_scale, price_service)
+        self.ingestor_runner = IngestorRunner(symbol, self.ingestor, time_scale, price_service, logger_service)
         self.parameters_runner = ParametersRunner(self.ingestor_runner)
         self.model_runner = ModelRunner(self.parameters_runner)
         if self.pattern_id == wave_trend_pattern_id:
