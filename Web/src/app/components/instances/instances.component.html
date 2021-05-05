@@ -4,8 +4,8 @@
         <th><button class="element-parameter" (click)="showDashboard(botInstance.instanceId)">{{botInstance.instanceId}}</button></th>
         <th><span class="element-parameter">{{botInstance.symbol}}</span></th>
         <th><span class="element-parameter">{{botInstance.patternId}}</span></th>
-        <th><button class="element-parameter">Start</button></th>
-        <th><button class="element-parameter">Stop</button></th>
-        <th><button class="element-parameter">Delete</button></th>
+        <th><button class="element-parameter" (click)="startInstance(botInstance.instanceId)">Start</button></th>
+        <th><button class="element-parameter" (click)="stopInstance(botInstance.instanceId)">Stop</button></th>
+        <th><button class="element-parameter" (click)="deleteInstance(botInstance.instanceId)">Delete</button></th>
     </tr>
 </div>

@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { element } from 'protractor';
@@ -24,6 +25,24 @@ export class InstancesService {
 
   postInstance(instanceDto: any) {
     return this.http.post<string>(this.baseUrl + 'add_bot_instance', instanceDto);
+  }
+
+  startInstance(instanceId: any): Observable<any> {
+    let headers = new HttpHeaders()
+      .set('instance_id', instanceId);
+    return this.http.get<any>(this.baseUrl + "/start_bot_instance", {headers});
+  }
+
+  stopInstance(instanceId: any): Observable<any> {
+    let headers = new HttpHeaders()
+      .set('instance_id', instanceId);
+    return this.http.get<any>(this.baseUrl + "/stop_bot_instance", {headers});
+  }
+
+  deleteInstance(instanceId: any): Observable<any> {
+    let headers = new HttpHeaders()
+      .set('instance_id', instanceId);
+    return this.http.get<any>(this.baseUrl + "/remove_bot_instance", {headers})
   }
 
   private mapDtoToModel(res) {

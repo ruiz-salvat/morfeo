@@ -2,21 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { appRoutingModule } from './app.routing';
-import { ContainerComponent } from './container/container.component';
-import { InstancesComponent } from './instances/instances.component';
-import { AddInstanceComponent } from './add-instance/add-instance.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContainerComponent } from './components/container/container.component';
+import { InstancesComponent } from './components/instances/instances.component';
+import { AddInstanceComponent } from './components/add-instance/add-instance.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LineChartComponent } from './line-chart/line-chart.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { API_BASE_URL } from './injection-tokens/api-base-url-token';
-import { LogsComponent } from './logs/logs.component';
+import { LogsComponent } from './components/logs/logs.component';
 
 @NgModule({
   declarations: [

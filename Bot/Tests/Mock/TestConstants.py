@@ -9,6 +9,7 @@ updated_test_time = 1111
 test_symbol = 'test_symbol'
 test_base = 'test_base'
 test_quote = 'test_quote'
+test_pattern_name = 'test_pattern'
 test_time_range_in_days = 7
 test_time_scale = 5
 test_budget = 1000

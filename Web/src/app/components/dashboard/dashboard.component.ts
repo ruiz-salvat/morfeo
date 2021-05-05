@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { InstanceDetails } from '../models/instance-details.model';
-import { Trade } from '../models/trade.model';
-import { DashboardService } from '../services/dashboard.service';
-import { InstanceDetailsService } from '../services/instance-details.service';
-import { TradesService } from '../services/trades.service';
+import { InstanceDetails } from '../../models/instance-details.model';
+import { Trade } from '../../models/trade.model';
+import { DashboardService } from '../../services/dashboard.service';
+import { InstanceDetailsService } from '../../services/instance-details.service';
+import { TradesService } from '../../services/trades.service';
 
 @Component({
   selector: 'app-dashboard',

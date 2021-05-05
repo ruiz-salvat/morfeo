@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../services/dashboard.service';
+import { DashboardService } from '../../services/dashboard.service';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -20,6 +20,16 @@ export class ContainerComponent implements OnInit {
       this.backButton = true;
       this.logs = false;
       this.logsButton = false;
+    });
+
+    this.dashboardService.getInstancesListObservable().subscribe(x => {
+      this.botInstanceList = true;
+      this.addInstance = false;
+      this.dashboard = false;
+      this.addInstanceButton = true;
+      this.backButton = false;
+      this.logs = false;
+      this.logsButton = true;
     });
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { InstancesService } from '../services/instances.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { InstancesService } from '../../services/instances.service';
 
 @Component({
   selector: 'app-add-instance',
@@ -10,7 +11,8 @@ import { InstancesService } from '../services/instances.service';
 export class AddInstanceComponent implements OnInit {
 
   constructor(
-    private instancesService: InstancesService
+    private instancesService: InstancesService,
+    private dashboardService: DashboardService
   ) { }
 
   ngOnInit(): void {
@@ -39,8 +41,10 @@ export class AddInstanceComponent implements OnInit {
       "n_partition_limit": this.addInstanceForm.controls["partitionLimit"].value,
       "time_range_in_days": this.addInstanceForm.controls["timeRangeInDays"].value
     }
+    
     this.instancesService.postInstance(instanceDto).subscribe(res => {
-      document.getElementById("response").innerHTML = res;
+      alert(res["msg"]);
+      this.dashboardService.notifyInstancesListObservable();
     });
   }
 }

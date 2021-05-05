@@ -29,7 +29,7 @@ patterns_pk = 'pattern_id'
 wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv'
 
 # Pattern IDs
-wave_trend_pattern_id = 1
+wave_trend_pattern_id = 'wave_trend'
 
 # Parameters
 wave_trend_parameters = ['ob_level', 'os_level', 'k']  # !!! the parameters order must match with the ranges order !!!!
@@ -83,11 +83,14 @@ delete_instance_states_db_msg = 'Instance states record deleted successfully fro
 delete_instance_states_db_error_msg = 'Error deleting instance states record from database'
 insert_symbols_db_msg = 'Symbols inserted to database successfully'
 insert_symbols_db_error_msg = 'The symbol was already inserted to database'
+insert_patterns_db_msg = 'Patterns inserted to database successfully'
+insert_patterns_db_error_msg = 'The pattern was already inserted to database'
 insert_prices_db_msg = 'Prices inserted to database successfully'
 insert_prices_db_error_msg = 'Error inserting prices to database'
 
 # Service Names
 symbols_service_name = 'symbols'
+patterns_service_name = 'patterns'
 prices_service_name = 'prices'
 trades_service_name = 'trades'
 instance_states_service_name = 'instance_states'

@@ -53,25 +53,28 @@ def add_bot_instance():
                                   instance_states_service, prices_service, is_test)
     jobs.add_thread(thread)
 
-    return 'Adding bot instance to the pool...'
+    return {'msg': 'Adding bot instance to the pool...'}
 
 
 @bot_pool_controller.route('/start_bot_instance', methods=['GET'])
 def start_bot_instance():
     instance_id = request.headers.get('instance_id')
-    return bot_pool.start_instance(instance_id)
+    msg = bot_pool.start_instance(instance_id)
+    return {'msg': msg}
 
 
 @bot_pool_controller.route('/remove_bot_instance', methods=['GET'])
 def remove_bot_instance():
     instance_id = request.headers.get('instance_id')
-    return bot_pool.remove_instance(instance_id)
+    msg = bot_pool.remove_instance(instance_id)
+    return {'msg': msg}
 
 
 @bot_pool_controller.route('/stop_bot_instance', methods=['GET'])
 def stop_bot_instance():
     instance_id = request.headers.get('instance_id')
-    return bot_pool.stop_instance(instance_id)
+    msg = bot_pool.stop_instance(instance_id)
+    return {'msg': msg}
 
 
 @bot_pool_controller.route('/get_bot_pool', methods=['GET'])

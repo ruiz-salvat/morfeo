@@ -1,10 +1,12 @@
 from Database.Services.SymbolsService import SymbolsService
+from Logger.LoggerService import LoggerService
 from Tests.Mock.TestConstants import test_symbol, test_base, test_quote
 from Util.Constants import symbols_table_name, insert_symbols_db_msg
 
 
 def SymbolsService_InsertElement_Equal():
-    service = SymbolsService(is_test=True)
+    logger_service = LoggerService(is_test=True)
+    service = SymbolsService(is_test=True, logger_service=logger_service)
     service.db_connector.drop_database()
     msg = service.insert_element(test_symbol, test_base, test_quote)
 

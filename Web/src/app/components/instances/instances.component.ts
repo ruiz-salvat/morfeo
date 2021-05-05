@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BotInstance } from '../models/bot-instance.model';
-import { DashboardService } from '../services/dashboard.service';
-import { InstancesService } from '../services/instances.service';
+import { BotInstance } from '../../models/bot-instance.model';
+import { DashboardService } from '../../services/dashboard.service';
+import { InstancesService } from '../../services/instances.service';
 
 @Component({
   selector: 'app-instances',
@@ -25,6 +25,18 @@ export class InstancesComponent implements OnInit {
   showDashboard(instanceId: any) {
     this.dashboardService.instanceId = instanceId;
     this.dashboardService.notifyContainerObserver();
+  }
+
+  startInstance(instanceId: any) {
+    this.instancesService.startInstance(instanceId).subscribe(res => alert(res["msg"]));
+  }
+
+  stopInstance(instanceId: any) {
+    this.instancesService.stopInstance(instanceId).subscribe(res => alert(res["msg"]));
+  }
+
+  deleteInstance(instanceId: any) {
+    this.instancesService.deleteInstance(instanceId).subscribe(res => alert(res["msg"]));
   }
 
 }

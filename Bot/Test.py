@@ -8,6 +8,7 @@ from Tests.FunctionsTest import Functions_Average_Equal, Functions_SimpleMovingA
     Functions_ExponentialMovingAverage_Equal, Functions_AbsoluteValueArray_Equal, Functions_Cross_Equal_True, \
     Functions_Cross_Equal_False
 from Tests.IntegrationTest import IntegrationTest
+from Tests.PatternsServiceTest import PatternsService_InsertElement_Equal
 from Tests.PricesServiceTest import PricesService_InsertElement_Error, PricesService_InsertElement_Equal
 from Tests.ReducerTest import Reducer_Reduce_Equal
 from Tests.IngestorTest import Ingestor_Buy_Equal, Ingestor_Sell_Equal, Ingestor_Buy_PartitionLimit
@@ -39,6 +40,7 @@ def run_non_asserted_tests():
 
 
 def run_tests():
+    '''
     BotPool_Size_Equal()
     BotPool_AddInstance_Equal()
     BotPool_AddInstance_Error()
@@ -79,6 +81,9 @@ def run_tests():
     InstanceStatesService_DeleteElement_Equal()
     InstanceStatesService_DeleteElement_Error()
     SymbolsService_InsertElement_Equal()
+    '''
+    PatternsService_InsertElement_Equal()
+    '''
     PricesService_InsertElement_Equal()
     PricesService_InsertElement_Error()
     WaveTrendPattern_BuyCondition_Equal()
@@ -93,8 +98,9 @@ def run_tests():
     BotInstance_StartInstance_Equal()  # Time consuming
     BotInstance_StopInstance_Equal()  # Time consuming
     WaveTrendSimulator_Simulate_Equal()
+    '''
     print('Everything passed')
 
 
-#run_tests()
-run_non_asserted_tests()
+run_tests()
+#run_non_asserted_tests()
