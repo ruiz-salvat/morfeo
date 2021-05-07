@@ -33,7 +33,7 @@ class BotInstance:
         self.parameters_runner = ParametersRunner(self.instance_id, self.ingestor_runner, logger_service)
         self.model_runner = ModelRunner(self.instance_id, self.parameters_runner, logger_service)
         if self.pattern_id == wave_trend_pattern_id:
-            self.simulator = WaveTrendSimulator()
+            self.simulator = WaveTrendSimulator(logger_service)
         else:
             raise Exception(pattern_not_found)
         self.simulator_runner = SimulatorRunner(self.instance_id, self.simulator, self.symbol, self.pattern_id,

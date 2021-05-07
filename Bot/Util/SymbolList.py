@@ -10,5 +10,5 @@ def insert_symbols_to_db(is_test, logger_service):
         split_text = symbol.split('/')
         base = split_text[0]
         quote = split_text[1]
-        msg = symbols_service.insert_element(symbol.replace('/', ''), base, quote)
+        msg = symbols_service.insert_element(symbol, base, quote)
         logger_service.log_service(symbols_service_name, msg + ' - (' + symbol + ')')

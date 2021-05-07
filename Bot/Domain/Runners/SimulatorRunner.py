@@ -42,8 +42,8 @@ class SimulatorRunner(Thread, Target):
         day_df = symbol_df[(symbol_df['timestamp'] >= str(start_date)) & (symbol_df['timestamp'] < str(end_date))]
 
         while day_df.shape[0] > 0:
-            thread = SimulatorThread(count, self.simulator, day_df, self.symbol, self.time_scale, self.budget,
-                                     self.partition_size, self.n_partition_limit)
+            thread = SimulatorThread(count, self.instance_id, self.simulator, day_df, self.symbol, self.time_scale, self.budget,
+                                     self.partition_size, self.n_partition_limit, self.logger_service)
             thread_pool.add_thread(thread)
 
             start_date = end_date

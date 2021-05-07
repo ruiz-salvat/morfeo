@@ -32,17 +32,17 @@ def add_bot_instance():
         symbol = body['symbol']
         pattern_id = body['pattern_id']
         customer_id = body['customer_id']
-        time_scale = body['time_scale']
-        budget = body['budget']
+        time_scale = int(body['time_scale'])
+        budget = int(body['budget'])
         initial_budget = budget
         clean_gains = 0
-        partition_size = body['partition_size']
+        partition_size = int(body['partition_size'])
         base_amount = 0
         n_partitions = 0
-        n_partition_limit = body['n_partition_limit']
-        time_range_in_days = body['time_range_in_days']
+        n_partition_limit = int(body['n_partition_limit'])
+        time_range_in_days = int(body['time_range_in_days'])
     except:
-        return 'Error: malformed request'
+        return {'msg': 'Error: malformed request'}
 
     instances_service.insert_element(instance_id, creation_time, symbol, pattern_id, customer_id, time_scale)
     instance_states_service.insert_element(instance_id, initial_budget, clean_gains, partition_size, base_amount,
@@ -50,7 +50,7 @@ def add_bot_instance():
 
     thread = AddBotInstanceThread(bot_pool, instance_id, symbol, pattern_id, time_range_in_days, time_scale, budget,
                                   partition_size, n_partition_limit, customer_id, trades_service,
-                                  instance_states_service, prices_service, is_test)
+                                  instance_states_service, prices_service, logger_service)
     jobs.add_thread(thread)
 
     return {'msg': 'Adding bot instance to the pool...'}

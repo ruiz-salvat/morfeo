@@ -1,6 +1,6 @@
 import time
 from Database.Services.Service import Service
-from Util.Constants import logs_table_name
+from Util.Constants import logs_table_name, log_limit
 
 
 class LoggerService(Service):
@@ -52,4 +52,6 @@ class LoggerService(Service):
         for i in range(logs.count()-1, -1, -1):
             messages[count] = logs[i]['message']
             count += 1
+            if count > log_limit:
+                break
         return messages

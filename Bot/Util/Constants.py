@@ -108,3 +108,4 @@ pattern_not_found = 'Pattern name not found'
 
 # Other
 seed_id = "seed_id"
+log_limit = 5

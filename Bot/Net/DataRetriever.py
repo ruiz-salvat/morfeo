@@ -9,6 +9,7 @@ class DataRetriever(Thread):
 
     def __init__(self, symbol, price_service, logger_service):
         super().__init__()
+        self.symbol_str = symbol
         self.symbol = symbol.replace('/', '')  # To avoid errors
         self.price_service = price_service
         self.logger_service = logger_service
@@ -25,7 +26,7 @@ class DataRetriever(Thread):
                 timestamp = time.time()
                 price = self.retrieve_last_price()
 
-                msg = self.price_service.insert_element(self.symbol, timestamp, price)
+                msg = self.price_service.insert_element(self.symbol_str, timestamp, price)
 
                 self.logger_service.log_service(prices_service_name, msg)
                 self.logger_service.log_data_retriever(True, 'Price retrieved data at: ' +
