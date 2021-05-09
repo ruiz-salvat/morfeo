@@ -1,3 +1,4 @@
+from DataObjects.Status import Status
 from Domain.Ingestor import Ingestor
 from Domain.Patterns.WaveTrendPattern import WaveTrendPattern
 from Domain.Runners.IngestorRunner import IngestorRunner
@@ -14,7 +15,10 @@ from Util.Waves import Waves
 class BotInstance:
 
     def __init__(self, instance_id, symbol, pattern_id, time_range_in_days, time_scale, budget, partition_size,
-                 n_partition_limit, trades_service, instance_states_service, price_service, logger_service):
+                 n_partition_limit, trades_service, instances_service, instance_states_service, price_service, logger_service):
+        instances_service.update_element_status(instance_id, Status.INITIALIZING)  # Update instance status
+
+        # Set attributes
         self.instance_id = instance_id
         self.symbol = symbol
         self.pattern_id = pattern_id
@@ -59,6 +63,8 @@ class BotInstance:
         self.instance_states_service = instance_states_service
         self.instance_states_initialized = False
         self.is_active = False
+
+        instances_service.update_element_status(instance_id, Status.NOT_STARTED)  # Update instance status
         logger_service.log_bot_instance(instance_id, bot_instance_process_name,
                                         'Bot instance: (' + symbol + ' - <pattern_id: ' + str(pattern_id) + '>) initialization completed')
 

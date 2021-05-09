@@ -68,7 +68,7 @@ def InstancesService_UpdateElementIsActive_Equal():
     service.db_connector.drop_database()
 
     service.insert_element(valid_id, test_time, test_symbol, valid_id, valid_id, test_time_scale)
-    msg = service.update_element_is_active(valid_id, True)
+    msg = service.update_element_status(valid_id, True)
 
     elements = service.db[instances_table_name].find({instances_pk: valid_id})
 
@@ -82,7 +82,7 @@ def InstancesService_UpdateElementIsActive_Error():
     service.db_connector.drop_database()
 
     service.insert_element(valid_id, test_time, test_symbol, valid_id, valid_id, test_time_scale)
-    msg = service.update_element_is_active(invalid_id, True)
+    msg = service.update_element_status(invalid_id, True)
 
     elements = service.db[instances_table_name].find({instances_pk: valid_id})
 

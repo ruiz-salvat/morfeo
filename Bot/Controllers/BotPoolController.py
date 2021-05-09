@@ -49,7 +49,7 @@ def add_bot_instance():
                                            n_partitions, n_partition_limit)
 
     thread = AddBotInstanceThread(bot_pool, instance_id, symbol, pattern_id, time_range_in_days, time_scale, budget,
-                                  partition_size, n_partition_limit, customer_id, trades_service,
+                                  partition_size, n_partition_limit, customer_id, trades_service, instances_service,
                                   instance_states_service, prices_service, logger_service)
     jobs.add_thread(thread)
 

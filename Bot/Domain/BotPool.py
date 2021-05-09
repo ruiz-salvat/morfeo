@@ -1,4 +1,6 @@
 import time
+
+from DataObjects.Status import Status
 from Util.Constants import bot_instance_added_msg, bot_instance_exists_msg, bot_instance_started_msg, \
     bot_instance_already_started_msg, instance_id_not_found_msg, bot_instance_removed_msg, \
     bot_instance_not_stopped_msg, bot_instance_stopped_msg, bot_instance_already_stopped_msg, instances_service_name, \
@@ -17,7 +19,7 @@ class BotPool:
         if bot_instance.instance_id not in self.bot_inst_dict.keys():
             self.bot_inst_dict[bot_instance.instance_id] = bot_instance
             msg = self.instances_service.insert_element(bot_instance.instance_id, time.time(), bot_instance.symbol,
-                                                        bot_instance.pattern_id, customer_id, bot_instance.time_scale)
+                                                        bot_instance.pattern_id, customer_id, bot_instance.time_scale)  # TODO: Remove
             bot_instance.initialize_instance_states()
             self.logger_service.log_service(instances_service_name, msg)
             return bot_instance_added_msg
@@ -28,10 +30,12 @@ class BotPool:
         if instance_id in self.bot_inst_dict.keys():
             if self.bot_inst_dict[instance_id].is_active is False:
                 self.bot_inst_dict[instance_id].start_instance()
-                msg = self.instances_service.update_element_is_active(instance_id, True)
+                msg = self.instances_service.update_element_status(instance_id, True)
                 self.logger_service.log_service(instances_service_name, msg)
+                self.instances_service.update_element_status(instance_id, Status.RUNNING)
                 return bot_instance_started_msg
             else:
+                self.instances_service.update_element_status(instance_id)
                 return bot_instance_already_started_msg
         else:
             return instance_id_not_found_msg
@@ -54,8 +58,9 @@ class BotPool:
         if instance_id in self.bot_inst_dict.keys():
             if self.bot_inst_dict[instance_id].is_active is True:
                 self.bot_inst_dict[instance_id].stop_instance()
-                msg = self.instances_service.update_element_is_active(instance_id, False)
+                msg = self.instances_service.update_element_status(instance_id, False)
                 self.logger_service.log_service(instances_service_name, msg)
+                self.instances_service.update_element_status(instance_id, Status.STOPPED)
                 return bot_instance_stopped_msg
             else:
                 return bot_instance_already_stopped_msg

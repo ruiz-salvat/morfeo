@@ -9,4 +9,4 @@ class Instances:
         self.pattern_id = pattern_id
         self.customer_id = customer_id
         self.time_scale = time_scale
-        self.status_id = Status.NOT_STARTED.value  # default
+        self.status_id = Status.NOT_INITIALIZED.value  # default

@@ -41,11 +41,11 @@ class InstancesService(Service):
         else:
             return update_instance_db_error_msg
 
-    def update_element_is_active(self, instance_id, is_active):
+    def update_element_status(self, instance_id, status):
         instance = self.db[instances_table_name].find_one({instances_pk: instance_id})
         if instance is not None:
             filt = {instances_pk: instance_id}
-            data_obj = {'is_active': is_active}
+            data_obj = {'status_id': status.value}
             new_values = {'$set': data_obj}
             self.db[instances_table_name].update_one(filt, new_values)
             return update_instance_db_msg
