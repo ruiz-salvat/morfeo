@@ -51,7 +51,8 @@ export class InstancesService {
       let botInstance: BotInstance = {
         instanceId: el["instance_id"],
         symbol: el["symbol"],
-        patternId: el["pattern_id"]
+        patternId: el["pattern_id"],
+        status: el["status"]
       };
       botInstances.push(botInstance);
     });

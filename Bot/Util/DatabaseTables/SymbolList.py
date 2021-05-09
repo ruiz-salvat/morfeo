@@ -5,7 +5,7 @@ symbol_list = ['ADA/USDT', 'BTC/USDT', 'DOT/USDT']
 
 
 def insert_symbols_to_db(is_test, logger_service):
-    symbols_service = SymbolsService(is_test=is_test, logger_service=logger_service)
+    symbols_service = SymbolsService(is_test=is_test)
     for symbol in symbol_list:
         split_text = symbol.split('/')
         base = split_text[0]

@@ -23,6 +23,7 @@ from Tests.InstancesServiceTest import InstancesService_InsertElement_Equal, Ins
     InstancesService_UpdateElementIsActive_Error, InstancesService_DeleteElement_ErrorInstanceStates
 from Tests.ModelTest import Model_GenerateIterable_Equal
 from Tests.SimulatorRunnerTest import SimulatorRunner_Run_ProcessCompletes
+from Tests.StatusServiceTest import StatusService_InsertElement_Equal
 from Tests.SymbolsServiceTest import SymbolsService_InsertElement_Equal
 from Tests.TradesServiceTest import TradesService_InsertElement_Equal, TradesService_InsertElement_Error, \
     TradesService_UpdateElement_Equal, TradesService_UpdateElement_Error, TradesService_DeleteElement_Equal, \
@@ -82,7 +83,8 @@ def run_tests():
     InstanceStatesService_DeleteElement_Error()
     SymbolsService_InsertElement_Equal()
     '''
-    PatternsService_InsertElement_Equal()
+    #PatternsService_InsertElement_Equal()
+    StatusService_InsertElement_Equal()
     '''
     PricesService_InsertElement_Equal()
     PricesService_InsertElement_Error()

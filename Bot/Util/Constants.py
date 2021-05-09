@@ -12,6 +12,7 @@ log_database_name = 'log_db'
 # Database Table Names
 symbols_table_name = 'Symbols'
 prices_table_name = 'Prices'
+status_table_name = 'Status'
 instances_table_name = 'Instances'
 instance_states_table_name = 'InstanceStates'
 trades_table_name = 'Trades'
@@ -24,6 +25,7 @@ symbols_pk = 'symbol'
 instances_pk = 'instance_id'
 customers_pk = 'customer_id'
 patterns_pk = 'pattern_id'
+status_pk = 'status_id'
 
 # File Paths
 wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv'
@@ -87,11 +89,14 @@ insert_patterns_db_msg = 'Patterns inserted to database successfully'
 insert_patterns_db_error_msg = 'The pattern was already inserted to database'
 insert_prices_db_msg = 'Prices inserted to database successfully'
 insert_prices_db_error_msg = 'Error inserting prices to database'
+insert_status_db_msg = 'The status was successfully inserted to database'
+insert_status_db_error_msg = 'The status was already inserted to database'
 
 # Service Names
 symbols_service_name = 'symbols'
 patterns_service_name = 'patterns'
 prices_service_name = 'prices'
+status_service_name = 'status'
 trades_service_name = 'trades'
 instance_states_service_name = 'instance_states'
 instances_service_name = 'instances'
@@ -108,4 +113,4 @@ pattern_not_found = 'Pattern name not found'
 
 # Other
 seed_id = "seed_id"
-log_limit = 5
+log_limit = 100

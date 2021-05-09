@@ -6,7 +6,7 @@ from Util.Constants import symbols_table_name, insert_symbols_db_msg
 
 def SymbolsService_InsertElement_Equal():
     logger_service = LoggerService(is_test=True)
-    service = SymbolsService(is_test=True, logger_service=logger_service)
+    service = SymbolsService(is_test=True)
     service.db_connector.drop_database()
     msg = service.insert_element(test_symbol, test_base, test_quote)
 
