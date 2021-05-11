@@ -2,3 +2,24 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.log-elements-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    margin-bottom: 25px;
+}
+
+.log-element {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.log-button {
+    margin-bottom: 10px;
+}
+
+input {
+    margin-bottom: 10px;
+}

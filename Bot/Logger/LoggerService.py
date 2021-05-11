@@ -16,11 +16,11 @@ class LoggerService(Service):
         }
         self.db[logs_table_name].insert_one(log_model)
 
-    def log_service(self, service, msg):
+    def log_service(self, service_name, msg):
         log_model = {
             'type': 'service',
             'timestamp': time.time(),
-            'service': service,
+            'service': service_name,
             'message': msg
         }
         self.db[logs_table_name].insert_one(log_model)
@@ -55,3 +55,18 @@ class LoggerService(Service):
             if count > log_limit:
                 break
         return messages
+
+    def get_error_logs(self):
+        pass
+
+    def get_service_logs(self, service_name):
+        pass
+
+    def get_bot_instance_logs(self, instance_id, process):
+        pass
+
+    def get_data_retriever_logs(self, is_thread):
+        pass
+
+    def get_other_logs(self):
+        raise Exception('Not implemented yet')

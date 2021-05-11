@@ -108,6 +108,13 @@ simulation_process_name = 'simulation'
 model_process_name = 'model'
 parameters_process_name = 'parameters'
 
+# Log types
+error_log_type = 'error'
+service_log_type = 'service'
+bot_instance_log_type = 'bot_instance'
+data_retriever_log_type = 'data_retriever'
+other_log_type = 'other'
+
 # Exceptions
 pattern_not_found = 'Pattern name not found'
 

@@ -1,2 +1,40 @@
 <h1>Log data</h1>
+<form [formGroup]="logOptionsForm">
+    <div class="log-elements-container">
+        <div class="log-element">
+            <button class="log-button" (click)="getLogs('kek')">All logs</button>
+        </div>
+        <div class="log-element">
+            <button class="log-button" (click)="getLogs('kek')">Error logs</button>
+        </div>
+        <div class="log-element">
+            <button class="log-button" (click)="getLogs('kek')">Service logs</button>
+            <label>
+                Service name:
+                <input type="text" formControlName="serviceName">
+            </label>
+        </div>
+        <div class="log-element">
+            <button class="log-button" (click)="getLogs('kek')">Bot instance logs</button>
+            <label>
+                Instance id:
+                <input type="text" formControlName="instanceId">
+            </label>
+            <label>
+                Process:
+                <input type="text" formControlName="process">
+            </label>
+        </div>
+        <div class="log-element">
+            <button class="log-button" (click)="getLogs('kek')">Data retriever logs</button>
+            <label>
+                Is thread:
+                <input type="text" formControlName="isThread">
+            </label>
+        </div>
+        <div lass="log-element" (click)="getLogs('kek')">
+            <button class="log-button">Other logs</button>
+        </div>
+    </div>
+</form>
 <div *ngFor="let item of logText" class="logs-div">{{item}}</div>

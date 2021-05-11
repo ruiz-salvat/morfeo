@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_BASE_URL } from '../injection-tokens/api-base-url-token';
@@ -16,6 +16,13 @@ export class LogsService {
 
   getAllLogs(): Observable<string[]> {
     return this.http.get<string[]>(this.baseUrl + "get_all_logs").pipe(
+      map(res => this.convertToString(res))
+    );
+  }
+
+  getFilteredLogs(filters: any): Observable<string[]> {
+    let headers = new HttpHeaders(filters);
+    return this.http.get<string[]>(this.baseUrl + "get_filtered_logs", {headers}).pipe(
       map(res => this.convertToString(res))
     );
   }
