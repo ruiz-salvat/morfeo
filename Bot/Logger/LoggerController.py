@@ -17,19 +17,26 @@ def get_all_logs():
 def get_filtered_logs():
     log_type = request.headers.get('log_type')
 
-    if log_type is error_log_type:
+    if log_type == error_log_type:
         return logger_service.get_error_logs()
-    elif log_type is service_log_type:
+    elif log_type == service_log_type:
         service_name = request.headers.get('service_name')
         return logger_service.get_service_logs(service_name)
-    elif log_type is bot_instance_log_type:
+    elif log_type == bot_instance_log_type:
         instance_id = request.headers.get('instance_id')
         process = request.headers.get('process')
         return logger_service.get_bot_instance_logs(instance_id, process)
-    elif log_type is data_retriever_log_type:
+    elif log_type == data_retriever_log_type:
         is_thread = request.headers.get('is_thread')
-        return logger_service.get_data_retriever_logs(is_thread)
-    elif log_type is other_log_type:
-        return {'0': 'Not implemented yet'}
+        is_thread_bool = False
+        if is_thread == 'True' or is_thread == 'true':
+            is_thread_bool = True
+        elif is_thread == 'False' or is_thread == 'false':
+            is_thread_bool = False
+        else:
+            return {'-1': 'Error in parameter: is_thread (should be \'true\' or \'false\')'}
+        return logger_service.get_data_retriever_logs(is_thread_bool)
+    elif log_type == other_log_type:
+        return {'-1': 'Not implemented yet'}
     else:
-        return {'0': 'Error: the log type could not be identified'}
+        return {'-1': 'Error: the log type could not be identified'}

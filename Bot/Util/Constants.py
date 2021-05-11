@@ -26,6 +26,7 @@ instances_pk = 'instance_id'
 customers_pk = 'customer_id'
 patterns_pk = 'pattern_id'
 status_pk = 'status_id'
+log_pk = 'type'
 
 # File Paths
 wave_trend_simulation_results = '../Data/ResultData/ADAUSDT_7_5_wave_trend_results.csv'

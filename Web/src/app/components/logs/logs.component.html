@@ -2,20 +2,20 @@
 <form [formGroup]="logOptionsForm">
     <div class="log-elements-container">
         <div class="log-element">
-            <button class="log-button" (click)="getLogs('kek')">All logs</button>
+            <button class="log-button" (click)="getAllLogs()">All logs</button>
         </div>
         <div class="log-element">
-            <button class="log-button" (click)="getLogs('kek')">Error logs</button>
+            <button class="log-button" (click)="getLogs('error')">Error logs</button>
         </div>
         <div class="log-element">
-            <button class="log-button" (click)="getLogs('kek')">Service logs</button>
+            <button class="log-button" (click)="getLogs('service')">Service logs</button>
             <label>
                 Service name:
                 <input type="text" formControlName="serviceName">
             </label>
         </div>
         <div class="log-element">
-            <button class="log-button" (click)="getLogs('kek')">Bot instance logs</button>
+            <button class="log-button" (click)="getLogs('bot_instance')">Bot instance logs</button>
             <label>
                 Instance id:
                 <input type="text" formControlName="instanceId">
@@ -26,15 +26,18 @@
             </label>
         </div>
         <div class="log-element">
-            <button class="log-button" (click)="getLogs('kek')">Data retriever logs</button>
+            <button class="log-button" (click)="getLogs('data_retriever')">Data retriever logs</button>
             <label>
                 Is thread:
                 <input type="text" formControlName="isThread">
             </label>
         </div>
-        <div lass="log-element" (click)="getLogs('kek')">
+        <div lass="log-element" (click)="getLogs('other')">
             <button class="log-button">Other logs</button>
         </div>
     </div>
 </form>
-<div *ngFor="let item of logText" class="logs-div">{{item}}</div>
+<div *ngFor="let log of logs" class="logs-div">
+    <div class="log-record">{{log.date}}</div>
+    <div>{{log.message}}</div>
+</div>

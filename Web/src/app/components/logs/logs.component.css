@@ -1,6 +1,11 @@
 .logs-div {
     margin-top: 10px;
     margin-bottom: 10px;
+    display: flex;
+}
+
+.log-record {
+    width: 200px;
 }
 
 .log-elements-container {
@@ -18,6 +23,8 @@
 
 .log-button {
     margin-bottom: 10px;
+    color: yellow;
+    border-color: yellow;
 }
 
 input {

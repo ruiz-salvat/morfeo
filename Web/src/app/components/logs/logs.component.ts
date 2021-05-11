@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Log } from 'src/app/models/log.model';
 import { LogsService } from '../../services/logs.service';
 
 @Component({
@@ -12,9 +13,7 @@ export class LogsComponent implements OnInit {
   constructor(private logsService: LogsService) { }
 
   ngOnInit(): void {
-    this.logsService.getAllLogs().subscribe(res => {
-      this.logText = res;
-    });
+    
   }
 
   logOptionsForm = new FormGroup({
@@ -24,7 +23,28 @@ export class LogsComponent implements OnInit {
     isThread: new FormControl()
   });
 
+  logs: Log[] = [
+    {date: "",
+    message: "> Select one option to retrieve logs"}
+  ];
+
+  getAllLogs() {
+    this.logs = [
+      {date: "",
+      message: "Loading..."}
+    ];
+    
+    this.logsService.getAllLogs().subscribe(res => {
+      this.logs = res;
+    });
+  }
+
   getLogs(logType: any) {
+    this.logs = [
+      {date: "",
+      message: "Loading..."}
+    ];
+
     // "" is used to avoid having null parameters
     let logFiltersDto = {
       "log_type": logType,
@@ -35,10 +55,7 @@ export class LogsComponent implements OnInit {
     }
     
     this.logsService.getFilteredLogs(logFiltersDto).subscribe(res => {
-      this.logText = res;
+      this.logs = res;
     });
   }
-
-  logText = ["Loading..."];
-
 }
