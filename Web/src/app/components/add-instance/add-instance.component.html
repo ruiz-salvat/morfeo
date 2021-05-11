@@ -17,6 +17,10 @@
         <input type="text" formControlName="timeScale">
     </label>
     <label>
+        Time range in days:
+        <input type="text" formControlName="timeRangeInDays">
+    </label>
+    <label>
         Budget:
         <input type="text" formControlName="budget">
     </label>
@@ -27,10 +31,6 @@
     <label>
         Partition limit:
         <input type="text" formControlName="partitionLimit">
-    </label>
-    <label>
-        Time range in days:
-        <input type="text" formControlName="timeRangeInDays">
     </label>
     <button type="submit" [disabled]="!addInstanceForm.valid" class="add-button">Add</button>
 </form>

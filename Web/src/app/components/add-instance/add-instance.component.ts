@@ -23,10 +23,10 @@ export class AddInstanceComponent implements OnInit {
     symbol: new FormControl(''),
     patternId: new FormControl(''),
     timeScale: new FormControl(''),
+    timeRangeInDays: new FormControl(''),
     budget: new FormControl(''),
     partitionSize: new FormControl(''),
-    partitionLimit: new FormControl(''),
-    timeRangeInDays: new FormControl('')
+    partitionLimit: new FormControl('')
   });
 
   onSubmit() {
@@ -36,10 +36,10 @@ export class AddInstanceComponent implements OnInit {
       "pattern_id": this.addInstanceForm.controls["patternId"].value,
       "customer_id": "Front-End Test Customer", // TODO: store customer id in session
       "time_scale": this.addInstanceForm.controls["timeScale"].value,
+      "time_range_in_days": this.addInstanceForm.controls["timeRangeInDays"].value,
       "budget": this.addInstanceForm.controls["budget"].value,
       "partition_size": this.addInstanceForm.controls["partitionSize"].value,
-      "n_partition_limit": this.addInstanceForm.controls["partitionLimit"].value,
-      "time_range_in_days": this.addInstanceForm.controls["timeRangeInDays"].value
+      "n_partition_limit": this.addInstanceForm.controls["partitionLimit"].value
     }
     
     this.instancesService.postInstance(instanceDto).subscribe(res => {
