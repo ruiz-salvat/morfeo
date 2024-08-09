@@ -1,4 +1,4 @@
-# Morfeo
+# Trading Bot
 
 * In this repository you will find a proof of concept of a stock trading bot developed in Python.
 
